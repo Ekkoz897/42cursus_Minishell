@@ -4,7 +4,7 @@ CC = cc
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -g #
+CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 
 SRC = main.c
 
@@ -12,9 +12,9 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(addprefix SRC/,$(OBJ)) $(addprefix get_next_line_100/,$(GET_OBJ))
+$(NAME): $(addprefix SRC/,$(OBJ))
 	@make -s -C ft_printf
-	$(CC) $(OBJ) ft_printf/libftprintf.a -o $(NAME)
+	$(CC) $(addprefix SRC/,$(OBJ)) ft_printf/libftprintf.a -o $(NAME)
 
 run: $(NAME)
 	@./minishell
