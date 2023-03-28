@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/28 15:45:48 by miandrad         ###   ########.fr       */
+/*   Created: 2023/03/28 15:34:23 by miandrad          #+#    #+#             */
+/*   Updated: 2023/03/28 15:37:07 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-)
-{
-	char	*input;
-	// char	**commands;
 
-	while (1)
-	{
-		input = readline("myshell> ");
-		if (!input)
-		{
-			ft_printf("\n");
+
+char	*check_cmd(char *cmd1, char **env)
+{
+	int		i;
+	char	**paths;
+	char	*path;
+
+	i = 0;
+	while (env[i++])
+		if (ft_strnstr(env[i], "PATH=", 5))
 			break ;
-		}
-		add_history(input);
-		ft_printf("You entered: %s\n", input);
-		check_cmd();
+	paths = ft_split(&env[i][5], ':');
+	i = 0;
+	while (paths[i])
+	{
+		path = ft_strjoin(paths[i], cmd1);
+		if (!access(path, X_OK))
+			break ;
+		free(path);
+		path = NULL;
+		i++;
 	}
-	return (0);
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
+	return (path);
 }
