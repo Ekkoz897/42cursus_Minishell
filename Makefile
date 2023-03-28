@@ -2,32 +2,43 @@ NAME = minishell
 
 CC = cc
 
-RM = rm -f
+RM = rm -rf
 
-CFLAGS = -Wall -Werror -Wextra -g # -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #
 
-SRC = SRC/main.c
+SRC = main.c
 
-all:	$(NAME)
+OBJ = $(SRC:.c=.o)
 
-$(NAME): $(SRC)
-	@echo "\nCompiling the program files...\n"
-	@make -s -C libft
+all: $(NAME)
+
+$(NAME): $(addprefix SRC/,$(OBJ)) $(addprefix get_next_line_100/,$(GET_OBJ))
 	@make -s -C ft_printf
-	@$(CC) $(CFLAGS) $(SRC) libft/libft.a ft_printf/libftprintf.a -o $(NAME)
+	$(CC) $(OBJ) ft_printf/libftprintf.a -o $(NAME)
 
-clean:
-	@find . -type f \( -name "*.o" \) -delete
+run: $(NAME)
+	@./minishell
 
-fclean: clean
-	@find . -type f \( -name "*.a" -o -name "minishell" \) -delete
-
-re: fclean all
-
-valgrind: all
-	valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all ./minishell
+valgrind: $(NAME)
+	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./minishell
 
 git: fclean
 	@git add .
 	@git commit
-	git push
+	@git push
+	@clear
+	@echo "                                                  "
+	@echo "                                                  "
+	@echo "         -------Commited and Pushed-------        "
+	@echo "                                                  "
+	@echo "                                                  "
+
+clean: 
+	@make clean -s -C ft_printf
+	@$(RM) $(addprefix SRC/,$(OBJ))
+
+fclean: clean
+	@make fclean -s -C ft_printf
+	@$(RM) $(NAME) $(LIB)
+
+re: fclean all
