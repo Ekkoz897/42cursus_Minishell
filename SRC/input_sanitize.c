@@ -6,20 +6,12 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/28 17:09:09 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:12:51 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/**
- * It counts the number of commands in a string
- * 
- * @param s the string to be split
- * @param c the delimiter
- * 
- * @return The number of commands in the string.
- */
 static size_t	commands_count(char *s)
 {
 	size_t	i;

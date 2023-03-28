@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/28 16:40:27 by apereira         ###   ########.fr       */
-=======
-/*   Updated: 2023/03/28 15:45:34 by miandrad         ###   ########.fr       */
->>>>>>> 56b1de3169b8ef3910aed0ead5ea2c7bb849b26b
+/*   Updated: 2023/03/28 17:13:59 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +19,10 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
-<<<<<<< HEAD
-char	*check_valid_cmd(char *argv, char **envp);
-
-=======
-char	*check_cmd(char *cmd1, char **env);
->>>>>>> 56b1de3169b8ef3910aed0ead5ea2c7bb849b26b
+// Input Sanitize.c
+static size_t	commands_count(char *s);
+char			**ft_commands(char *argv);
+char			*find_path(char **envp);
+char			*check_valid_cmd(char *argv, char **envp);
 
 #endif
