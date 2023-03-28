@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:43:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/02/28 17:27:48 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:38:50 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @return The address of the first character of the substring.
  */
 
-char	*ft_strnstr(const char *str, const char *word)
+char	*ft_strnstr(const char *str, const char *word, size_t n)
 {
 	size_t	i;
 	size_t	j;
@@ -31,10 +31,10 @@ char	*ft_strnstr(const char *str, const char *word)
 	i = 0;
 	if (word[i] == '\0')
 		return ((char *)str);
-	while ((str[i]))
+	while ((i < n) && (str[i]))
 	{
 		j = 0;
-		while (str[i + j] == word[j])
+		while (str[i + j] == word[j] && ((i + j) < n))
 		{
 			if (word[j + 1] == '\0')
 				return ((char *)&(str[i]));

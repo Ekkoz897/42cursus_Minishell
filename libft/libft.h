@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:41:50 by apereira          #+#    #+#             */
-/*   Updated: 2023/02/28 16:33:56 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:40:42 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size);
 
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
-char		*ft_strnstr(const char *haystack, const char *needle);
+char		*ft_strnstr(const char *str, const char *word, size_t n);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 long		ft_atoi(const char *str);
 
