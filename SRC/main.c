@@ -6,16 +6,16 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/28 15:45:48 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:50:20 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-)
+int	main(int argc, char **argv, char **env)
 {
 	char	*input;
-	// char	**commands;
+	char	**commands;
 
 	while (1)
 	{
@@ -27,7 +27,6 @@
 		}
 		add_history(input);
 		ft_printf("You entered: %s\n", input);
-		check_cmd();
 	}
 	return (0);
 }

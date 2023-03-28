@@ -6,13 +6,22 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:34:23 by miandrad          #+#    #+#             */
-/*   Updated: 2023/03/28 15:37:07 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:54:42 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	input_sanitize(char *input, char **env)
+{
+	int	i;
 
+	i = 0;
+	while (input[i])
+	{
+		
+	}
+}
 
 char	*check_cmd(char *cmd1, char **env)
 {
