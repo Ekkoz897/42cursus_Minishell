@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/28 13:40:44 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/28 16:40:27 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
+
+char	*check_valid_cmd(char *argv, char **envp);
+
 
 #endif
