@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 11:47:51 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 12:00:31 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_split_cmds2(char **cmds, char *input, int i)
 		{
 			free (cmds);
 			cmds = ft_calloc(3, sizeof(char *));
-			j = i;
+			j = i - 2;
 			cmds[0] = ft_calloc(j + 1, sizeof(char));
 			while (j >= 0)
 			{
@@ -34,7 +34,7 @@ char	**ft_split_cmds2(char **cmds, char *input, int i)
 			j = 0;
 			while (input[i++])
 				j++;
-			cmds[2] = ft_calloc(j, sizeof(char));
+			cmds[2] = ft_calloc(j + 1, sizeof(char));
 			while (j >= 0)
 			{
 				cmds[2][j] = input[i];
@@ -61,11 +61,10 @@ char	**ft_split_cmds(char *input)
 	else
 	{
 		i = 0;
+		cmds[0] = ft_calloc(ft_strlen(input) + 1, sizeof(char));
 		while (input[i])
 		{
-			cmds[0] = ft_calloc(ft_strlen(input), sizeof(char));
 			cmds[0][i] = input[i];
-			ft_printf("%s\n", cmds[0]);
 			i++;
 		}
 	}
@@ -91,9 +90,8 @@ int	main(int ac, char **av, char **env)
 		add_history(input);
 		commands = ft_split_cmds(input);
 		if (commands)
-			ft_printf("%s\n", *commands[0]);
+			ft_printf("%s\n", commands[0]);
 		ft_printf("You entered: %s\n", input);
-		commands_cpy(input);
 		free(input);
 	}
 	return (0);
