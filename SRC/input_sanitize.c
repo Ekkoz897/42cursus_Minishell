@@ -6,12 +6,76 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/03/29 16:07:04 by miandrad         ###   ########.fr       */
+=======
 /*   Updated: 2023/03/29 10:25:34 by apereira         ###   ########.fr       */
+>>>>>>> a06c793cc88ada5e4ffb2299a2fed8a83296ba0a
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../minishell.h"
 
+<<<<<<< HEAD
+/**
+ * It counts the number of commands in a string
+ * 
+ * @param s the string to be split
+ * @param c the delimiter
+ * 
+ * @return The number of commands in the string.
+ */
+size_t	commands_cpy(char *s)
+{
+	size_t	i;
+	size_t	j;
+	char	*cmd;
+
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] == ' ' && s[i] == '	')
+			i++;
+		j = 0;
+		cmd = ft_commands(s);
+		while ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+			cmd[j++] = s[i++];
+		while (s[i] == ' ' && s[i] == '	')
+			i++;
+		while (s[i] != '|' && s[i])
+		{
+			ft_printf("aqui\n");
+			while (s[i] == ' ' && s[i] == '	')
+				i++;
+			while ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+				cmd[j++] = s[i++];
+		}
+	ft_printf("%s\n" ,cmd);
+	}
+	return (1);
+}
+
+// Allocates for with command size.
+char	*ft_commands(char *s)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s[i] != '|' && s[i])
+	{
+		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+			j++;
+		i++;	
+	}
+	ft_printf("%i\n", j);
+	return (malloc(sizeof(char) * j + 1));
+}
+
+=======
+>>>>>>> a06c793cc88ada5e4ffb2299a2fed8a83296ba0a
 // Finds the PATH string in the "envp" text
 char	*find_path(char **envp)
 {

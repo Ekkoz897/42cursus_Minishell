@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 11:46:40 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:47:51 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	main(int ac, char **av, char **env)
 		if (commands)
 			ft_printf("%s\n", *commands[0]);
 		ft_printf("You entered: %s\n", input);
+		commands_cpy(input);
 		free(input);
 	}
 	return (0);

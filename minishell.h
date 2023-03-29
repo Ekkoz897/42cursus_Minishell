@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 10:25:37 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:13:33 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "ft_printf/ft_printf.h"
 
 // Input Sanitize.c
+size_t			commands_cpy(char *s);
+char			*ft_commands(char *s);
 char			*find_path(char **envp);
 char			*check_valid_cmd(char *argv, char **envp);
 
