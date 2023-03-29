@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 14:24:14 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:19:22 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	main(int ac, char **av, char **env)
 {
 	char	*input;
 	// char	**commands;
 
-	(void)argc;
-	(void)argv;
+	(void)ac;
+	(void)av;
 	while (1)
 	{
 		input = readline("myshell> ");

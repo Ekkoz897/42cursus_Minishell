@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_sanitize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/29 14:32:48 by miandrad         ###   ########.fr       */
-=======
-/*   Updated: 2023/03/28 17:12:51 by apereira         ###   ########.fr       */
->>>>>>> 4bbda6d2acee7fe66327494b940e95c7951f7c9a
+/*   Updated: 2023/03/29 10:16:17 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
