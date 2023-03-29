@@ -6,24 +6,16 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 11:11:41 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:46:40 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-// Function takes the input string and splits the commands into one array each 
-// their with flags
-char	**ft_split_cmds(char *input)
+char	**ft_split_cmds2(char **cmds, char *input, int i)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	**cmds;
+	int	j;
 
-	i = 0;
-	cmds = ft_calloc(1, sizeof(char *));
 	while (input[i])
 	{
 		if (input[i] == '|')
@@ -39,6 +31,7 @@ char	**ft_split_cmds(char *input)
 			}
 			cmds[1] = ft_calloc(2, sizeof(char));
 			cmds[1][0] = '|';
+			j = 0;
 			while (input[i++])
 				j++;
 			cmds[2] = ft_calloc(j, sizeof(char));
@@ -51,13 +44,38 @@ char	**ft_split_cmds(char *input)
 		}
 		i++;
 	}
-	
+	return (cmds);
+}
+
+// Function takes the input string and splits the commands into one array each 
+// with their with flags
+char	**ft_split_cmds(char *input)
+{
+	int		i;
+	char	**cmds;
+
+	i = 0;
+	cmds = ft_calloc(2, sizeof(char *));
+	if (ft_strchr(input, '|') != NULL)
+		ft_split_cmds2(cmds, input, i);
+	else
+	{
+		i = 0;
+		while (input[i])
+		{
+			cmds[0] = ft_calloc(ft_strlen(input), sizeof(char));
+			cmds[0][i] = input[i];
+			ft_printf("%s\n", cmds[0]);
+			i++;
+		}
+	}
+	return (cmds);
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
-	// char	**commands;
+	char	**commands;
 
 	(void)ac;
 	(void)av;
@@ -71,7 +89,9 @@ int	main(int ac, char **av, char **env)
 			break ;
 		}
 		add_history(input);
-		
+		commands = ft_split_cmds(input);
+		if (commands)
+			ft_printf("%s\n", *commands[0]);
 		ft_printf("You entered: %s\n", input);
 		free(input);
 	}
