@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 12:00:31 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 12:12:50 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_split_cmds2(char **cmds, char *input, int i)
 		{
 			free (cmds);
 			cmds = ft_calloc(3, sizeof(char *));
-			j = i - 2;
+			j = i - 1;
 			cmds[0] = ft_calloc(j + 1, sizeof(char));
 			while (j >= 0)
 			{
@@ -90,7 +90,11 @@ int	main(int ac, char **av, char **env)
 		add_history(input);
 		commands = ft_split_cmds(input);
 		if (commands)
-			ft_printf("%s\n", commands[0]);
+			ft_printf("cmd[0] = %s\n", commands[0]);
+		if (commands[1])
+			ft_printf("cmd[1] = %s\n", commands[1]);
+		if (commands[2])
+			ft_printf("cmd[2] = %s\n", commands[2]);
 		ft_printf("You entered: %s\n", input);
 		free(input);
 	}
