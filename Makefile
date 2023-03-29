@@ -15,7 +15,7 @@ all: $(NAME)
 $(NAME): $(addprefix SRC/,$(OBJ))
 	@make -s -C ft_printf
 	@make -s -C libft
-	@$(CC) -lreadline $(addprefix SRC/,$(OBJ)) ft_printf/libftprintf.a libft/libft.a -o $(NAME)
+	@$(CC) $(addprefix SRC/,$(OBJ)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
 
 run: $(NAME)
 	@./minishell

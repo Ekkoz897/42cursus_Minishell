@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   input_sanitize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/29 16:07:04 by miandrad         ###   ########.fr       */
+=======
+/*   Updated: 2023/03/29 10:25:34 by apereira         ###   ########.fr       */
+>>>>>>> a06c793cc88ada5e4ffb2299a2fed8a83296ba0a
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../minishell.h"
 
+<<<<<<< HEAD
 /**
  * It counts the number of commands in a string
  * 
@@ -69,6 +74,8 @@ char	*ft_commands(char *s)
 	return (malloc(sizeof(char) * j + 1));
 }
 
+=======
+>>>>>>> a06c793cc88ada5e4ffb2299a2fed8a83296ba0a
 // Finds the PATH string in the "envp" text
 char	*find_path(char **envp)
 {

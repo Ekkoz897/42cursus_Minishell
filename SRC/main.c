@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 15:51:29 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:13:02 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	main(int argc, char **argv)
 	char	*input;
 	// char	**commands;
 
-	(void)argc;
-	(void)argv;
+	(void)ac;
+	(void)av;
+	(void)env;
 	while (1)
 	{
 		input = readline("myshell> ");
