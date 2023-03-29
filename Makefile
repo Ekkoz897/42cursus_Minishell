@@ -6,7 +6,7 @@ RM = rm -rf
 
 CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 
-SRC = main.c input.c
+SRC = main.c input_sanitize.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -15,7 +15,7 @@ all: $(NAME)
 $(NAME): $(addprefix SRC/,$(OBJ))
 	@make -s -C ft_printf
 	@make -s -C libft
-	@$(CC) -lreadline $(addprefix SRC/,$(OBJ)) ft_printf/libftprintf.a libft/libft.a -o $(NAME)
+	@$(CC) $(addprefix SRC/,$(OBJ)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
 
 run: $(NAME)
 	@./minishell

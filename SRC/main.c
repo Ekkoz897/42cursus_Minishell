@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 10:19:22 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:24:35 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	(void)env;
 	while (1)
 	{
 		input = readline("myshell> ");

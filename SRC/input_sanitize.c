@@ -6,49 +6,11 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 10:16:17 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:25:34 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static size_t	commands_count(char *s)
-{
-	size_t	i;
-	size_t	words;
-
-	i = 0;
-	words = 0;
-	while (*s)
-	{
-		if (*s == ' ' || *s == '	')
-			i++;
-		else if (*s != ' ' && *s != '	' && i != 0 && *s != '-')
-		{
-			words++;
-			i = 0;
-		}
-		s++;
-	}
-	if (i != 0)
-		words++;
-	return (words);
-}
-
-// Splits into sub arrays  seperate commands.
-char	**ft_commands(char *argv)
-{
-	char	**commands;
-	int		i;
-
-	i = 0;
-	commands = malloc(sizeof(char *));
-	while (i < commands_count(argv))
-	{
-		commands[i] = malloc(sizeof(char *));
-		i++;
-	}
-}
 
 // Finds the PATH string in the "envp" text
 char	*find_path(char **envp)
