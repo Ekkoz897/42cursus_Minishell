@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 16:15:14 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:15:34 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	main(int ac, char **av, char **env)
 		
 		ft_printf("You entered: %s\n", input);
 		commands_cpy(input);
-		
 		free(input);
 	}
 	return (0);
