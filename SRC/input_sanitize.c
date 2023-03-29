@@ -6,52 +6,67 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/29 14:32:48 by miandrad         ###   ########.fr       */
-=======
-/*   Updated: 2023/03/28 17:12:51 by apereira         ###   ########.fr       */
->>>>>>> 4bbda6d2acee7fe66327494b940e95c7951f7c9a
+/*   Updated: 2023/03/29 16:07:04 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../minishell.h"
 
-static size_t	commands_count(char *s)
+/**
+ * It counts the number of commands in a string
+ * 
+ * @param s the string to be split
+ * @param c the delimiter
+ * 
+ * @return The number of commands in the string.
+ */
+size_t	commands_cpy(char *s)
 {
 	size_t	i;
-	size_t	words;
+	size_t	j;
+	char	*cmd;
 
 	i = 0;
-	words = 0;
-	while (*s)
+	while (s[i])
 	{
-		if (*s == ' ' || *s == '	')
+		while (s[i] == ' ' && s[i] == '	')
 			i++;
-		else if (*s != ' ' && *s != '	' && i != 0 && *s != '-')
+		j = 0;
+		cmd = ft_commands(s);
+		while ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+			cmd[j++] = s[i++];
+		while (s[i] == ' ' && s[i] == '	')
+			i++;
+		while (s[i] != '|' && s[i])
 		{
-			words++;
-			i = 0;
+			ft_printf("aqui\n");
+			while (s[i] == ' ' && s[i] == '	')
+				i++;
+			while ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+				cmd[j++] = s[i++];
 		}
-		s++;
+	ft_printf("%s\n" ,cmd);
 	}
-	if (i != 0)
-		words++;
-	return (words);
+	return (1);
 }
 
-// Splits into sub arrays  seperate commands.
-char	**ft_commands(char *argv)
+// Allocates for with command size.
+char	*ft_commands(char *s)
 {
-	char	**commands;
-	int		i;
+	int	i;
+	int	j;
 
 	i = 0;
-	commands = malloc(sizeof(char *));
-	while (i < commands_count(argv))
+	j = 0;
+	while (s[i] != '|' && s[i])
 	{
-		commands[i] = malloc(sizeof(char *));
-		i++;
+		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+			j++;
+		i++;	
 	}
+	ft_printf("%i\n", j);
+	return (malloc(sizeof(char) * j + 1));
 }
 
 // Finds the PATH string in the "envp" text
