@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 07:13:20 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/30 09:37:08 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd)
 			exit(1);
 		execve(vars->cmd1_path, vars->cmd1_flags, envp);
 	}
+	waitpid(vars->pid1, NULL, 0);
 }
 
 // Opens the second file FD, parses the second command by duplicating it
