@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 12:12:50 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/30 06:56:47 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av, char **env)
 {
 	char	*input;
 	char	**commands;
+	t_vars	vars;
 
 	(void)ac;
 	(void)av;
@@ -91,12 +92,22 @@ int	main(int ac, char **av, char **env)
 		commands = ft_split_cmds(input);
 		if (commands)
 			ft_printf("cmd[0] = %s\n", commands[0]);
-		if (commands[1])
-			ft_printf("cmd[1] = %s\n", commands[1]);
-		if (commands[2])
-			ft_printf("cmd[2] = %s\n", commands[2]);
+		vars.cmd1_flags = ft_split(commands[0], ' ');
+		vars.cmd1_path = check_valid_cmd(vars.cmd1_flags[0], env);
+		if (vars.cmd1_path)
+			execve(vars.cmd1_path, vars.cmd1_flags, env);
+		// vars.cmd2_flags = ft_split(argv[3], ' ');
 		ft_printf("You entered: %s\n", input);
+		ft_free(commands);
 		free(input);
 	}
 	return (0);
 }
+
+// To print the commands stored in the array
+		// if (commands)
+		// 	ft_printf("cmd[0] = %s\n", commands[0]);
+		// if (commands[1])
+		// 	ft_printf("cmd[1] = %s\n", commands[1]);
+		// if (commands[2])
+		// 	ft_printf("cmd[2] = %s\n", commands[2]);
