@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 06:51:56 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/30 07:03:44 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,9 @@ void			ft_free(char **array);
 char			*ft_commands(char *s);
 char			*find_path(char **envp);
 char			*check_valid_cmd(char *argv, char **envp);
+
+// Processes.c
+void			first_process(t_vars *vars, char **envp, int *pipe_fd);
+void			second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 #endif

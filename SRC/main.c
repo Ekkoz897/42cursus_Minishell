@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 06:56:47 by apereira         ###   ########.fr       */
+/*   Updated: 2023/03/30 07:17:14 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int ac, char **av, char **env)
 	char	*input;
 	char	**commands;
 	t_vars	vars;
+	int		pipe_fd[2];
 
 	(void)ac;
 	(void)av;
@@ -93,12 +94,10 @@ int	main(int ac, char **av, char **env)
 		if (commands)
 			ft_printf("cmd[0] = %s\n", commands[0]);
 		vars.cmd1_flags = ft_split(commands[0], ' ');
-		vars.cmd1_path = check_valid_cmd(vars.cmd1_flags[0], env);
-		if (vars.cmd1_path)
-			execve(vars.cmd1_path, vars.cmd1_flags, env);
-		// vars.cmd2_flags = ft_split(argv[3], ' ');
+		first_process(&vars, env, pipe_fd);
 		ft_printf("You entered: %s\n", input);
 		ft_free(commands);
+		ft_free(vars.cmd1_flags);
 		free(input);
 	}
 	return (0);
