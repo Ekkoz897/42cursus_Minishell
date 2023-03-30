@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 09:36:33 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:29:32 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ char			*check_valid_cmd(char *argv, char **envp);
 // Processes.c
 void			first_process(t_vars *vars, char **envp, int *pipe_fd);
 void			second_process(t_vars *vars, char **envp, int *pipe_fd);
+
+// Split_cmds.c
+char	**ft_split_cmds(char const *s, char c);
 
 #endif

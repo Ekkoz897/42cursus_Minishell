@@ -1,57 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 10:30:55 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:05:44 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
 /**
  * It splits a string into words.
  * 
  */
-
-static size_t	words_count(char *s, char c)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (*s)
-	{
-		if (*s != c)
-			i++;
-		else if (*s == c && i != 0)
-		{
-			j++;
-			i = 0;
-		}
-		s++;
-	}
-	if (i != 0)
-		j++;
-	return (j);
-}
-
-static char	*word(char *s, char c)
-{
-	char	*buf;
-
-	while (*s == c)
-		s++;
-	buf = s;
-	while (*buf && *buf != c)
-		buf++;
-	*buf = '\0';
-	return (ft_strdup(s));
-}
 
 static char	**free_arr(char **arr, char *s)
 {
@@ -66,6 +30,64 @@ static char	**free_arr(char **arr, char *s)
 	free(arr);
 	free(s);
 	return (NULL);
+}
+
+static size_t	words_count(char *s, char c)
+{
+	size_t	i;
+	size_t	j;
+
+	j = 0;
+	while (*s)
+	{
+		i = 1;
+		while (*s == c)
+			s++;
+		while (*s != c && *s)
+		{
+			if (*s == '-')
+				i = 0;
+			if (i != 0)
+			{
+				j++;
+				i = 0;
+			}
+			s++;
+		}
+	}
+	if (i != 0)
+		j++;
+	ft_printf("%i\n" , j);
+	return (j);
+}
+
+static char	*word(char *s, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (*s == c)
+		s++;
+	while (s[i] && s[i] != c)
+		i++;
+	while (1)
+	{
+		j = i;
+		while (s[j] && s[j] == c)
+			j++;
+		if (s[j] != '-')
+			break;
+		else
+		{
+			i = j;
+			while (s[i] && s[i] != c)
+				i++;
+				
+		}
+	}
+	s[i] = '\0';
+	return (ft_strdup(s));
 }
 
 static char	**worker(char **arr, char *s1, char c, size_t j)
@@ -92,17 +114,17 @@ static char	**worker(char **arr, char *s1, char c, size_t j)
 	return (arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_cmds(char const *s, char c)
 {
 	char	**w_arr;
 	char	*s1;
 	size_t	j;
 
-	s1 = ft_strdup(s);
-	if (!s1)
+	if (!s)
 		return (NULL);
+	s1 = ft_strdup(s);
 	j = words_count(s1, c);
-	w_arr = (char **)malloc(sizeof(char *) * (j + 1));
+	w_arr = malloc(sizeof(char *) * (j + 1));
 	if (!w_arr)
 		return (NULL);
 	return (worker(w_arr, s1, c, j));
