@@ -6,62 +6,21 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 16:16:39 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:44:25 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-// Function takes the input string and splits the commands into one array each 
-// their with flags
-// char	**ft_split_cmds(char *input)
-// {
-// 	int		i;
-// 	int		j;
-// 	// int		k;
-// 	char	**cmds;
-
-// 	i = 0;
-// 	cmds = ft_calloc(1, sizeof(char *));
-// 	while (input[i])
-// 	{
-// 		if (input[i] == '|')
-// 		{
-// 			free (cmds);
-// 			cmds = ft_calloc(3, sizeof(char *));
-// 			j = i;
-// 			cmds[0] = ft_calloc(j + 1, sizeof(char));
-// 			while (j >= 0)
-// 			{
-// 				cmds[0][j] = input[j];
-// 				j--;
-// 			}
-// 			cmds[1] = ft_calloc(2, sizeof(char));
-// 			cmds[1][0] = '|';
-// 			while (input[i++])
-// 				j++;
-// 			cmds[2] = ft_calloc(j, sizeof(char));
-// 			while (j >= 0)
-// 			{
-// 				cmds[2][j] = input[i];
-// 				j--;
-// 				i--;
-// 			}
-// 		}
-// 		i++;
-// 	}
-	
-// }
-
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
-	// char	**commands;
+	char	**commands;
+	t_vars	vars;
+	int		pipe_fd[2];
 
 	(void)ac;
 	(void)av;
-	(void)env;
 	while (1)
 	{
 		input = readline("myshell> ");
@@ -71,10 +30,27 @@ int	main(int ac, char **av, char **env)
 			break ;
 		}
 		add_history(input);
-		
 		ft_printf("You entered: %s\n", input);
-		commands_cpy(input);
+		commands = ft_split_cmds(input, ' ');
+		if (commands)
+			ft_printf("cmd[0] = %s\n", commands[0]);
+		vars.cmd1_flags = ft_split(commands[0], ' ');
+		if (commands[1])
+			ft_printf("cmd[1] = %s\n", commands[1]);
+		if (commands[2])
+			ft_printf("cmd[2] = %s\n", commands[2]);
+		first_process(&vars, env, pipe_fd);
+		ft_free(commands);
+		ft_free(vars.cmd1_flags);
 		free(input);
 	}
 	return (0);
 }
+
+// To print the commands stored in the array
+		// if (commands)
+		// 	ft_printf("cmd[0] = %s\n", commands[0]);
+		// if (commands[1])
+		// 	ft_printf("cmd[1] = %s\n", commands[1]);
+		// if (commands[2])
+		// 	ft_printf("cmd[2] = %s\n", commands[2]);
