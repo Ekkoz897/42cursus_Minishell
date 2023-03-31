@@ -34,6 +34,8 @@ git: fclean
 	@echo "                                                  "
 	@echo "                                                  "
 
+commit: fclean
+
 clean: 
 	@make clean -s -C ft_printf
 	@make clean -s -C libft

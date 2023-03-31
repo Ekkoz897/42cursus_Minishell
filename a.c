@@ -51,26 +51,13 @@ char **split_commands(const char *input, int *cmd_count) {
     return commands;
 }
 
-void print_arguments(const char *command_str) {
-    int arg_num = 1;
-    const char *word = get_next_token(command_str, " \t\n");
-
-    while (word) {
-        int length = get_token_length(word, " \t\n");
-        printf("  Argument %d: %.*s\n", arg_num, length, word);
-        word = get_next_token(word + length, " \t\n");
-        arg_num++;
-    }
-}
-
 int main() {
     char *input = "command1 arg1 arg2 | command2 arg3 | grep arg4";
     int cmd_count;
     char **commands = split_commands(input, &cmd_count);
 
     for (int i = 0; i < cmd_count; i++) {
-        printf("Command %d:\n", i + 1);
-        print_arguments(commands[i]);
+        printf("Command %s\n", commands[i]);;
         free(commands[i]);
     }
 
