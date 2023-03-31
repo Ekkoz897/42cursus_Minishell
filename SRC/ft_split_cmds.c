@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 11:28:22 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:12:21 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static size_t	words_count(char *s, char c)
 			s++;
 		}
 	}
-	if (i != 0)
+	if (i == 0)
 		j++;
 	ft_printf("%i\n" , j);
 	return (j);
@@ -76,7 +76,7 @@ static char	*word(char *s, char c)
 		j = i;
 		while (s[j] && s[j] == c)
 			j++;
-		if (s[j] != '-')
+		if (s[j] == '|' || !s[j])
 			break;
 		else
 		{
