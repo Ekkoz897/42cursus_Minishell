@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/29 16:15:34 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:16:39 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,44 @@
 
 // Function takes the input string and splits the commands into one array each 
 // their with flags
-char	**ft_split_cmds(char *input)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	**cmds;
+// char	**ft_split_cmds(char *input)
+// {
+// 	int		i;
+// 	int		j;
+// 	// int		k;
+// 	char	**cmds;
 
-	i = 0;
-	cmds = ft_calloc(1, sizeof(char *));
-	while (input[i])
-	{
-		if (input[i] == '|')
-		{
-			free (cmds);
-			cmds = ft_calloc(3, sizeof(char *));
-			j = i;
-			cmds[0] = ft_calloc(j + 1, sizeof(char));
-			while (j >= 0)
-			{
-				cmds[0][j] = input[j];
-				j--;
-			}
-			cmds[1] = ft_calloc(2, sizeof(char));
-			cmds[1][0] = '|';
-			while (input[i++])
-				j++;
-			cmds[2] = ft_calloc(j, sizeof(char));
-			while (j >= 0)
-			{
-				cmds[2][j] = input[i];
-				j--;
-				i--;
-			}
-		}
-		i++;
-	}
+// 	i = 0;
+// 	cmds = ft_calloc(1, sizeof(char *));
+// 	while (input[i])
+// 	{
+// 		if (input[i] == '|')
+// 		{
+// 			free (cmds);
+// 			cmds = ft_calloc(3, sizeof(char *));
+// 			j = i;
+// 			cmds[0] = ft_calloc(j + 1, sizeof(char));
+// 			while (j >= 0)
+// 			{
+// 				cmds[0][j] = input[j];
+// 				j--;
+// 			}
+// 			cmds[1] = ft_calloc(2, sizeof(char));
+// 			cmds[1][0] = '|';
+// 			while (input[i++])
+// 				j++;
+// 			cmds[2] = ft_calloc(j, sizeof(char));
+// 			while (j >= 0)
+// 			{
+// 				cmds[2][j] = input[i];
+// 				j--;
+// 				i--;
+// 			}
+// 		}
+// 		i++;
+// 	}
 	
-}
+// }
 
 int	main(int ac, char **av, char **env)
 {
