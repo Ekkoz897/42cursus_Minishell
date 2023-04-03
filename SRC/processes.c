@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 13:40:37 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:04:47 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 {
-	char	*infile;
 	// char	*outfile;
+	char	*infile;
 	char	*temp;
 	int		i;
 

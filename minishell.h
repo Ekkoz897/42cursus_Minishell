@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 13:01:03 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:11:57 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ typedef struct s_cmds
 }t_cmds;
 
 // Input Sanitize.c
-size_t		commands_cpy(char *s);
-void		ft_free(char **array);
-char		*find_path(char **envp);
 char		*check_valid_cmd(char *argv, char **envp);
 
 // ft_split_cmds.c
@@ -54,11 +51,22 @@ const char	*get_next_token(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
-void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands);
+void		first_process(t_vars *vars, char **envp, int *pipe_fd,
+				char **commands);
 void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c
-char	**ft_split_commands_no_redirection(const char *str, const char *delimiters);
+char		*find_path(char **envp);
+void		ft_free(char **array);
 int			count_words(const char *str, const char *delimiters);
 
+// util2.c
+char		**ft_split_commands_no_redirection(const char *str,
+				const char *delimiters);
+int			is_delimiter(char c, const char *delimiters);
+int			count_words_no_redirection(const char *str, const char *delimiters);
+const char	*get_next_token_no_redirection(const char *str,
+				const char *delimiters);
+int			get_token_length_no_redirection(const char *str,
+				const char *delimiters);
 #endif

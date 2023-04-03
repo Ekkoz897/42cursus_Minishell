@@ -6,7 +6,7 @@ RM = rm -rf
 
 CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 
-SRC = main.c input_sanitize.c processes.c split_cmds.c utils.c
+SRC = main.c input_sanitize.c processes.c split_cmds.c utils.c utils2.c
 
 OBJ = $(SRC:.c=.o)
 
