@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 09:37:08 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:23:20 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	first_process(t_vars *vars, char **envp, int *pipe_fd)
 {
 	(void)pipe_fd;
-
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
@@ -38,7 +37,6 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd)
 void	second_process(t_vars *vars, char **envp, int *pipe_fd)
 {
 	(void)pipe_fd;
-
 	vars->pid2 = fork();
 	if (vars->pid2 < 0)
 		return ;

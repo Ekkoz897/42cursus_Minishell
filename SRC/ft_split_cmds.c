@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 08:44:30 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:27:09 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,11 @@ char	**ft_split_commands(const char *str, const char *delimiters)
 	{
 		token_length = get_token_length(token_start, delimiters);
 		words[i] = ft_strndup(token_start, token_length);
-		if (!words[i])
+		if (!words[i++])
 		{
 			ft_free(words);
 			return (NULL);
 		}
-		i++;
 		token_start = get_next_token(token_start + token_length, delimiters);
 	}
 	words[num_words] = NULL;
