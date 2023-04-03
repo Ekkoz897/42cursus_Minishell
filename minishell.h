@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 10:00:01 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:03:02 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,23 @@ typedef struct s_cmds
 }t_cmds;
 
 // Input Sanitize.c
-size_t	commands_cpy(char *s);
-void	ft_free(char **array);
-char	*find_path(char **envp);
-char	*check_valid_cmd(char *argv, char **envp);
+size_t		commands_cpy(char *s);
+void		ft_free(char **array);
+char		*find_path(char **envp);
+char		*check_valid_cmd(char *argv, char **envp);
 
 // ft_split_cmds.c
-t_cmds	*ft_split_commands(const char *str, const char *delimiters);
-int		count_words(const char *str, const char *delimiters);
+int			get_token_length(const char *str, const char *delimiters);
+const char	*get_next_token(const char *str, const char *delimiters);
+char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
-void	first_process(t_vars *vars, char **envp, int *pipe_fd);
-void	second_process(t_vars *vars, char **envp, int *pipe_fd);
+void		first_process(t_vars *vars, char **envp, int *pipe_fd);
+void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c
-t_cmds	*create_new_node(char **command);
-t_cmds	*link_new_node(t_cmds *current, char **commands);
+t_cmds		*create_new_node(char **command);
+t_cmds		*link_new_node(t_cmds *current, char **commands);
+int			count_words(const char *str, const char *delimiters);
 
 #endif

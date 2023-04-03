@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 10:01:46 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:01:33 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,21 @@ t_cmds	*link_new_node(t_cmds *current, char **commands)
 		return (create_new_node(commands));
 	current->next = create_new_node(commands);
 	return (current->next);
+}
+
+int	count_words(const char *str, const char *delimiters)
+{
+	int			count;
+	int			token_length;
+	const char	*token_start;
+
+	count = 0;
+	token_start = get_next_token(str, delimiters);
+	while (token_start)
+	{
+		count++;
+		token_length = get_token_length(token_start, delimiters);
+		token_start = get_next_token(token_start + token_length, delimiters);
+	}
+	return (count);
 }

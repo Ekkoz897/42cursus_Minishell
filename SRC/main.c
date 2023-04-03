@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 10:04:09 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:07:37 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
+	char	**commands;
 	t_vars	vars;
-	t_cmds	*cmds;
 	int		pipe_fd[2];
 
 	(void)ac;
@@ -31,13 +31,16 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(input);
 		ft_printf("You entered: %s\n", input);
-		cmds = ft_split_commands(input, "|");
-		ft_printf("cmd0 = %s\n", cmds->content);
-		if (cmds->next->content)
-			ft_printf("cmd1 = %s\n", *cmds->next->content);
-		if (cmds->next->next->content)
-			ft_printf("cmd2 = %s\n", *cmds->next->next->content);
+		commands = ft_split_commands(input, "|");
+		if (commands)
+			ft_printf("cmd[0] = %s\n", commands[0]);
+		vars.cmd1_flags = ft_split(commands[0], ' ');
+		if (commands[1])
+			ft_printf("cmd[1] = %s\n", commands[1]);
+		if (commands[2])
+			ft_printf("cmd[2] = %s\n", commands[2]);
 		first_process(&vars, env, pipe_fd);
+		ft_free(commands);
 		ft_free(vars.cmd1_flags);
 		free(input);
 	}

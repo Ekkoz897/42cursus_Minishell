@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 10:05:04 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:06:52 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,54 +52,31 @@ const char	*get_next_token(const char *str, const char *delimiters)
 		return (NULL);
 }
 
-t_cmds	*ft_split_commands(const char *str, const char *delimiters)
+char	**ft_split_commands(const char *str, const char *delimiters)
 {
-	char		**commands;
+	int			num_words;
+	char		**words;
 	const char	*token_start;
 	int			token_length;
-	t_cmds		*head;
-	t_cmds		*current;
+	int			i;
 
-	head = NULL;
+	num_words = count_words(str, delimiters);
+	words = (char **)malloc((num_words + 1) * sizeof(char *));
+	if (!words)
+		return (NULL);
+	i = 0;
 	token_start = get_next_token(str, delimiters);
 	while (token_start)
 	{
 		token_length = get_token_length(token_start, delimiters);
-		commands = ft_split(token_start, token_length);
-		current = link_new_node(current, commands);
-		if (!head)
-			current = head;
+		words[i] = ft_strndup(token_start, token_length);
+		if (!words[i++])
+		{
+			ft_free(words);
+			return (NULL);
+		}
 		token_start = get_next_token(token_start + token_length, delimiters);
 	}
-	ft_printf("ok\n");
-	return (head);
+	words[num_words] = NULL;
+	return (words);
 }
-
-// char	**ft_split_commands(const char *str, const char *delimiters)
-// {
-// 	int			num_words;
-// 	char		**words;
-// 	const char	*token_start;
-// 	int			token_length;
-// 	int			i;
-
-// 	num_words = count_words(str, delimiters);
-// 	words = (char **)malloc((num_words + 1) * sizeof(char *));
-// 	if (!words)
-// 		return (NULL);
-// 	i = 0;
-// 	token_start = get_next_token(str, delimiters);
-// 	while (token_start)
-// 	{
-// 		token_length = get_token_length(token_start, delimiters);
-// 		words[i] = ft_strndup(token_start, token_length);
-// 		if (!words[i++])
-// 		{
-// 			ft_free(words);
-// 			return (NULL);
-// 		}
-// 		token_start = get_next_token(token_start + token_length, delimiters);
-// 	}
-// 	words[num_words] = NULL;
-// 	return (words);
-// }
