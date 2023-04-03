@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 12:30:16 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:39:35 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 
 	vars->fd0 = 0;
 	i = 0;
+	vars->cmd_flags = ft_split(commands[0], ' ');
 	if (ft_strrchr(commands[0], '<'))
 	{
 		temp = ft_strrchr(commands[0], '<');
@@ -44,7 +45,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		return ;
 	if (vars->pid1 == 0)
 	{
-		vars->cmd1_path = check_valid_cmd(vars->cmd1_flags[0], envp);
+		vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
 		if (vars->cmd1_path == NULL)
 			exit(1);
 		if (commands[1])
@@ -52,7 +53,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		//  close (pipe_fd[0]);
 		if (vars->fd0 == 0)
 			dup2(vars->fd0, STDIN_FILENO);
-		execve(vars->cmd1_path, vars->cmd1_flags, envp);
+		execve(vars->cmd1_path, vars->cmd_flags, envp);
 	}
 }
 

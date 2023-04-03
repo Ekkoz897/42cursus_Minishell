@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 12:32:23 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:39:19 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int ac, char **av, char **env)
 			ft_printf("cmd[%i] : %s\n", i, commands[i]);
 			i++;
 		}
-		vars.cmd1_flags = ft_split(commands[0], ' ');
 		i = 0;
 		while (commands[i])
 		{
@@ -48,7 +47,7 @@ int	main(int ac, char **av, char **env)
 		}
 		waitpid(vars.pid1, NULL, 0);
 		ft_free(commands);
-		ft_free(vars.cmd1_flags);
+		ft_free(vars.cmd_flags);
 		free(input);
 	}
 	return (0);
