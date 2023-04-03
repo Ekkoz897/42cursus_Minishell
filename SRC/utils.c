@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 13:14:41 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:38:24 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,20 @@ int get_token_length_no_redirection(const char *str, const char *delimiters)
 
 const char *get_next_token_no_redirection(const char *str, const char *delimiters)
 {
-    while (*str && (ft_strchr(delimiters, *str) || *str == '<' || *str == '>'))
+    while (*str && ft_strchr(delimiters, *str))
     {
         str++;
     }
+	if (*str == '<')
+	{
+		str++;
+		while (*str && ft_strchr(delimiters, *str))
+			str++;
+		while (*str && !ft_strchr(delimiters, *str))
+			str++;
+		while (*str && ft_strchr(delimiters, *str))
+			str++;
+	}
     if (*str)
     {
         return (str);
@@ -70,38 +80,43 @@ int is_delimiter(char c, const char *delimiters)
 
 char **ft_split_commands_no_redirection(const char *str, const char *delimiters)
 {
-    char **tokens;
-    int num_words;
-    char *token_start;
-    int token_length;
+	char **tokens;
+	int num_words;
+	char *token_start;
+	int token_length;
 
-    num_words = count_words_no_redirection(str, delimiters);
-    tokens = malloc((num_words + 1) * sizeof(char *));
-    if (!tokens)
-        return (NULL);
-    token_start = (char *)str;
-    while (*token_start)
-    {
-        while (is_delimiter(*token_start, delimiters))
-            token_start++;
-        if (*token_start == '<')
-        {
-            while (*token_start && *token_start != ' ' && *token_start != '	')
-                token_start++;
-            while (is_delimiter(*token_start, delimiters))
-                token_start++;
-        }
-        if (*token_start)
-        {
-            token_length = get_token_length(token_start, delimiters);
-            *tokens = ft_strndup(token_start, token_length);
-            token_start += token_length;
-            tokens++;
-        }
-    }
-    *tokens = NULL;
-    return (tokens - num_words);
+	num_words = count_words_no_redirection(str, delimiters);
+	tokens = malloc((num_words + 1) * sizeof(char *));
+	if (!tokens)
+		return (NULL);
+	token_start = (char *)str;
+	while (*token_start)
+	{
+		while (is_delimiter(*token_start, delimiters))
+			token_start++;
+		if (*token_start == '<')
+		{
+			token_start++;
+			while (is_delimiter(*token_start, delimiters))
+				token_start++;
+			while (!is_delimiter(*token_start, delimiters))
+				token_start++;
+			while (is_delimiter(*token_start, delimiters))
+				token_start++;
+			continue;
+		}
+		if (*token_start)
+		{
+			token_length = get_token_length(token_start, delimiters);
+			*tokens = ft_strndup(token_start, token_length);
+			token_start += token_length;
+			tokens++;
+		}
+	}
+	*tokens = NULL;
+	return (tokens - num_words);
 }
+
 
 // Finds the PATH string in the "envp" text
 char	*find_path(char **envp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 13:15:27 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:40:37 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " ");
 	if (ft_strrchr(commands[0], '<'))
 	{
-		ft_printf("aqun\n");
 		temp = ft_strrchr(commands[0], '<');
 		temp++;
 		while (*temp == ' ' || *temp == '	')
@@ -32,7 +31,6 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		while (temp[i] != ' ' && temp[i] != '	' && temp[i])
 			i++;
 		infile = ft_strndup(temp, i);
-		ft_printf("%s; infile :\n", infile);
 		vars->fd0 = open(infile, O_RDONLY);
 		if (vars->fd0 < 0)
 		{
@@ -51,7 +49,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		if (commands[1])
 			dup2(pipe_fd[1], STDOUT_FILENO);
 		//  close (pipe_fd[0]);
-		if (vars->fd0 == 0)
+		if (vars->fd0 != 0)
 			dup2(vars->fd0, STDIN_FILENO);
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
 	}
