@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 12:39:00 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:01:03 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands);
 void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c
-t_cmds		*create_new_node(char **command);
-t_cmds		*link_new_node(t_cmds *current, char **commands);
+char	**ft_split_commands_no_redirection(const char *str, const char *delimiters);
 int			count_words(const char *str, const char *delimiters);
 
 #endif
