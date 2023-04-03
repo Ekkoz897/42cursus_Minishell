@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 11:17:56 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:19:38 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **env)
 	t_vars	vars;
 	int		pipe_fd[2];
 
-	i = 0;
 	(void)ac;
 	(void)av;
 	while (1)
@@ -33,6 +32,7 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(input);
 		ft_printf("You entered: %s\n", input);
+		i = 0;
 		commands = ft_split_commands(input, "|");
 		while (commands[i])
 		{
