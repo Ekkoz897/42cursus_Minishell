@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 08:01:52 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 08:46:59 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(input);
 		ft_printf("You entered: %s\n", input);
-		commands = ft_split_cmds(input, ' ');
+		commands = ft_split_commands(input, "|");
 		if (commands)
 			ft_printf("cmd[0] = %s\n", commands[0]);
 		vars.cmd1_flags = ft_split(commands[0], ' ');

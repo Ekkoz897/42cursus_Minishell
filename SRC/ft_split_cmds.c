@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/31 15:24:49 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 08:44:30 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,115 +17,84 @@
  * 
  */
 
-static char	**free_arr(char **arr, char *s)
-{
-	size_t	i;
+// static char	**free_arr(char **arr, char *s)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-	free(s);
-	return (NULL);
+// 	i = 0;
+// 	while (arr[i])
+// 	{
+// 		free(arr[i]);
+// 		i++;
+// 	}
+// 	free(arr);
+// 	free(s);
+// 	return (NULL);
+// }
+
+int	get_token_length(const char *str, const char *delimiters)
+{
+	int	length;
+
+	length = 0;
+	while (str[length] && !ft_strchr(delimiters, str[length]))
+		length++;
+	return (length);
 }
 
-static size_t	words_count(char *s, char c)
+const char	*get_next_token(const char *str, const char *delimiters)
 {
-	size_t	i;
-	size_t	j;
-
-	j = 0;
-	while (*s)
-	{
-		i = 1;
-		while (*s == c)
-			s++;
-		while (*s != c && *s)
-		{
-			if (*s != '|' )
-				i = 0;
-			if (i != 0)
-			{
-				j++;
-				i = 0;
-			}
-			s++;
-		}
-	}
-	if (i == 0)
-		j++;
-	ft_printf("%i\n" , j);
-	return (j);
-}
-
-static char	*word(char *s, char c)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (*s == c)
-		s++;
-	while (s[i] && s[i] != c)
-		i++;
-	while (1)
-	{
-		j = i;
-		while (s[j] && s[j] == c)
-			j++;
-		if (s[j] == '|' || !s[j])
-			break;
-		else
-		{
-			i = j;
-			while (s[i] && s[i] != c)
-				i++;
-				
-		}
-	}
-	s[i] = '\0';
-	return (ft_strdup(s));
-}
-
-static char	**worker(char **arr, char *s1, char c, size_t j)
-{
-	size_t	i;
-	char	*str;
-
-	str = s1;
-	i = 0;
-	while (i < j)
-	{
-		if (*s1 != c)
-		{
-			arr[i] = word(s1, c);
-			if (!arr[i])
-				return (free_arr(arr, s1));
-			s1 = s1 + ft_strlen(arr[i]);
-			i++;
-		}
-		s1++;
-	}
-	arr[i] = NULL;
-	free(str);
-	return (arr);
-}
-
-char	**ft_split_cmds(char const *s, char c)
-{
-	char	**w_arr;
-	char	*s1;
-	size_t	j;
-
-	if (!s)
+	while (*str && ft_strchr(delimiters, *str))
+	str++;
+	if (*str)
+		return (str);
+	else
 		return (NULL);
-	s1 = ft_strdup(s);
-	j = words_count(s1, c);
-	w_arr = malloc(sizeof(char *) * (j + 1));
-	if (!w_arr)
+}
+
+int	count_words(const char *str, const char *delimiters)
+{
+	int			count;
+	int			token_length;
+	const char	*token_start;
+
+	count = 0;
+	token_start = get_next_token(str, delimiters);
+	while (token_start)
+	{
+		count++;
+		token_length = get_token_length(token_start, delimiters);
+		token_start = get_next_token(token_start + token_length, delimiters);
+	}
+	return (count);
+}
+
+char	**ft_split_commands(const char *str, const char *delimiters)
+{
+	int			num_words;
+	char		**words;
+	const char	*token_start;
+	int			token_length;
+	int			i;
+
+	num_words = count_words(str, delimiters);
+	words = (char **)malloc((num_words + 1) * sizeof(char *));
+	if (!words)
 		return (NULL);
-	return (worker(w_arr, s1, c, j));
+	i = 0;
+	token_start = get_next_token(str, delimiters);
+	while (token_start)
+	{
+		token_length = get_token_length(token_start, delimiters);
+		words[i] = ft_strndup(token_start, token_length);
+		if (!words[i])
+		{
+			ft_free(words);
+			return (NULL);
+		}
+		i++;
+		token_start = get_next_token(token_start + token_length, delimiters);
+	}
+	words[num_words] = NULL;
+	return (words);
 }

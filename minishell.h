@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/03/30 10:29:32 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 08:46:03 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,18 @@ typedef struct s_vars
 }t_vars;
 
 // Input Sanitize.c
-size_t			commands_cpy(char *s);
-void			ft_free(char **array);
-char			*ft_commands(char *s);
-char			*find_path(char **envp);
-char			*check_valid_cmd(char *argv, char **envp);
+size_t	commands_cpy(char *s);
+void	ft_free(char **array);
+char	*find_path(char **envp);
+char	*check_valid_cmd(char *argv, char **envp);
+
+// split_cmds.c
+char	**ft_split_commands(const char *str, const char *delimiters);
+int		count_words(const char *str, const char *delimiters);
 
 // Processes.c
-void			first_process(t_vars *vars, char **envp, int *pipe_fd);
-void			second_process(t_vars *vars, char **envp, int *pipe_fd);
+void	first_process(t_vars *vars, char **envp, int *pipe_fd);
+void	second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // Split_cmds.c
 char	**ft_split_cmds(char const *s, char c);
