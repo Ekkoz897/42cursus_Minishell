@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 14:12:12 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:13:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,7 @@ char	**ft_split_commands_no_redirection(const char *str,
 	{
 		while (is_delimiter(*token_start, delimiters))
 			token_start++;
-		if (*token_start == '<')
-		{
-			token_start++;
-			while (is_delimiter(*token_start, delimiters))
-				token_start++;
-			while (!is_delimiter(*token_start, delimiters))
-				token_start++;
-			while (is_delimiter(*token_start, delimiters))
-				token_start++;
-		}
+		get_next_token_no_redirection(token_start, delimiters);
 		if (*token_start)
 		{
 			token_length = get_token_length(token_start, delimiters);
