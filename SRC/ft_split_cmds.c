@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 09:27:09 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:59:02 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,48 +52,53 @@ const char	*get_next_token(const char *str, const char *delimiters)
 		return (NULL);
 }
 
-int	count_words(const char *str, const char *delimiters)
+t_cmds	*ft_split_commands(const char *str, const char *delimiters)
 {
-	int			count;
-	int			token_length;
-	const char	*token_start;
-
-	count = 0;
-	token_start = get_next_token(str, delimiters);
-	while (token_start)
-	{
-		count++;
-		token_length = get_token_length(token_start, delimiters);
-		token_start = get_next_token(token_start + token_length, delimiters);
-	}
-	return (count);
-}
-
-char	**ft_split_commands(const char *str, const char *delimiters)
-{
-	int			num_words;
-	char		**words;
+	char		**commands;
 	const char	*token_start;
 	int			token_length;
-	int			i;
+	t_cmds		*head;
+	t_cmds		*current;
 
-	num_words = count_words(str, delimiters);
-	words = (char **)malloc((num_words + 1) * sizeof(char *));
-	if (!words)
-		return (NULL);
-	i = 0;
+	head = NULL;
 	token_start = get_next_token(str, delimiters);
 	while (token_start)
 	{
 		token_length = get_token_length(token_start, delimiters);
-		words[i] = ft_strndup(token_start, token_length);
-		if (!words[i++])
-		{
-			ft_free(words);
-			return (NULL);
-		}
+		commands = ft_split(token_start, token_length);
+		current = link_new_node(current, commands);
+		if (!head)
+			current = head;
 		token_start = get_next_token(token_start + token_length, delimiters);
 	}
-	words[num_words] = NULL;
-	return (words);
+	return (head);
 }
+
+// char	**ft_split_commands(const char *str, const char *delimiters)
+// {
+// 	int			num_words;
+// 	char		**words;
+// 	const char	*token_start;
+// 	int			token_length;
+// 	int			i;
+
+// 	num_words = count_words(str, delimiters);
+// 	words = (char **)malloc((num_words + 1) * sizeof(char *));
+// 	if (!words)
+// 		return (NULL);
+// 	i = 0;
+// 	token_start = get_next_token(str, delimiters);
+// 	while (token_start)
+// 	{
+// 		token_length = get_token_length(token_start, delimiters);
+// 		words[i] = ft_strndup(token_start, token_length);
+// 		if (!words[i++])
+// 		{
+// 			ft_free(words);
+// 			return (NULL);
+// 		}
+// 		token_start = get_next_token(token_start + token_length, delimiters);
+// 	}
+// 	words[num_words] = NULL;
+// 	return (words);
+// }

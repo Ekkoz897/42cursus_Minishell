@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 08:46:03 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:00:01 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,29 @@ typedef struct s_vars
 	char	**cmd2_flags;
 }t_vars;
 
+// Struct for commands list
+typedef struct s_cmds
+{
+	void			**content;
+	struct s_cmds	*next;
+}t_cmds;
+
 // Input Sanitize.c
 size_t	commands_cpy(char *s);
 void	ft_free(char **array);
 char	*find_path(char **envp);
 char	*check_valid_cmd(char *argv, char **envp);
 
-// split_cmds.c
-char	**ft_split_commands(const char *str, const char *delimiters);
+// ft_split_cmds.c
+t_cmds	*ft_split_commands(const char *str, const char *delimiters);
 int		count_words(const char *str, const char *delimiters);
 
 // Processes.c
 void	first_process(t_vars *vars, char **envp, int *pipe_fd);
 void	second_process(t_vars *vars, char **envp, int *pipe_fd);
 
-// Split_cmds.c
-char	**ft_split_cmds(char const *s, char c);
+// utils.c
+t_cmds	*create_new_node(char **command);
+t_cmds	*link_new_node(t_cmds *current, char **commands);
 
 #endif
