@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 09:59:02 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:05:04 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_cmds	*ft_split_commands(const char *str, const char *delimiters)
 			current = head;
 		token_start = get_next_token(token_start + token_length, delimiters);
 	}
+	ft_printf("ok\n");
 	return (head);
 }
 
