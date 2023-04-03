@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 11:17:56 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:18:49 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **env)
 	t_vars	vars;
 	int		pipe_fd[2];
 
-	i = 0;
 	(void)ac;
 	(void)av;
 	while (1)
@@ -34,13 +33,20 @@ int	main(int ac, char **av, char **env)
 		add_history(input);
 		ft_printf("You entered: %s\n", input);
 		commands = ft_split_commands(input, "|");
+		i = 0;
 		while (commands[i])
 		{
 			ft_printf("cmd[%i] : %s\n", i, commands[i]);
 			i++;
 		}
 		vars.cmd1_flags = ft_split(commands[0], ' ');
-		first_process(&vars, env, pipe_fd);
+		i = 0;
+		while (commands[i])
+		{
+			first_process(&vars, env, pipe_fd, &commands[i]);
+			i++;
+		}
+		waitpid(vars.pid1, NULL, 0);
 		ft_free(commands);
 		ft_free(vars.cmd1_flags);
 		free(input);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 11:03:02 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:07:10 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
@@ -27,7 +28,7 @@ typedef struct s_vars
 	int		pid1;
 	int		pid2;
 	int		fd1;
-	int		fd2;
+	int		fd0;
 	char	*cmd1_path;
 	char	*cmd2_path;
 	char	**cmd1_flags;
@@ -53,7 +54,7 @@ const char	*get_next_token(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
-void		first_process(t_vars *vars, char **envp, int *pipe_fd);
+void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands);
 void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c
