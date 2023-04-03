@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 13:00:55 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:14:41 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,39 +57,50 @@ int count_words_no_redirection(const char *str, const char *delimiters)
     return (count);
 }
 
-char	**ft_split_commands_no_redirection(const char *str, const char *delimiters)
+int is_delimiter(char c, const char *delimiters)
 {
+    while (*delimiters)
+    {
+        if (c == *delimiters)
+            return (1);
+        delimiters++;
+    }
+    return (0);
+}
+
+char **ft_split_commands_no_redirection(const char *str, const char *delimiters)
+{
+    char **tokens;
     int num_words;
-    char **words;
-    const char *token_start;
+    char *token_start;
     int token_length;
-    int i;
 
     num_words = count_words_no_redirection(str, delimiters);
-    words = (char **)malloc((num_words + 1) * sizeof(char *));
-    if (!words)
-    {
+    tokens = malloc((num_words + 1) * sizeof(char *));
+    if (!tokens)
         return (NULL);
-    }
-    i = 0;
-    token_start = get_next_token_no_redirection(str, delimiters);
-    while (token_start)
+    token_start = (char *)str;
+    while (*token_start)
     {
-        token_length = get_token_length_no_redirection(token_start, delimiters);
-        words[i] = ft_strndup(token_start, token_length);
-        if (!words[i++])
+        while (is_delimiter(*token_start, delimiters))
+            token_start++;
+        if (*token_start == '<')
         {
-            ft_free(words);
-            return (NULL);
+            while (*token_start && *token_start != ' ' && *token_start != '	')
+                token_start++;
+            while (is_delimiter(*token_start, delimiters))
+                token_start++;
         }
-        token_start = get_next_token_no_redirection(token_start + token_length, delimiters);
-        if (token_start && (*token_start == '<' || *token_start == '>'))
+        if (*token_start)
         {
-            token_start = get_next_token_no_redirection(token_start + 1, delimiters);
+            token_length = get_token_length(token_start, delimiters);
+            *tokens = ft_strndup(token_start, token_length);
+            token_start += token_length;
+            tokens++;
         }
     }
-    words[num_words] = NULL;
-    return (words);
+    *tokens = NULL;
+    return (tokens - num_words);
 }
 
 // Finds the PATH string in the "envp" text

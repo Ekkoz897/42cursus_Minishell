@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 13:02:19 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:15:27 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 
 	vars->fd0 = 0;
 	i = 0;
-	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " 	");
+	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " ");
 	if (ft_strrchr(commands[0], '<'))
 	{
 		ft_printf("aqun\n");
