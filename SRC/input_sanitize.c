@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_sanitize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 08:43:48 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:28:27 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ char	*check_valid_cmd(char *command, char **envp)
 	cmd = find_path(envp);
 	split_paths = ft_split(cmd, ':');
 	i = 0;
+	if (ft_strchr(command, '/'))
+	{
+		if (access(command, 0) == 0)
+		{
+			ft_free(split_paths);
+			return (command);
+		}
+		else
+		{
+			perror(command);
+			return (NULL);
+		}
+	}
 	while (split_paths[i])
 	{
 		temp = ft_strjoin(split_paths[i], "/");

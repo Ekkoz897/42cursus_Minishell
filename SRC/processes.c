@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 14:04:47 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:17:06 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	vars->fd0 = 0;
 	i = 0;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " ");
+	ft_printf("vars->cmd_falgs : %s\n", vars->cmd_flags[0]);
 	if (ft_strrchr(commands[0], '<'))
 	{
 		temp = ft_strrchr(commands[0], '<');
@@ -34,10 +35,12 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		vars->fd0 = open(infile, O_RDONLY);
 		if (vars->fd0 < 0)
 		{
-			perror("Infile");
+			perror(infile);
 			return ;
 		}
 	}
+	// if (commands[1])
+	// pipe()
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
