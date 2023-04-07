@@ -6,13 +6,13 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/04 17:37:26 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:25:35 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	get_token_length_no_redirection(const char *str, const char *delimiters)
+int	get_token_length_no_redirection(char *str, char *delimiters)
 {
 	int	length;
 
@@ -25,8 +25,8 @@ int	get_token_length_no_redirection(const char *str, const char *delimiters)
 	return (length);
 }
 
-const char	*get_next_token_no_redirection(const char *str,
-		const char *delimiters)
+char	*get_next_token_no_redirection(char *str,
+		char *delimiters)
 {
 	while (*str && ft_strchr(delimiters, *str))
 		str++;
@@ -46,11 +46,11 @@ const char	*get_next_token_no_redirection(const char *str,
 		return (NULL);
 }
 
-int	count_words_no_redirection(const char *str, const char *delimiters)
+int	count_words_no_redirection(char *str, char *delimiters)
 {
 	int			count;
 	int			token_length;
-	const char	*token_start;
+	char	*token_start;
 
 	count = 0;
 	token_start = get_next_token_no_redirection(str, delimiters);
@@ -64,7 +64,7 @@ int	count_words_no_redirection(const char *str, const char *delimiters)
 	return (count);
 }
 
-int	is_delimiter(char c, const char *delimiters)
+int	is_delimiter(char c, char *delimiters)
 {
 	while (*delimiters)
 	{
@@ -75,8 +75,8 @@ int	is_delimiter(char c, const char *delimiters)
 	return (0);
 }
 
-char	**ft_split_commands_no_redirection(const char *str,
-	const char *delimiters)
+char	**ft_split_commands_no_redirection(char *str,
+	char *delimiters)
 {
 	char	**tokens;
 	int		num_words;
@@ -88,12 +88,12 @@ char	**ft_split_commands_no_redirection(const char *str,
 	if (!tokens)
 		return (NULL);
 	token_start = (char *)str;
-	while (*token_start)
+	while (token_start)
 	{
 		while (is_delimiter(*token_start, delimiters))
 			token_start++;
-		get_next_token_no_redirection(token_start, delimiters);
-		if (*token_start)
+		token_start = get_next_token_no_redirection(token_start, delimiters);
+		if (token_start)
 		{
 			token_length = get_token_length(token_start, delimiters);
 			*tokens = ft_strndup(token_start, token_length);
