@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 15:19:42 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:31:56 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	char		*infile;
 	char		*temp;
 	int			i;
-	static int	p0;
 	// char	*outfile;
 
 	vars->fd0 = 0;
@@ -59,14 +58,14 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		close (pipe_fd[0]);
 		if (vars->fd0 != 0)
 			dup2(vars->fd0, STDIN_FILENO);
-		else if (p0 != 0)
-			dup2(p0, STDIN_FILENO);
+		else if (vars->p0 != 0)
+			dup2(vars->p0, STDIN_FILENO);
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
 	}
 	close(pipe_fd[1]);
-	if (p0 != 0)
-		close(p0);
-	p0 = pipe_fd[0];
+	if (vars->p0 != 0)
+		close(vars->p0);
+	vars->p0 = pipe_fd[0];
 }
 
 void	second_process(t_vars *vars, char **envp, int *pipe_fd)

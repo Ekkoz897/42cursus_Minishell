@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 12:33:48 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:31:08 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_vars
 	int		pid2;
 	int		fd1;
 	int		fd0;
+	int		p0;
 	char	*cmd1_path;
 	char	*cmd2_path;
 	char	**cmd_flags;
