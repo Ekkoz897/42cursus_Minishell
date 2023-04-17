@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 11:25:40 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:34:38 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	count_words_no_redirection(char *str, char *delimiters)
 {
 	int			count;
 	int			token_length;
-	const char	*token_start;
+	char	*token_start;
 
 	count = 0;
 	token_start = get_next_token_no_redirection(str, delimiters);

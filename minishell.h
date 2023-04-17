@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 11:24:44 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:33:48 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void		ft_free(char **array);
 int			count_words(const char *str, const char *delimiters);
 
 // util2.c
-char		**ft_split_commands_no_redirection(const char *str,
-				const char *delimiters);
-int			is_delimiter(char c, const char *delimiters);
-int			count_words_no_redirection(const char *str, const char *delimiters);
-const char	*get_next_token_no_redirection(const char *str,
-				const char *delimiters);
-int			get_token_length_no_redirection(const char *str,
-				const char *delimiters);
+char		**ft_split_commands_no_redirection(char *str,
+				char *delimiters);
+int			is_delimiter(char c, char *delimiters);
+int			count_words_no_redirection(char *str, char *delimiters);
+char	*get_next_token_no_redirection(char *str,
+				char *delimiters);
+int		get_token_length_no_redirection(char *str,
+				char *delimiters);
 #endif
