@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/06 19:10:04 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:15:04 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ char	**ft_split_commands_no_redirection(char *str,
 	if (!tokens)
 		return (NULL);
 	token_start = (char *)str;
-	while (*token_start)
+	while (token_start)
 	{
 		while (is_delimiter(*token_start, delimiters))
 			token_start++;
 		token_start = get_next_token_no_redirection(token_start, delimiters);
-		if (*token_start)
+		if (token_start)
 		{
 			token_length = get_token_length(token_start, delimiters);
 			*tokens = ft_strndup(token_start, token_length);
