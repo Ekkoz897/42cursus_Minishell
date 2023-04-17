@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 12:34:38 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:31:15 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*get_next_token_no_redirection(char *str,
 {
 	while (*str && ft_strchr(delimiters, *str))
 		str++;
-	ft_printf("aqui %s\n", str);
 	if (*str == '<')
 	{
 		str++;
@@ -49,8 +48,8 @@ char	*get_next_token_no_redirection(char *str,
 
 int	count_words_no_redirection(char *str, char *delimiters)
 {
-	int			count;
-	int			token_length;
+	int		count;
+	int		token_length;
 	char	*token_start;
 
 	count = 0;
