@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 14:11:52 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:16:44 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	count_words(const char *str, const char *delimiters)
 	const char	*token_start;
 
 	count = 0;
+	if (!str)
+		return (0);
 	token_start = get_next_token(str, delimiters);
 	while (token_start)
 	{
