@@ -18,6 +18,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	char	*infile;
 	char	*temp;
 	int		i;
+	int		p0;
 
 	vars->fd0 = 0;
 	i = 0;
@@ -39,8 +40,11 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 			return ;
 		}
 	}
-	// if (commands[1])
-	// pipe()
+	if (pipe(pipe_fd) < 0)
+	{
+		perror("Pipe");
+		exit(1);
+	}
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
@@ -50,20 +54,15 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		if (vars->cmd1_path == NULL)
 			exit(1);
 		if (commands[1])
-			dup2(pipe_fd[1], STDOUT_FILENO);
-		//  close (pipe_fd[0]);
+			dup2(pipe_fd[1], STDOUT_FILENO);	
+		close (pipe_fd[0]);
 		if (vars->fd0 != 0)
 			dup2(vars->fd0, STDIN_FILENO);
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
 	}
+
 }
 
-// Opens the second file FD, parses the second command by duplicating it
-// and executes it. Passes the output onto the second file instead of
-// to the standard output.
-// O_TRUNC deletes file contents so we can write to the file, O_CREAT creates 
-// a file if there isn't one available, O_RDWR opens a FD to read and write.
-// The number sets the perms of the file so it can be read from and wrote on.
 void	second_process(t_vars *vars, char **envp, int *pipe_fd)
 {
 	(void)pipe_fd;
