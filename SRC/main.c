@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/04 17:40:38 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:22:40 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **av, char **env)
 			first_process(&vars, env, pipe_fd, &commands[i]);
 			i++;
 		}
+		close(pipe_fd[0]);
 		waitpid(vars.pid1, NULL, 0);
 		ft_free(commands);
 		free(input);

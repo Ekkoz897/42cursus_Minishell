@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 14:56:39 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:19:42 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 {
+	char		*infile;
+	char		*temp;
+	int			i;
+	static int	p0;
 	// char	*outfile;
-	char	*infile;
-	char	*temp;
-	int		i;
-	int		p0;
 
 	vars->fd0 = 0;
 	i = 0;
@@ -45,6 +45,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		perror("Pipe");
 		exit(1);
 	}
+	ft_printf("%i, %i\n", pipe_fd[0], pipe_fd[1]);
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
@@ -58,16 +59,16 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		close (pipe_fd[0]);
 		if (vars->fd0 != 0)
 			dup2(vars->fd0, STDIN_FILENO);
+		else if (p0 != 0)
+			dup2(p0, STDIN_FILENO);
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
 	}
+	close(pipe_fd[1]);
+	if (p0 != 0)
+		close(p0);
+	p0 = pipe_fd[0];
 }
 
-// Opens the second file FD, parses the second command by duplicating it
-// and executes it. Passes the output onto the second file instead of
-// to the standard output.
-// O_TRUNC deletes file contents so we can write to the file, O_CREAT creates 
-// a file if there isn't one available, O_RDWR opens a FD to read and write.
-// The number sets the perms of the file so it can be read from and wrote on.
 void	second_process(t_vars *vars, char **envp, int *pipe_fd)
 {
 	(void)pipe_fd;
