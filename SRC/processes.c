@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/18 13:18:17 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:26:42 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	char		*infile;
 	char		*temp;
 	int			i;
-	// char	*outfile;
 
 	vars->fd0 = 0;
 	i = 0;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " ");
-	ft_printf("vars->cmd_falgs : %s\n", vars->cmd_flags[0]);
+	ft_printf("vars->cmd_flags : %s\n", vars->cmd_flags[0]);
 	if (ft_strrchr(commands[0], '<'))
 	{
 		temp = ft_strrchr(commands[0], '<');
