@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 17:02:47 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:26:51 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		input = readline("myshell> ");
-		ft_printf("aqio\n");
-		if (!input)
+		if (!input || *input == '\n')
 		{
 			ft_printf("\n");
-			break ;
 		}
 		add_history(input);
 		commands = ft_split_commands(input, "|");
@@ -48,8 +46,11 @@ int	main(int ac, char **av, char **env)
 		}
 		close(pipe_fd[0]);
 		waitpid(vars.pid1, NULL, 0);
-		ft_free(commands);
-		free(input);
+		if (commands)
+			ft_free(commands);
+		if (input)
+			free(input);
+		input = NULL;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/03 14:05:01 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:18:15 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	get_token_length(const char *str, const char *delimiters)
 
 const char	*get_next_token(const char *str, const char *delimiters)
 {
+	if (!str)
+		return (NULL);
 	while (*str && ft_strchr(delimiters, *str))
 	str++;
 	if (*str)
