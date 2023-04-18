@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/18 13:18:24 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/18 15:55:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ const char	*get_next_token(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
+int			setup_input_redirection(char **commands, t_vars *vars);
+int			setup_output_redirection(char **commands, t_vars *vars);
+int			setup_pipe(int	*pipe_fd);
+void		execute_command(t_vars *vars, char **commands, char **envp,
+				int *pipe_fd);
 void		first_process(t_vars *vars, char **envp, int *pipe_fd,
 				char **commands);
 // void		second_process(t_vars *vars, char **envp, int *pipe_fd);
@@ -66,8 +71,8 @@ char		**ft_split_commands_no_redirection(char *str,
 				char *delimiters);
 int			is_delimiter(char c, char *delimiters);
 int			count_words_no_redirection(char *str, char *delimiters);
-char	*get_next_token_no_redirection(char *str,
+char		*get_next_token_no_redirection(char *str,
 				char *delimiters);
-int		get_token_length_no_redirection(char *str,
+int			get_token_length_no_redirection(char *str,
 				char *delimiters);
 #endif
