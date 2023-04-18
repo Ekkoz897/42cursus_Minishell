@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/18 10:26:42 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:21:05 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 {
+	char		*outfile;
 	char		*infile;
 	char		*temp;
 	int			i;
 
 	vars->fd0 = 0;
+	vars->fd1 = 1;
 	i = 0;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " ");
 	ft_printf("vars->cmd_flags : %s\n", vars->cmd_flags[0]);
@@ -38,6 +40,22 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 			return ;
 		}
 	}
+	if (ft_strrchr(commands[0], '>'))
+	{
+		temp = ft_strrchr(commands[0], '>');
+		temp++;
+		while (*temp == ' ' || *temp == '	')
+			temp++;
+		while (temp[i] != ' ' && temp[i] != '	' && temp[i])
+			i++;
+		outfile = ft_strndup(temp, i);
+		vars->fd1 = open(outfile, O_RDONLY);
+		if (vars->fd1 < 0)
+		{
+			perror(outfile);
+			return ;
+		}
+	}
 	if (pipe(pipe_fd) < 0)
 	{
 		perror("Pipe");
@@ -51,15 +69,28 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
 		if (vars->cmd1_path == NULL)
 			exit(1);
-		if (commands[1])
+		ft_printf("vars->fd1 %i\n", vars->fd1);
+		if (vars->fd1 != 1)
+		{
+			dup2(vars->fd1, STDOUT_FILENO);
+			close(vars->fd1);
+		}
+		else if (commands[1])
 			dup2(pipe_fd[1], STDOUT_FILENO);
 		close (pipe_fd[0]);
 		if (vars->fd0 != 0)
+		{
 			dup2(vars->fd0, STDIN_FILENO);
+			close(vars->fd0);
+		}
 		else if (vars->p0 != 0)
 			dup2(vars->p0, STDIN_FILENO);
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
 	}
+	if (vars->fd1 != 1)
+		close(vars->fd1);
+	if (vars->fd0 != 0)
+		close(vars->fd0);
 	close(pipe_fd[1]);
 	if (vars->p0 != 0)
 		close(vars->p0);
