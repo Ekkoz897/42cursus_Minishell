@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_sanitize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/04 17:40:35 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:58:36 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,28 @@
 
 // Checks if the command received in ARGV is valid by
 // searching for it in the bin folder
-char	*check_valid_cmd(char *command, char **envp)
+
+char	*check_executable(char *command, char **split_paths)
+{
+	if (access(command, 0) == 0)
+	{
+		ft_free(split_paths);
+		return (command);
+	}
+	else
+	{
+		perror(command);
+		return (NULL);
+	}
+}
+
+char	*check_command(char *command, char **split_paths)
 {
 	int		i;
-	char	**split_paths;
 	char	*path;
 	char	*temp;
-	char	*cmd;
 
-	cmd = find_path(envp);
-	split_paths = ft_split(cmd, ':');
 	i = 0;
-	if (ft_strchr(command, '/'))
-	{
-		if (access(command, 0) == 0)
-		{
-			ft_free(split_paths);
-			return (command);
-		}
-		else
-		{
-			perror(command);
-			return (NULL);
-		}
-	}
 	while (split_paths[i])
 	{
 		temp = ft_strjoin(split_paths[i], "/");
@@ -54,4 +52,17 @@ char	*check_valid_cmd(char *command, char **envp)
 	ft_free (split_paths);
 	ft_printf("Command not found: %s\n", command);
 	return (NULL);
+}
+
+char	*check_valid_cmd(char *command, char **envp)
+{
+	char	*cmd;
+	char	**split_paths;
+
+	cmd = find_path(envp);
+	split_paths = ft_split(cmd, ':');
+	if (ft_strchr(command, '/'))
+		return (check_executable(command, split_paths));
+	else
+		return (check_command(command, split_paths));
 }
