@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 15:31:25 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:02:47 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		input = readline("myshell> ");
+		ft_printf("aqio\n");
 		if (!input)
 		{
 			ft_printf("\n");

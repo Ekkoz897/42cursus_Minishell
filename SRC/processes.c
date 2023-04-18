@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 15:31:56 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:18:17 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		perror("Pipe");
 		exit(1);
 	}
-	ft_printf("%i, %i\n", pipe_fd[0], pipe_fd[1]);
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
@@ -68,17 +67,17 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	vars->p0 = pipe_fd[0];
 }
 
-void	second_process(t_vars *vars, char **envp, int *pipe_fd)
-{
-	(void)pipe_fd;
-	vars->pid2 = fork();
-	if (vars->pid2 < 0)
-		return ;
-	if (vars->pid2 == 0)
-	{
-		vars->cmd2_path = check_valid_cmd(vars->cmd2_flags[0], envp);
-		if (!vars->cmd2_path)
-			exit(1);
-		execve(vars->cmd2_path, vars->cmd2_flags, envp);
-	}
-}
+// void	second_process(t_vars *vars, char **envp, int *pipe_fd)
+// {
+// 	(void)pipe_fd;
+// 	vars->pid2 = fork();
+// 	if (vars->pid2 < 0)
+// 		return ;
+// 	if (vars->pid2 == 0)
+// 	{
+// 		vars->cmd2_path = check_valid_cmd(vars->cmd2_flags[0], envp);
+// 		if (!vars->cmd2_path)
+// 			exit(1);
+// 		execve(vars->cmd2_path, vars->cmd2_flags, envp);
+// 	}
+// }

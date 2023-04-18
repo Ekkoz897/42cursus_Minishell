@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 15:31:08 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:18:24 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_vars
 {
 	int		fd[2];
 	int		pid1;
-	int		pid2;
 	int		fd1;
 	int		fd0;
 	int		p0;
@@ -55,7 +54,7 @@ char		**ft_split_commands(const char *str, const char *delimiters);
 // Processes.c
 void		first_process(t_vars *vars, char **envp, int *pipe_fd,
 				char **commands);
-void		second_process(t_vars *vars, char **envp, int *pipe_fd);
+// void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c
 char		*find_path(char **envp);
