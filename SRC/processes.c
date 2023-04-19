@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/18 15:51:30 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:09:52 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,23 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 	char		*outfile;
 	char		*temp;
 	int			i;
+	int			flag;
 
 	i = 0;
+	flag = 0;
 	temp = ft_strrchr(commands[0], '>');
+	if (commands[0][ft_strlen(commands[0]) - ft_strlen(temp) - 1] == '>')
+		flag = 1;
 	temp++;
 	while (*temp == ' ' || *temp == '	')
 		temp++;
 	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
 		i++;
 	outfile = ft_strndup(temp, i);
-	vars->fd1 = open(outfile, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+	if (flag == 1)
+		vars->fd1 = open(outfile, O_CREAT | O_RDWR, 0000644);
+	else
+		vars->fd1 = open(outfile, O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (vars->fd1 < 0)
 	{
 		perror(outfile);
@@ -98,7 +105,7 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " ");
-	ft_printf("vars->cmd_flags : %s\n", vars->cmd_flags[0]);
+	ft_printf("vars->cmd_flags : %s\n", vars->cmd_flags[1]);
 	if (ft_strrchr(commands[0], '<'))
 		setup_input_redirection(commands, vars);
 	if (ft_strrchr(commands[0], '>'))
