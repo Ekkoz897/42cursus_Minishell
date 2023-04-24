@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/18 18:19:29 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/24 10:53:49 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ int	main(int ac, char **av, char **env)
 	{
 		input = readline("myshell> ");
 		add_history(input);
+		if (!input)
+		{
+			printf("exit\n");
+			rl_clear_history();
+			return (0);
+		}
 		if (ft_strlen(input) != 0)
 			minishell(input, env);
 	}
