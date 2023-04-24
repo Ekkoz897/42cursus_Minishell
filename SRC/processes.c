@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/24 10:50:44 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:00:01 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,16 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 	char		*outfile;
 	char		*temp;
 	int			i;
-	int			flag;
 
 	i = 0;
-	flag = 0;
 	temp = ft_strrchr(commands[0], '>');
-	if (commands[0][ft_strlen(commands[0]) - ft_strlen(temp) - 1] == '>')
-		flag = 1;
 	temp++;
 	while (*temp == ' ' || *temp == '	')
 		temp++;
 	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
 		i++;
 	outfile = ft_strndup(temp, i);
-	if (flag == 1)
+	if (commands[0][ft_strlen(commands[0]) - ft_strlen(temp) - 1] == '>')
 		vars->fd1 = open(outfile, O_CREAT | O_RDWR, 0000644);
 	else
 		vars->fd1 = open(outfile, O_TRUNC | O_CREAT | O_RDWR, 0000644);
