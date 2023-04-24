@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/19 16:09:33 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/24 11:37:06 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	get_token_length_no_redirection(char *str, char *delimiters)
 	int	length;
 
 	length = 0;
-	while (str[length] && !ft_strchr(delimiters, str[length])
-		&& str[length] != '<' && str[length] != '>')
+	while (str[length] && !ft_strchr(delimiters, str[length]))
 	{
 	length++;
 	}
@@ -28,7 +27,7 @@ int	get_token_length_no_redirection(char *str, char *delimiters)
 char	*get_next_token_no_redirection(char *str,
 		char *delimiters)
 {
-	while (*str && ft_strchr(delimiters, *str))
+	while (*str && *str == ' ')
 		str++;
 	if (*str == '<' || *str == '>')
 	{
@@ -90,7 +89,7 @@ char	**ft_split_commands_no_redirection(char *str,
 	token_start = (char *)str;
 	while (token_start)
 	{
-		while (is_delimiter(*token_start, delimiters))
+		while (*token_start == ' ')
 			token_start++;
 		token_start = get_next_token_no_redirection(token_start, delimiters);
 		if (token_start)
