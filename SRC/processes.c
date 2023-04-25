@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/24 12:00:01 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:53:43 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 		i++;
 	outfile = ft_strndup(temp, i);
 	if (commands[0][ft_strlen(commands[0]) - ft_strlen(temp) - 1] == '>')
-		vars->fd1 = open(outfile, O_CREAT | O_RDWR, 0000644);
+		vars->fd1 = open(outfile, O_CREAT | O_RDWR | O_APPEND , 0000644);
 	else
 		vars->fd1 = open(outfile, O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (vars->fd1 < 0)

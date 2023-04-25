@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/24 11:37:06 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:16:05 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_next_token_no_redirection(char *str,
 			str++;
 		while (*str && !ft_strchr(delimiters, *str))
 			str++;
-		while (*str && ft_strchr(delimiters, *str))
+		while (*str && *str == ' ')
 			str++;
 	}
 	if (*str)
@@ -92,8 +92,10 @@ char	**ft_split_commands_no_redirection(char *str,
 		while (*token_start == ' ')
 			token_start++;
 		token_start = get_next_token_no_redirection(token_start, delimiters);
-		if (token_start)
+		ft_printf("next_token %s\n", token_start);
+		if (token_start && *token_start != '>' && *token_start != '<')
 		{
+			ft_printf("Ok\n");
 			token_length = get_token_length(token_start, delimiters);
 			*tokens = ft_strndup(token_start, token_length);
 			token_start += token_length;
