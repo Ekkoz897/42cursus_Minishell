@@ -6,19 +6,19 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/26 11:59:56 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:02:30 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // To print the commands stored in the array
-		// if (commands)
-		// 	ft_printf("cmd[0] = %s\n", commands[0]);
-		// if (commands[1])
-		// 	ft_printf("cmd[1] = %s\n", commands[1]);
-		// if (commands[2])
-		// 	ft_printf("cmd[2] = %s\n", commands[2]);
+	// if (commands)
+	// 	ft_printf("cmd[0] = %s\n", commands[0]);
+	// if (commands[1])
+	// 	ft_printf("cmd[1] = %s\n", commands[1]);
+	// if (commands[2])
+	// 	ft_printf("cmd[2] = %s\n", commands[2]);
 
 void	minishell(char *input, char **env)
 {
