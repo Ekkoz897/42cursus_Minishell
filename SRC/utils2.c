@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/26 09:33:10 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/26 09:41:25 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ int	is_delimiter(char c, char *delimiters)
 	return (0);
 }
 
-char	**ft_split_commands_no_redirection(char *str,
-	char *delimiters)
+char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 {
 	char	**tokens;
 	int		num_words;
