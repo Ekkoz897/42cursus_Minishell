@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/25 18:16:05 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/04/26 09:33:10 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,14 @@ char	**ft_split_commands_no_redirection(char *str,
 	int		num_words;
 	char	*token_start;
 	int		token_length;
+	int		i;
 
 	num_words = count_words_no_redirection(str, delimiters);
 	tokens = malloc((num_words + 1) * sizeof(char *));
 	if (!tokens)
 		return (NULL);
 	token_start = (char *)str;
+	i = 0;
 	while (token_start)
 	{
 		while (*token_start == ' ')
@@ -95,13 +97,18 @@ char	**ft_split_commands_no_redirection(char *str,
 		ft_printf("next_token %s\n", token_start);
 		if (token_start && *token_start != '>' && *token_start != '<')
 		{
-			ft_printf("Ok\n");
 			token_length = get_token_length(token_start, delimiters);
-			*tokens = ft_strndup(token_start, token_length);
+			tokens[i] = ft_strndup(token_start, token_length);
 			token_start += token_length;
-			tokens++;
+			i++;
 		}
 	}
-	*tokens = NULL;
-	return (tokens - num_words);
+	tokens[i] = NULL;
+	i = 0;
+	while (tokens[i])
+	{
+		ft_printf("token [%i] = %s\n", i, tokens[i]);
+		i++;
+	}
+	return (tokens);
 }
