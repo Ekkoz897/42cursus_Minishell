@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/24 12:17:22 by apereira         ###   ########.fr       */
+/*   Updated: 2023/04/26 11:27:34 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
@@ -75,4 +76,7 @@ char		*get_next_token_no_redirection(char *str,
 				char *delimiters);
 int			get_token_length_no_redirection(char *str,
 				char *delimiters);
+
+// signal_handler.c
+void		signal_handler(int signal);
 #endif
