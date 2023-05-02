@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/26 11:27:34 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:08:34 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+# include "GNL/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
 // Same struct used in Pipex
@@ -35,14 +36,15 @@ typedef struct s_vars
 	char	*cmd2_path;
 	char	**cmd_flags;
 	char	**cmd2_flags;
+	int		*here_doc_fd;
 }t_vars;
 
 // Struct for commands list
-typedef struct s_cmds
-{
-	void			**content;
-	struct s_cmds	*next;
-}t_cmds;
+// typedef struct s_cmds
+// {
+// 	void			**content;
+// 	struct s_cmds	*next;
+// }t_cmds;
 
 // Input Sanitize.c
 char		*check_valid_cmd(char *argv, char **envp);
