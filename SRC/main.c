@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/27 18:15:24 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:39:36 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	rl_catch_signals = 0;
 	rl_set_signals();
-	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
+	signal(SIGINT, signal_handler);
 	while (1)
 	{
 		input = readline("myshell> ");
