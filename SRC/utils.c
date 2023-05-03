@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/17 17:16:44 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:44:27 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ char	*find_path(char **envp)
 	while (ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	return (*envp + 5);
-}
-
-void	ft_free(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free (array);
 }
 
 int	count_words(const char *str, const char *delimiters)
@@ -50,4 +37,12 @@ int	count_words(const char *str, const char *delimiters)
 		token_start = get_next_token(token_start + token_length, delimiters);
 	}
 	return (count);
+}
+
+// This functions helps preventing a double print
+// when using commands that wait for input like "cat"
+void	custom_handle_signal(int sign)
+{
+	(void)sign;
+	write(1, "\n", 1);
 }

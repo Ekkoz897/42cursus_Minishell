@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/02 18:06:25 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:08:12 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		i++;
 	vars->here_doc_fd[*j] = open("./TMP", __O_TMPFILE | O_RDWR, 0000644);
 	str = get_next_line(0);
-	while(ft_strncmp(str, commands, ft_strlen(str)) != 0)
+	while (ft_strncmp(str, commands, ft_strlen(str)) != 0)
 	{
 		free(str);
 		str = get_next_line(0);
@@ -44,7 +44,8 @@ void	here_doc(t_vars *vars, char **commands)
 	j = 0;
 	while (commands[i])
 	{
-		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], '<') - 1) == '<')
+		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], \
+			'<') - 1) == '<')
 			j++;
 		i++;
 	}
@@ -54,7 +55,8 @@ void	here_doc(t_vars *vars, char **commands)
 	j = 0;
 	while (commands[i])
 	{
-		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], '<') - 1) == '<')
+		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], \
+			'<') - 1) == '<')
 			open_doc(vars, commands[i], &j);
 		i++;
 	}
@@ -104,10 +106,10 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	rl_catch_signals = 0;
 	rl_set_signals();
-	signal(SIGQUIT, signal_handler);
-	signal(SIGINT, signal_handler);
 	while (1)
 	{
+		signal(SIGQUIT, signal_handler);
+		signal(SIGINT, signal_handler);
 		input = readline("myshell> ");
 		if (!input)
 		{
@@ -117,6 +119,8 @@ int	main(int ac, char **av, char **env)
 		}
 		if (ft_strlen(input) != 0)
 			add_history(input);
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, custom_handle_signal);
 		if (ft_strlen(input) != 0)
 			minishell(input, env);
 	}

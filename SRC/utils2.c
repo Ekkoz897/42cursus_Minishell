@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/26 09:41:25 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:34:13 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ int	is_delimiter(char c, char *delimiters)
 	return (0);
 }
 
+// Para printar os tokens individuais, adionar na linha 114:
+// i = 0;
+// 	while (tokens[i])
+// 	{
+// 		ft_printf("token [%i] = %s\n", i, tokens[i]);
+// 		i++;
+// 	}
 char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 {
 	char	**tokens;
@@ -90,24 +97,14 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	i = 0;
 	while (token_start)
 	{
-		while (*token_start == ' ')
-			token_start++;
 		token_start = get_next_token_no_redirection(token_start, delimiters);
-		ft_printf("next_token %s\n", token_start);
 		if (token_start && *token_start != '>' && *token_start != '<')
 		{
 			token_length = get_token_length(token_start, delimiters);
-			tokens[i] = ft_strndup(token_start, token_length);
+			tokens[i++] = ft_strndup(token_start, token_length);
 			token_start += token_length;
-			i++;
 		}
 	}
 	tokens[i] = NULL;
-	i = 0;
-	while (tokens[i])
-	{
-		ft_printf("token [%i] = %s\n", i, tokens[i]);
-		i++;
-	}
 	return (tokens);
 }

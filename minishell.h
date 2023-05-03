@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/02 17:08:34 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:58:51 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+# include "GNL/get_next_line.h"
 # include "GNL/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
@@ -37,9 +38,15 @@ typedef struct s_vars
 	char	**cmd_flags;
 	char	**cmd2_flags;
 	int		*here_doc_fd;
+	int		*here_doc_fd;
 }t_vars;
 
 // Struct for commands list
+// typedef struct s_cmds
+// {
+// 	void			**content;
+// 	struct s_cmds	*next;
+// }t_cmds;
 // typedef struct s_cmds
 // {
 // 	void			**content;
@@ -66,8 +73,8 @@ void		first_process(t_vars *vars, char **envp, int *pipe_fd,
 
 // utils.c
 char		*find_path(char **envp);
-void		ft_free(char **array);
 int			count_words(const char *str, const char *delimiters);
+void		custom_handle_signal(int sign);
 
 // util2.c
 char		**ft_split_commands_no_redirection(char *str,
