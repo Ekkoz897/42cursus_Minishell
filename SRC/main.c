@@ -6,20 +6,23 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/03 14:50:11 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:20:42 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_free(char **matrix)
+void	ft_free(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (matrix[i])
-		free(matrix[i]);
-	free(matrix);
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free (array);
 }
 
 void	open_doc(t_vars *vars, char *commands, int *j)
