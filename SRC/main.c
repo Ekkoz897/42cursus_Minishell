@@ -6,14 +6,25 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/03 14:08:12 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:50:11 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	ft_free(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		free(matrix[i]);
+	free(matrix);
+}
+
 void	open_doc(t_vars *vars, char *commands, int *j)
 {
+	char	*doc_file;
 	char	*str;
 	int		i;
 
@@ -24,9 +35,10 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		commands++;
 	while (commands[i] != ' ' && commands[i] != '	' && commands[i])
 		i++;
+	doc_file = ft_strndup(commands, i);
 	vars->here_doc_fd[*j] = open("./TMP", __O_TMPFILE | O_RDWR, 0000644);
 	str = get_next_line(0);
-	while (ft_strncmp(str, commands, ft_strlen(str)) != 0)
+	while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
 	{
 		free(str);
 		str = get_next_line(0);
@@ -44,8 +56,7 @@ void	here_doc(t_vars *vars, char **commands)
 	j = 0;
 	while (commands[i])
 	{
-		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], \
-			'<') - 1) == '<')
+		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], '<') - 1) == '<')
 			j++;
 		i++;
 	}
@@ -55,8 +66,7 @@ void	here_doc(t_vars *vars, char **commands)
 	j = 0;
 	while (commands[i])
 	{
-		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], \
-			'<') - 1) == '<')
+		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], '<') - 1) == '<')
 			open_doc(vars, commands[i], &j);
 		i++;
 	}

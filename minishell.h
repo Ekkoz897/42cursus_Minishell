@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/03 13:58:51 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:45:41 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_vars
 	char	**cmd_flags;
 	char	**cmd2_flags;
 	int		*here_doc_fd;
-	int		*here_doc_fd;
 }t_vars;
 
 // Struct for commands list
@@ -52,6 +51,8 @@ typedef struct s_vars
 // 	void			**content;
 // 	struct s_cmds	*next;
 // }t_cmds;
+
+void		ft_free(char **matrix);
 
 // Input Sanitize.c
 char		*check_valid_cmd(char *argv, char **envp);

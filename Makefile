@@ -49,6 +49,7 @@ clean:
 	@make clean -s -C ft_printf
 	@make clean -s -C libft
 	@$(RM) $(addprefix SRC/,$(OBJ))
+	@$(RM) $(addprefix GNL/,$(OBJ_GNL))
 
 fclean: clean
 	@make fclean -s -C ft_printf
