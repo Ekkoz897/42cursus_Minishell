@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/03 16:26:24 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:40:20 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_free(char **array)
 void	open_doc(t_vars *vars, char *commands, int *j)
 {
 	char	*doc_file;
+	char	*temp;
 	char	*str;
 	int		i;
 	int		id;
@@ -40,12 +41,16 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	while (commands[i] != ' ' && commands[i] != '	' && commands[i])
 		i++;
 	doc_file = ft_strndup(commands, i);
+	temp = doc_file;
+	doc_file = ft_strjoin(doc_file, "\n");
+	free(temp);
 	vars->here_doc_fd[*j] = open("./TMP", __O_TMPFILE | O_RDWR, 0000644);
 	id = fork();
 	if (id == 0)
 	{
 		write(1, "> ", 2);
 		str = get_next_line(0);
+		ft_printf("%sstring\n%sdoc_file\n", str, doc_file);
 		while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
 		{
 			free(str);
@@ -53,6 +58,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 			str = get_next_line(0);
 		}
 		free(str);
+		exit(0);
 	}
 	wait(NULL);
 	(*j)++;

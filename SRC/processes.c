@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/02 15:35:49 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:46:11 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	setup_input_redirection(char **commands, t_vars *vars)
 	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
 		i++;
 	infile = ft_strndup(temp, i);
-	vars->fd0 = open(infile, O_RDONLY);
+	i = 0;
+	// if (*(ft_strrchr(commands[0], '>') - 1) != '<')
+		vars->fd0 = open(infile, O_RDONLY);
+	// else
+	// 	vars->fd0 = vars->here_doc_fd[i];
 	if (vars->fd0 < 0)
 	{
 		perror(infile);
