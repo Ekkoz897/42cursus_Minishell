@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/04/26 09:46:39 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:35:49 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ int	setup_pipe(int	*pipe_fd)
 	return (1);
 }
 
+// signals para evitar o double prompt "minishell>minishell>"
 void	execute_command(t_vars *vars, char **commands, char **envp,
 		int *pipe_fd)
 {
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
 	if (vars->cmd1_path == NULL)
 		exit(1);
