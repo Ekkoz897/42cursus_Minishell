@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/04 10:40:20 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/05 07:40:43 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,16 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
 	free(temp);
-	vars->here_doc_fd[*j] = open("./TMP", __O_TMPFILE | O_RDWR, 0000644);
+	vars->here_doc_fd[*j] = open("./TMP", __O_TMPFILE | O_RDWR);
 	id = fork();
 	if (id == 0)
 	{
 		write(1, "> ", 2);
 		str = get_next_line(0);
-		ft_printf("%sstring\n%sdoc_file\n", str, doc_file);
 		while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
 		{
+			write(vars->here_doc_fd[*j], str, ft_strlen(str));
+			ft_printf("%i\n%s\n%s", vars->here_doc_fd[*j], get_next_line(vars->here_doc_fd[*j]), str);
 			free(str);
 			write(1, "> ", 2);
 			str = get_next_line(0);

@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/04 14:46:11 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/05 07:07:25 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	setup_input_redirection(char **commands, t_vars *vars)
 		i++;
 	infile = ft_strndup(temp, i);
 	i = 0;
-	// if (*(ft_strrchr(commands[0], '>') - 1) != '<')
+	if (*(ft_strrchr(commands[0], '<') - 1) == '<')
+		vars->fd0 = vars->here_doc_fd[i];
+	else
 		vars->fd0 = open(infile, O_RDONLY);
-	// else
-	// 	vars->fd0 = vars->here_doc_fd[i];
 	if (vars->fd0 < 0)
 	{
 		perror(infile);
@@ -84,6 +84,7 @@ void	execute_command(t_vars *vars, char **commands, char **envp,
 	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
 	if (vars->cmd1_path == NULL)
 		exit(1);
+	ft_printf("%i\n", vars->fd0);
 	ft_printf("vars->fd1 %i\n", vars->fd1);
 	if (vars->fd1 != 1)
 	{
