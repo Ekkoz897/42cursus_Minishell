@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/05 07:07:25 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:53:37 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	execute_command(t_vars *vars, char **commands, char **envp,
 	else if (vars->p0 != 0)
 		dup2(vars->p0, STDIN_FILENO);
 	execve(vars->cmd1_path, vars->cmd_flags, envp);
+	ft_printf("ola\n");
 }
 
 void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
@@ -129,4 +130,5 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	if (vars->p0 != 0)
 		close(vars->p0);
 	vars->p0 = pipe_fd[0];
+	
 }

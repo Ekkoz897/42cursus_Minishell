@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/08 16:35:30 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:54:16 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
 	free(temp);
-	vars->here_doc_fd[*j] = open("/", __O_TMPFILE | O_RDWR);
+	temp = ft_strjoin("./TMP/tmpfile", ft_itoa(*j));
+	ft_printf("%s\n", temp);
+	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_EXCL | O_RDWR, 0600);
+	if (vars->here_doc_fd[*j] == -1)
+		perror(temp);
 	id = fork();
 	if (id == 0)
 	{
@@ -53,7 +57,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
 		{
 			write(vars->here_doc_fd[*j], str, ft_strlen(str));
-			ft_printf("%i\n%s\n", vars->here_doc_fd[*j], get_next_line(vars->here_doc_fd[*j]));
+			ft_printf("%i\n", vars->here_doc_fd[*j]);
 			free(str);
 			write(1, "> ", 2);
 			str = get_next_line(0);
@@ -62,6 +66,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		exit(0);
 	}
 	wait(NULL);
+	unlink(temp);
 	(*j)++;
 }
 
