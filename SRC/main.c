@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/11 16:54:16 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:31:56 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	free(temp);
 	temp = ft_strjoin("./TMP/tmpfile", ft_itoa(*j));
 	ft_printf("%s\n", temp);
-	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_EXCL | O_RDWR, 0600);
+	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_EXCL | O_RDWR, 0000644);
 	if (vars->here_doc_fd[*j] == -1)
 		perror(temp);
 	id = fork();
@@ -66,7 +66,8 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		exit(0);
 	}
 	wait(NULL);
-	unlink(temp);
+	close(vars->here_doc_fd[*j]);
+	vars->here_doc_fd[*j] = open(temp, O_RDONLY, 0000644);
 	(*j)++;
 }
 
