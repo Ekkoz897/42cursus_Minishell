@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/12 16:31:56 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:47:43 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	int		id;
 
 	i = 0;
-	commands = ft_strrchr(commands, '<');
+	commands = ft_strchr(commands, '<');
 	commands++;
 	while (*commands == ' ' || *commands == '	')
 		commands++;
@@ -46,7 +46,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	free(temp);
 	temp = ft_strjoin("./TMP/tmpfile", ft_itoa(*j));
 	ft_printf("%s\n", temp);
-	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_EXCL | O_RDWR, 0000644);
+	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
 	if (vars->here_doc_fd[*j] == -1)
 		perror(temp);
 	id = fork();
@@ -73,8 +73,9 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 
 void	here_doc(t_vars *vars, char **commands)
 {
-	int	i;
-	int	j;
+	char	*tmp;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -90,8 +91,12 @@ void	here_doc(t_vars *vars, char **commands)
 	j = 0;
 	while (commands[i])
 	{
-		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], '<') - 1) == '<')
-			open_doc(vars, commands[i], &j);
+		tmp = commands[i];
+		while (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
+		{
+			open_doc(vars, tmp, &j);
+			tmp = tmp + ft_strchr(tmp, '<');
+		}
 		i++;
 	}
 }
