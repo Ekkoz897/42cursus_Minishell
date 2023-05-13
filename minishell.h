@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/13 11:36:37 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:58:59 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,6 @@ void		signal_handler(int signal);
 // Built_ins.c
 int			check_if_builtin(char **commands);
 void		ft_echo(char **commands);
+void		ft_pwd(void);
+void		ft_cd(char **commands);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/12 16:51:49 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:38:21 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	execute_command(t_vars *vars, char **commands, char **envp,
 	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
 	if (vars->cmd1_path == NULL)
 		exit(1);
-	// ft_printf("%i\n", vars->fd0);
-	// ft_printf("vars->fd1 %i\n", vars->fd1);
 	if (vars->fd1 != 1)
 	{
 		dup2(vars->fd1, STDOUT_FILENO);
@@ -102,7 +100,6 @@ void	execute_command(t_vars *vars, char **commands, char **envp,
 	else if (vars->p0 != 0)
 		dup2(vars->p0, STDIN_FILENO);
 	execve(vars->cmd1_path, vars->cmd_flags, envp);
-	// ft_printf("ola\n");
 }
 
 void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
@@ -110,7 +107,6 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " |<>");
-	// ft_printf("vars->cmd_flags : %s\n", vars->cmd_flags[1]);
 	if (ft_strrchr(commands[0], '<'))
 		setup_input_redirection(commands, vars);
 	if (ft_strrchr(commands[0], '>'))
