@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:43 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:40:12 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	(*j)++;
 }
 
+// Comentei "// tmp = tmp + ft_strchr(tmp, '<');" porque nao compilava
 void	here_doc(t_vars *vars, char **commands)
 {
 	char	*tmp;
@@ -95,7 +96,7 @@ void	here_doc(t_vars *vars, char **commands)
 		while (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
 		{
 			open_doc(vars, tmp, &j);
-			tmp = tmp + ft_strchr(tmp, '<');
+			// tmp = tmp + ft_strchr(tmp, '<');
 		}
 		i++;
 	}
@@ -116,6 +117,8 @@ void	minishell(char *input, char **env)
 	int		pipe_fd[2];
 
 	commands = ft_split_commands(input, "|");
+	if (check_if_builtin(commands))
+		return ;
 	here_doc(&vars, commands);
 	i = 0;
 	vars.p0 = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/03 14:45:41 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:36:37 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		first_process(t_vars *vars, char **envp, int *pipe_fd,
 char		*find_path(char **envp);
 int			count_words(const char *str, const char *delimiters);
 void		custom_handle_signal(int sign);
+int			ft_strcmp(const char *s1, const char *s2);
 
 // util2.c
 char		**ft_split_commands_no_redirection(char *str,
@@ -89,4 +90,8 @@ int			get_token_length_no_redirection(char *str,
 
 // signal_handler.c
 void		signal_handler(int signal);
+
+// Built_ins.c
+int			check_if_builtin(char **commands);
+void		ft_echo(char **commands);
 #endif

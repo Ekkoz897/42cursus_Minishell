@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/02 15:44:27 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:36:24 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ void	custom_handle_signal(int sign)
 {
 	(void)sign;
 	write(1, "\n", 1);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((int)s1[i] - (int)s2[i]);
 }
