@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/13 11:58:59 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:33:07 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_vars
 	char	**cmd_flags;
 	char	**cmd2_flags;
 	int		*here_doc_fd;
+	char	**my_environ;
+	int		num_env_vars;
 }t_vars;
 
 // Struct for commands list
@@ -77,6 +79,9 @@ char		*find_path(char **envp);
 int			count_words(const char *str, const char *delimiters);
 void		custom_handle_signal(int sign);
 int			ft_strcmp(const char *s1, const char *s2);
+char	*get_env_var(t_vars *vars, const char *name);
+void	modify_env_var(t_vars *vars, const char *name, const char *new_value);
+ char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3);
 
 // util2.c
 char		**ft_split_commands_no_redirection(char *str,
@@ -92,8 +97,16 @@ int			get_token_length_no_redirection(char *str,
 void		signal_handler(int signal);
 
 // Built_ins.c
-int			check_if_builtin(char **commands);
+int			check_if_builtin(char **commands, t_vars *vars);
 void		ft_echo(char **commands);
 void		ft_pwd(void);
-void		ft_cd(char **commands);
+void		ft_cd(char **commands, t_vars *vars);
+
+// Built_ins3.c
+char		*ft_strjoin_three(char const *s1, char const *s2, char const *s3);
+void		add_env_var(t_vars *vars, const char *name, const char *value);
+void		modify_env_var(t_vars *vars, const char *name,
+				const char *new_value);
+char		*get_env_var(t_vars *vars, const char *name);
+char		**copy_environ(char **environ);
 #endif

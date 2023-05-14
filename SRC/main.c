@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/13 12:15:57 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:27:46 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,22 +109,21 @@ void	here_doc(t_vars *vars, char **commands)
 	// 	ft_printf("cmd[1] = %s\n", commands[1]);
 	// if (commands[2])
 	// 	ft_printf("cmd[2] = %s\n", commands[2]);
-void	minishell(char *input, char **env)
+void	minishell(char *input, char **env, t_vars *vars)
 {
 	char	**commands;
 	int		i;
-	t_vars	vars;
 	int		pipe_fd[2];
 
 	commands = ft_split_commands(input, "|");
-	if (check_if_builtin(commands))
+	if (check_if_builtin(commands, vars))
 		return ;
-	here_doc(&vars, commands);
+	here_doc(vars, commands);
 	i = 0;
-	vars.p0 = 0;
+	vars->p0 = 0;
 	while (commands[i])
 	{
-		first_process(&vars, env, pipe_fd, &commands[i]);
+		first_process(vars, env, pipe_fd, &commands[i]);
 		i++;
 	}
 	close(pipe_fd[0]);
@@ -143,11 +142,13 @@ void	minishell(char *input, char **env)
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
+	t_vars	vars;
 
 	(void)ac;
 	(void)av;
 	rl_catch_signals = 0;
 	rl_set_signals();
+	vars.my_environ = copy_environ(env);
 	while (1)
 	{
 		signal(SIGQUIT, signal_handler);
@@ -164,7 +165,8 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, custom_handle_signal);
 		if (ft_strlen(input) != 0)
-			minishell(input, env);
+			minishell(input, env, &vars);
 	}
+	ft_free(vars.my_environ);
 	return (0);
 }
