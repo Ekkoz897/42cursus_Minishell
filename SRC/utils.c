@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 17:09:10 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:49:50 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return ((int)s1[i] - (int)s2[i]);
+}
+
+int	ft_exit(char *input)
+{
+	if (!input)
+	{
+		printf("exit\n");
+		rl_clear_history();
+		return (0);
+	}
+	return (1);
 }

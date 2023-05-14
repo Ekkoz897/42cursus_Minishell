@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 18:33:07 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:57:44 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,12 @@ typedef struct s_vars
 	int		num_env_vars;
 }t_vars;
 
-// Struct for commands list
-// typedef struct s_cmds
-// {
-// 	void			**content;
-// 	struct s_cmds	*next;
-// }t_cmds;
-// typedef struct s_cmds
-// {
-// 	void			**content;
-// 	struct s_cmds	*next;
-// }t_cmds;
-
-void		ft_free(char **matrix);
-
 // Input Sanitize.c
+char		*check_executable(char *command, char **split_paths);
+char		*check_command(char *command, char **split_paths);
 char		*check_valid_cmd(char *argv, char **envp);
 
-// ft_split_cmds.c
+// split_cmds.c
 int			get_token_length(const char *str, const char *delimiters);
 const char	*get_next_token(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
@@ -79,22 +67,21 @@ char		*find_path(char **envp);
 int			count_words(const char *str, const char *delimiters);
 void		custom_handle_signal(int sign);
 int			ft_strcmp(const char *s1, const char *s2);
-char	*get_env_var(t_vars *vars, const char *name);
-void	modify_env_var(t_vars *vars, const char *name, const char *new_value);
- char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3);
+int			ft_exit(char *input);
 
 // util2.c
-char		**ft_split_commands_no_redirection(char *str,
-				char *delimiters);
-int			is_delimiter(char c, char *delimiters);
-int			count_words_no_redirection(char *str, char *delimiters);
-char		*get_next_token_no_redirection(char *str,
-				char *delimiters);
 int			get_token_length_no_redirection(char *str,
 				char *delimiters);
+char		*get_next_token_no_redirection(char *str,
+				char *delimiters);
+int			count_words_no_redirection(char *str, char *delimiters);
+int			is_delimiter(char c, char *delimiters);
+char		**ft_split_commands_no_redirection(char *str,
+				char *delimiters);
 
-// signal_handler.c
-void		signal_handler(int signal);
+// utils3.c
+void		ft_free(char **matrix);
+void		signal_handler(int sig);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
@@ -102,11 +89,12 @@ void		ft_echo(char **commands);
 void		ft_pwd(void);
 void		ft_cd(char **commands, t_vars *vars);
 
-// Built_ins3.c
+// Built_ins2.c
 char		*ft_strjoin_three(char const *s1, char const *s2, char const *s3);
 void		add_env_var(t_vars *vars, const char *name, const char *value);
 void		modify_env_var(t_vars *vars, const char *name,
 				const char *new_value);
 char		*get_env_var(t_vars *vars, const char *name);
 char		**copy_environ(char **environ);
+
 #endif

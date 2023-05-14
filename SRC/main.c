@@ -6,24 +6,11 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 18:27:46 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:51:45 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	ft_free(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free (array);
-}
 
 void	open_doc(t_vars *vars, char *commands, int *j)
 {
@@ -82,7 +69,8 @@ void	here_doc(t_vars *vars, char **commands)
 	j = 0;
 	while (commands[i])
 	{
-		if (ft_strrchr(commands[i], '<') && *(ft_strrchr(commands[i], '<') - 1) == '<')
+		if (ft_strrchr(commands[i], '<') \
+			&& *(ft_strrchr(commands[i], '<') - 1) == '<')
 			j++;
 		i++;
 	}
@@ -154,12 +142,8 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, signal_handler);
 		signal(SIGINT, signal_handler);
 		input = readline("myshell> ");
-		if (!input)
-		{
-			printf("exit\n");
-			rl_clear_history();
+		if (!ft_exit(input))
 			return (0);
-		}
 		if (ft_strlen(input) != 0)
 			add_history(input);
 		signal(SIGQUIT, SIG_IGN);

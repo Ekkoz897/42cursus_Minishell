@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:18:13 by miandrad          #+#    #+#             */
-/*   Updated: 2023/05/03 15:18:19 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:45:01 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

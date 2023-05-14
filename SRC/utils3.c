@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 11:22:33 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/02 13:44:32 by miandrad         ###   ########.fr       */
+/*   Created: 2023/05/14 18:52:08 by apereira          #+#    #+#             */
+/*   Updated: 2023/05/14 18:58:18 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_free(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free (array);
+}
 
 // Receives the signal and handles it if it is CTRL+C
 // RL_on_new_line() moves the cursor to the next line
