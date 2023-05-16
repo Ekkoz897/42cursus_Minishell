@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 18:51:45 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:38:41 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 
 	i = 0;
 	commands = ft_strchr(commands, '<');
-	commands++;
+	commands += 2;
 	while (*commands == ' ' || *commands == '	')
 		commands++;
 	while (commands[i] != ' ' && commands[i] != '	' && commands[i])
@@ -30,10 +30,9 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	doc_file = ft_strndup(commands, i);
 	temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
-	free(temp);
-	temp = ft_strjoin("./TMP/tmpfile", ft_itoa(*j));
 	ft_printf("%s\n", temp);
 	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
+	free(temp);
 	if (vars->here_doc_fd[*j] == -1)
 		perror(temp);
 	id = fork();
@@ -84,7 +83,9 @@ void	here_doc(t_vars *vars, char **commands)
 		while (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
 		{
 			open_doc(vars, tmp, &j);
-			// tmp = tmp + ft_strchr(tmp, '<');
+			if (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
+				tmp = ft_strchr(tmp, '<') + 1;
+			ft_printf("%s\n%i\n", tmp, ft_strchr(tmp, '<'));
 		}
 		i++;
 	}
