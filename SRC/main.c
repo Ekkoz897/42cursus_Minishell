@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/16 17:38:41 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:16:30 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	open_doc(t_vars *vars, char *commands, int *j)
 {
 	char	*doc_file;
-	char	*temp;
 	char	*str;
 	int		i;
 	int		id;
@@ -25,16 +24,15 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	commands += 2;
 	while (*commands == ' ' || *commands == '	')
 		commands++;
-	while (commands[i] != ' ' && commands[i] != '	' && commands[i])
+	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' && commands[i] != '	' && commands[i])
 		i++;
 	doc_file = ft_strndup(commands, i);
-	temp = doc_file;
+	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
-	ft_printf("%s\n", temp);
-	vars->here_doc_fd[*j] = open(temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
-	free(temp);
+	ft_printf("%s\n", vars->temp);
+	vars->here_doc_fd[*j] = open(vars->temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
 	if (vars->here_doc_fd[*j] == -1)
-		perror(temp);
+		perror(vars->temp);
 	id = fork();
 	if (id == 0)
 	{
@@ -53,7 +51,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	}
 	wait(NULL);
 	close(vars->here_doc_fd[*j]);
-	vars->here_doc_fd[*j] = open(temp, O_RDONLY, 0000644);
+	vars->here_doc_fd[*j] = open(vars->temp, O_RDONLY, 0000644);
 	(*j)++;
 }
 
@@ -84,8 +82,13 @@ void	here_doc(t_vars *vars, char **commands)
 		{
 			open_doc(vars, tmp, &j);
 			if (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
-				tmp = ft_strchr(tmp, '<') + 1;
-			ft_printf("%s\n%i\n", tmp, ft_strchr(tmp, '<'));
+			{
+				close(vars->here_doc_fd[j]);
+				unlink(vars->temp);
+				free(vars->temp);
+				tmp = ft_strchr(tmp, '<') + 2;
+			}
+			ft_printf("%s\n", tmp);
 		}
 		i++;
 	}
