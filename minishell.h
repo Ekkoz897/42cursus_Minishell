@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/17 16:13:18 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:29:48 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_vars
 	char	*cmd2_path;
 	char	**cmd_flags;
 	char	**cmd2_flags;
-	int		*here_doc_fd;
+	char		*here_doc_fd;
 	char	**my_environ;
 	int		num_env_vars;
 }t_vars;

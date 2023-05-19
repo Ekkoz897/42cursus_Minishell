@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/17 16:16:30 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:20:06 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	int		id;
 
 	i = 0;
+	str = NULL;
 	commands = ft_strchr(commands, '<');
 	commands += 2;
 	while (*commands == ' ' || *commands == '	')
@@ -41,7 +42,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
 		{
 			write(vars->here_doc_fd[*j], str, ft_strlen(str));
-			ft_printf("%i\n", vars->here_doc_fd[*j]);
+			// ft_printf("%i\n", vars->here_doc_fd[*j]);
 			free(str);
 			write(1, "> ", 2);
 			str = get_next_line(0);
@@ -50,7 +51,6 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		exit(0);
 	}
 	wait(NULL);
-	close(vars->here_doc_fd[*j]);
 	vars->here_doc_fd[*j] = open(vars->temp, O_RDONLY, 0000644);
 	(*j)++;
 }
@@ -71,7 +71,7 @@ void	here_doc(t_vars *vars, char **commands)
 			j++;
 		i++;
 	}
-	vars->here_doc_fd = malloc(sizeof(int) * j + 1);
+	vars->here_doc_fd = malloc(sizeof(char) * j + 1);
 	vars->here_doc_fd[j] = '\0';
 	i = 0;
 	j = 0;
@@ -81,12 +81,12 @@ void	here_doc(t_vars *vars, char **commands)
 		while (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
 		{
 			open_doc(vars, tmp, &j);
+			tmp = ft_strchr(tmp, '<') + 2;
 			if (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
 			{
 				close(vars->here_doc_fd[j]);
 				unlink(vars->temp);
 				free(vars->temp);
-				tmp = ft_strchr(tmp, '<') + 2;
 			}
 			ft_printf("%s\n", tmp);
 		}
@@ -147,7 +147,9 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, signal_handler);
 		input = readline("myshell> ");
 		if (!ft_exit(input))
+		{
 			return (0);
+		}
 		if (ft_strlen(input) != 0)
 			add_history(input);
 		signal(SIGQUIT, SIG_IGN);
