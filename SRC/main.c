@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/19 17:20:06 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:58:38 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, signal_handler);
 		signal(SIGINT, signal_handler);
 		input = readline("myshell> ");
-		if (!ft_exit(input))
+		if (!ft_exit_ctrl_d(input))
 		{
 			return (0);
 		}

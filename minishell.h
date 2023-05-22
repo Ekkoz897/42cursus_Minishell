@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/19 14:29:48 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:58:18 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char		*find_path(char **envp);
 int			count_words(const char *str, const char *delimiters);
 void		custom_handle_signal(int sign);
 int			ft_strcmp(const char *s1, const char *s2);
-int			ft_exit(char *input);
+int			ft_exit_ctrl_d(char *input);
 
 // util2.c
 int			get_token_length_no_redirection(char *str,
@@ -98,4 +98,6 @@ void		modify_env_var(t_vars *vars, const char *name,
 char		*get_env_var(t_vars *vars, const char *name);
 char		**copy_environ(char **environ);
 
+// Built_ins2.c
+void		ft_exit(char **split_cmds);
 #endif

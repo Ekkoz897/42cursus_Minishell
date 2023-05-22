@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 18:51:14 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:00:50 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	check_if_builtin(char **commands, t_vars *vars)
 	// 	ft_unset(split_cmds);
 	// else if (ft_strcmp(split_cmds[0], "env") == 0)
 	// 	ft_env(split_cmds);
-	// else if (ft_strcmp(split_cmds[0], "exit") == 0)
-	// 	ft_exit(split_cmds);
+	else if (ft_strcmp(split_cmds[0], "exit") == 0)
+		ft_exit(split_cmds);
 	else
 		return (0);
 	return (1);
@@ -73,58 +73,47 @@ void	ft_pwd(void)
 		perror("pwd");
 }
 
-void	ft_cd(char **commands, t_vars *vars)
+void	change_directory(char *path, t_vars *vars)
 {
-	char	*home;
-	char	*pwd;
 	char	*old_pwd;
 	char	*new_pwd;
 	char	*temp;
 
+	old_pwd = get_env_var(vars, "PWD");
+	temp = old_pwd;
+	if (chdir(path) == 0)
+	{
+		new_pwd = getcwd(NULL, 0);
+		modify_env_var(vars, "OLDPWD", temp);
+		modify_env_var(vars, "PWD", new_pwd);
+		free(new_pwd);
+	}
+	else
+		perror(path);
+}
+
+void	ft_cd(char **commands, t_vars *vars)
+{
+	char	*home;
+	char	*old_pwd;
+
 	home = get_env_var(vars, "HOME");
 	old_pwd = get_env_var(vars, "OLDPWD");
-	pwd = get_env_var(vars, "PWD");
 	if (!commands[1])
 	{
 		if (home)
-		{
-			modify_env_var(vars, "OLDPWD", pwd);
-			if (chdir(home) == 0)
-			{
-				new_pwd = getcwd(NULL, 0);
-				modify_env_var(vars, "PWD", new_pwd);
-				free(new_pwd);
-			}
-		}
+			change_directory(home, vars);
 		else
 			ft_printf("cd: HOME not set\n");
 	}
 	else if (ft_strcmp(commands[1], "-") == 0)
 	{
+		old_pwd = get_env_var(vars, "OLDPWD");
 		if (old_pwd)
-		{
-			temp = pwd;
-			if (chdir(old_pwd) == 0)
-			{
-				modify_env_var(vars, "OLDPWD", temp);
-				new_pwd = getcwd(NULL, 0);
-				modify_env_var(vars, "PWD", new_pwd);
-				free(new_pwd);
-			}
-		}
+			change_directory(old_pwd, vars);
 		else
 			ft_printf("cd: OLDPWD not set\n");
 	}
 	else
-	{
-		modify_env_var(vars, "OLDPWD", pwd);
-		if (chdir(commands[1]) == -1)
-			perror(commands[1]);
-		else
-		{
-			new_pwd = getcwd(NULL, 0);
-			modify_env_var(vars, "PWD", new_pwd);
-			free(new_pwd);
-		}
-	}
+		change_directory(commands[1], vars);
 }
