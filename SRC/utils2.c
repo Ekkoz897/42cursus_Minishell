@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/02 15:34:13 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:56:31 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	is_delimiter(char c, char *delimiters)
 	return (0);
 }
 
-// Para printar os tokens individuais, adionar na linha 114:
+// Para printar os tokens individuais:
 // i = 0;
 // 	while (tokens[i])
 // 	{

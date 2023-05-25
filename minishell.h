@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/25 13:23:30 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:04:19 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,13 @@ void		modify_env_var(t_vars *vars, const char *name,
 char		*get_env_var(t_vars *vars, const char *name);
 char		**copy_environ(char **environ);
 
-// Built_ins2.c
+// Built_ins3.c
 void		ft_exit(char **split_cmds);
 void		ft_env(t_vars *vars);
+char		*get_var_name(char *str);
+char		*get_value(char *str);
+void		ft_export(t_vars *vars, char **split_cmds);
+
+// Built_ins4.c
+void		ft_unset(t_vars *vars, char **commands);
 #endif
