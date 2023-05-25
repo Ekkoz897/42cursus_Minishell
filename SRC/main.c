@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/22 16:58:38 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:33:27 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,18 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
 		{
 			write(vars->here_doc_fd[*j], str, ft_strlen(str));
-			// ft_printf("%i\n", vars->here_doc_fd[*j]);
 			free(str);
 			write(1, "> ", 2);
 			str = get_next_line(0);
 		}
 		free(str);
+		str = NULL;
 		exit(0);
 	}
 	wait(NULL);
 	vars->here_doc_fd[*j] = open(vars->temp, O_RDONLY, 0000644);
-	(*j)++;
 }
 
-// Comentei "// tmp = tmp + ft_strchr(tmp, '<');" porque nao compilava
 void	here_doc(t_vars *vars, char **commands)
 {
 	char	*tmp;
@@ -87,6 +85,7 @@ void	here_doc(t_vars *vars, char **commands)
 				close(vars->here_doc_fd[j]);
 				unlink(vars->temp);
 				free(vars->temp);
+				j++;
 			}
 			ft_printf("%s\n", tmp);
 		}
