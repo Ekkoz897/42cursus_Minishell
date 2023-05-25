@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/22 17:01:42 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:23:07 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,17 @@ void	ft_exit(char **split_cmds)
 	{
 		ft_printf("minishell: exit: too many arguments\n");
 		exit(EXIT_FAILURE);
+	}
+}
+
+void	ft_env(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (vars->my_environ[i])
+	{
+		ft_printf("%s\n", vars->my_environ[i]);
+		i++;
 	}
 }

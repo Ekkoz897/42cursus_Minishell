@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/22 17:00:50 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:22:46 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	check_if_builtin(char **commands, t_vars *vars)
 	// 	ft_export(split_cmds);
 	// else if (ft_strcmp(split_cmds[0], "unset") == 0)
 	// 	ft_unset(split_cmds);
-	// else if (ft_strcmp(split_cmds[0], "env") == 0)
-	// 	ft_env(split_cmds);
+	else if (ft_strcmp(split_cmds[0], "env") == 0)
+		ft_env(vars);
 	else if (ft_strcmp(split_cmds[0], "exit") == 0)
 		ft_exit(split_cmds);
 	else

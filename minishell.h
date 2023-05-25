@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/22 16:58:18 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:23:30 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ char		**copy_environ(char **environ);
 
 // Built_ins2.c
 void		ft_exit(char **split_cmds);
+void		ft_env(t_vars *vars);
 #endif
