@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/25 14:04:19 by apereira         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:58:10 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct s_vars
 {
 	int		fd[2];
+	int		pipe_fd[2];
 	int		pid1;
 	int		fd1;
 	int		fd0;
@@ -57,10 +58,8 @@ char		**ft_split_commands(const char *str, const char *delimiters);
 int			setup_input_redirection(char **commands, t_vars *vars);
 int			setup_output_redirection(char **commands, t_vars *vars);
 int			setup_pipe(int	*pipe_fd);
-void		execute_command(t_vars *vars, char **commands, char **envp,
-				int *pipe_fd);
-void		first_process(t_vars *vars, char **envp, int *pipe_fd,
-				char **commands);
+void		execute_command(t_vars *vars, char **commands, char **envp);
+void		first_process(t_vars *vars, char **envp, char **commands);
 // void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c

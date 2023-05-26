@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/16 18:00:51 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:58:26 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ int	setup_pipe(int	*pipe_fd)
 }
 
 // signals para evitar o double prompt "minishell>minishell>"
-void	execute_command(t_vars *vars, char **commands, char **envp,
-		int *pipe_fd)
+void	execute_command(t_vars *vars, char **commands, char **envp)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
@@ -90,7 +89,7 @@ void	execute_command(t_vars *vars, char **commands, char **envp,
 		close(vars->fd1);
 	}
 	else if (commands[1])
-		dup2(pipe_fd[1], STDOUT_FILENO);
+		dup2(vars->pipe_fd[1], STDOUT_FILENO);
 	close (pipe_fd[0]);
 	if (vars->fd0 != 0)
 	{
@@ -102,7 +101,7 @@ void	execute_command(t_vars *vars, char **commands, char **envp,
 	execve(vars->cmd1_path, vars->cmd_flags, envp);
 }
 
-void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
+void	first_process(t_vars *vars, char **envp, char **commands)
 {
 	vars->fd0 = 0;
 	vars->fd1 = 1;
@@ -111,13 +110,13 @@ void	first_process(t_vars *vars, char **envp, int *pipe_fd, char **commands)
 		setup_input_redirection(commands, vars);
 	if (ft_strrchr(commands[0], '>'))
 		setup_output_redirection(commands, vars);
-	if (!setup_pipe(pipe_fd))
+	if (!setup_pipe(vars->pipe_fd))
 		exit(1);
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
 	if (vars->pid1 == 0)
-		execute_command(vars, commands, envp, pipe_fd);
+		execute_command(vars, commands, envp);
 	if (vars->fd1 != 1)
 		close(vars->fd1);
 	if (vars->fd0 != 0)

@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/23 17:33:27 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:57:40 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	doc_file = ft_strndup(commands, i);
 	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
-	ft_printf("%s\n", vars->temp);
+	// ft_printf("%s\n", vars->temp);
 	vars->here_doc_fd[*j] = open(vars->temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
 	if (vars->here_doc_fd[*j] == -1)
 		perror(vars->temp);
@@ -69,6 +69,7 @@ void	here_doc(t_vars *vars, char **commands)
 			j++;
 		i++;
 	}
+	ft_printf("%i\n", j);
 	vars->here_doc_fd = malloc(sizeof(char) * j + 1);
 	vars->here_doc_fd[j] = '\0';
 	i = 0;
@@ -85,10 +86,10 @@ void	here_doc(t_vars *vars, char **commands)
 				close(vars->here_doc_fd[j]);
 				unlink(vars->temp);
 				free(vars->temp);
-				j++;
 			}
-			ft_printf("%s\n", tmp);
+			// ft_printf("%s\n", tmp);
 		}
+		j++;
 		i++;
 	}
 }
@@ -104,7 +105,6 @@ void	minishell(char *input, char **env, t_vars *vars)
 {
 	char	**commands;
 	int		i;
-	int		pipe_fd[2];
 
 	commands = ft_split_commands(input, "|");
 	if (check_if_builtin(commands, vars))
@@ -114,10 +114,10 @@ void	minishell(char *input, char **env, t_vars *vars)
 	vars->p0 = 0;
 	while (commands[i])
 	{
-		first_process(vars, env, pipe_fd, &commands[i]);
+		first_process(vars, env, &commands[i]);
 		i++;
 	}
-	close(pipe_fd[0]);
+	close(vars->pipe_fd[0]);
 	while (i-- > 0)
 		wait(NULL);
 	if (commands)
