@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/26 17:58:26 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:24:21 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execute_command(t_vars *vars, char **commands, char **envp)
 	}
 	else if (commands[1])
 		dup2(vars->pipe_fd[1], STDOUT_FILENO);
-	close (pipe_fd[0]);
+	close (vars->pipe_fd[0]);
 	if (vars->fd0 != 0)
 	{
 		dup2(vars->fd0, STDIN_FILENO);
@@ -121,8 +121,8 @@ void	first_process(t_vars *vars, char **envp, char **commands)
 		close(vars->fd1);
 	if (vars->fd0 != 0)
 		close(vars->fd0);
-	close(pipe_fd[1]);
+	close(vars->pipe_fd[1]);
 	if (vars->p0 != 0)
 		close(vars->p0);
-	vars->p0 = pipe_fd[0];
+	vars->p0 = vars->pipe_fd[0];
 }
