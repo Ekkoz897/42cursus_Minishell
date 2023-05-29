@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/26 17:58:10 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/29 10:10:55 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ const char	*get_next_token(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
-int			setup_input_redirection(char **commands, t_vars *vars);
+int			setup_input_redirection(char **commands, t_vars *vars, int *j);
 int			setup_output_redirection(char **commands, t_vars *vars);
 int			setup_pipe(int	*pipe_fd);
 void		execute_command(t_vars *vars, char **commands, char **envp);
-void		first_process(t_vars *vars, char **envp, char **commands);
+void		first_process(t_vars *vars, char **envp, char **commands, int *j);
 // void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c

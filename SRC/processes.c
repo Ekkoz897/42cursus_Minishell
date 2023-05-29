@@ -6,13 +6,13 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/28 12:24:21 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/29 10:11:20 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	setup_input_redirection(char **commands, t_vars *vars)
+int	setup_input_redirection(char **commands, t_vars *vars, int *j)
 {
 	char		*infile;
 	char		*temp;
@@ -28,7 +28,10 @@ int	setup_input_redirection(char **commands, t_vars *vars)
 	infile = ft_strndup(temp, i);
 	i = 0;
 	if (*(ft_strrchr(commands[0], '<') - 1) == '<')
-		vars->fd0 = vars->here_doc_fd[i];
+	{
+		vars->fd0 = vars->here_doc_fd[*j];
+		(*j)++;
+	}
 	else
 		vars->fd0 = open(infile, O_RDONLY);
 	if (vars->fd0 < 0)
@@ -101,13 +104,13 @@ void	execute_command(t_vars *vars, char **commands, char **envp)
 	execve(vars->cmd1_path, vars->cmd_flags, envp);
 }
 
-void	first_process(t_vars *vars, char **envp, char **commands)
+void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 {
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " |<>");
 	if (ft_strrchr(commands[0], '<'))
-		setup_input_redirection(commands, vars);
+		setup_input_redirection(commands, vars, j);
 	if (ft_strrchr(commands[0], '>'))
 		setup_output_redirection(commands, vars);
 	if (!setup_pipe(vars->pipe_fd))

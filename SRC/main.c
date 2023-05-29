@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/26 17:57:40 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/05/29 10:06:28 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ void	minishell(char *input, char **env, t_vars *vars)
 {
 	char	**commands;
 	int		i;
+	int		j;
 
+	j = 0;
 	commands = ft_split_commands(input, "|");
 	if (check_if_builtin(commands, vars))
 		return ;
@@ -114,7 +116,7 @@ void	minishell(char *input, char **env, t_vars *vars)
 	vars->p0 = 0;
 	while (commands[i])
 	{
-		first_process(vars, env, &commands[i]);
+		first_process(vars, env, &commands[i], &j);
 		i++;
 	}
 	close(vars->pipe_fd[0]);
