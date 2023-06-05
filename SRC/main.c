@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/29 10:06:28 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:11:30 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	doc_file = ft_strndup(commands, i);
 	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
-	// ft_printf("%s\n", vars->temp);
 	vars->here_doc_fd[*j] = open(vars->temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
 	if (vars->here_doc_fd[*j] == -1)
 		perror(vars->temp);
@@ -48,9 +47,12 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		}
 		free(str);
 		str = NULL;
+		free(doc_file);
+		ft_free_vars(vars);
 		exit(0);
 	}
 	wait(NULL);
+	free(doc_file);
 	vars->here_doc_fd[*j] = open(vars->temp, O_RDONLY, 0000644);
 }
 
@@ -87,7 +89,6 @@ void	here_doc(t_vars *vars, char **commands)
 				unlink(vars->temp);
 				free(vars->temp);
 			}
-			// ft_printf("%s\n", tmp);
 		}
 		j++;
 		i++;
@@ -129,6 +130,26 @@ void	minishell(char *input, char **env, t_vars *vars)
 	input = NULL;
 }
 
+void	ft_vars_init(t_vars *vars)
+{
+	vars->here_doc_fd = NULL;
+	vars->my_environ = NULL;
+	vars->cmd2_flags = NULL;
+	vars->cmd2_path = NULL;
+	vars->cmd_flags = NULL;
+	vars->cmd1_path = NULL;
+	vars->temp = NULL;
+}
+
+void	ft_free_vars(t_vars *vars)
+{
+	// int	i;
+
+	// i = 0;
+	free(vars->here_doc_fd);
+	free(vars->temp);
+}
+
 // rl_catch_signals = 0; // Disables the default behavior of SIGINT and SIGQUIT
 // rl_set_signals(); // Tells readline to ignore the default behaviour of those
 // signals and respect the ones we set in signal_handler()
@@ -141,6 +162,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	rl_catch_signals = 0;
 	rl_set_signals();
+	ft_vars_init(&vars);
 	vars.my_environ = copy_environ(env);
 	while (1)
 	{
@@ -159,5 +181,6 @@ int	main(int ac, char **av, char **env)
 			minishell(input, env, &vars);
 	}
 	ft_free(vars.my_environ);
+	ft_free_vars(&vars);
 	return (0);
 }

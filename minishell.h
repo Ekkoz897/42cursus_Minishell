@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/29 10:10:55 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:01:47 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ typedef struct s_vars
 	char	*cmd2_path;
 	char	**cmd_flags;
 	char	**cmd2_flags;
-	char		*here_doc_fd;
+	char	*here_doc_fd;
 	char	**my_environ;
 	int		num_env_vars;
 }t_vars;
+
+void	ft_free_vars(t_vars *vars);
 
 // Input Sanitize.c
 char		*check_executable(char *command, char **split_paths);
