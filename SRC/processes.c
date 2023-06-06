@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/29 10:11:20 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:29:30 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	setup_input_redirection(char **commands, t_vars *vars, int *j)
 		perror(infile);
 		return (0);
 	}
+	free(infile);
 	return (1);
 }
 

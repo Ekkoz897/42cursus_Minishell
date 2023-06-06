@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/06/05 13:11:30 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:24:15 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		}
 		free(str);
 		str = NULL;
+		get_next_line(-1);
 		free(doc_file);
 		ft_free_vars(vars);
 		exit(0);
@@ -171,6 +172,7 @@ int	main(int ac, char **av, char **env)
 		input = readline("myshell> ");
 		if (!ft_exit_ctrl_d(input))
 		{
+			ft_free_vars(&vars);
 			return (0);
 		}
 		if (ft_strlen(input) != 0)
@@ -181,6 +183,5 @@ int	main(int ac, char **av, char **env)
 			minishell(input, env, &vars);
 	}
 	ft_free(vars.my_environ);
-	ft_free_vars(&vars);
 	return (0);
 }
