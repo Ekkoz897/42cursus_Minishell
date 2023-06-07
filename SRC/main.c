@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/06/06 17:24:15 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:51:16 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	minishell(char *input, char **env, t_vars *vars)
 		ft_free(commands);
 	if (input)
 		free(input);
+	ft_free_vars(vars);
 	input = NULL;
 }
 
@@ -144,11 +145,16 @@ void	ft_vars_init(t_vars *vars)
 
 void	ft_free_vars(t_vars *vars)
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
+	i = 0;
+	while(vars->cmd_flags[i])
+	{
+		free(vars->cmd_flags[i]);
+		i++;
+	}
+	free(vars->cmd_flags);
 	free(vars->here_doc_fd);
-	free(vars->temp);
 }
 
 // rl_catch_signals = 0; // Disables the default behavior of SIGINT and SIGQUIT
