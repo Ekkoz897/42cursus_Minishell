@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:52:08 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 18:58:18 by apereira         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:06:34 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_free(char **array)
 		free(array[i]);
 		i++;
 	}
-	free (array);
+	free(array);
 }
 
 // Receives the signal and handles it if it is CTRL+C

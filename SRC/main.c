@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/06/07 15:51:16 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:04:26 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ int	main(int ac, char **av, char **env)
 		if (!ft_exit_ctrl_d(input))
 		{
 			ft_free_vars(&vars);
+			ft_free(vars.my_environ);
 			return (0);
 		}
 		if (ft_strlen(input) != 0)
@@ -188,6 +189,5 @@ int	main(int ac, char **av, char **env)
 		if (ft_strlen(input) != 0)
 			minishell(input, env, &vars);
 	}
-	ft_free(vars.my_environ);
 	return (0);
 }
