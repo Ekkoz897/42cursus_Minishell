@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 11:43:53 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/03 12:31:18 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,18 @@ void	ft_free_vars(t_vars *vars)
 	if (vars->cmd_flags)
 	{	
 		ft_free(vars->cmd_flags);
+		vars->cmd_flags = NULL;
 	}
-	// ft_free(vars->my_environ);
-	free(vars->here_doc_fd);
+	if (vars->my_environ)
+	{	
+		ft_free(vars->my_environ);
+		vars->my_environ = NULL;
+	}
+	if (vars->here_doc_fd)
+	{
+		free(vars->here_doc_fd);
+		vars->here_doc_fd = NULL;
+	}
 }
 
 // rl_catch_signals = 0; // Disables the default behavior of SIGINT and SIGQUIT
