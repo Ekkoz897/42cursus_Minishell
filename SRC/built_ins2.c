@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins3.c                                       :+:      :+:    :+:   */
+/*   built_ins2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/14 18:39:46 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:20:00 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ char	**copy_environ(char **environ)
 	char	**new_environ;
 
 	i = 0;
-	while (environ[i++] != NULL)
+	while (environ[i] != NULL)
+		i++;
 	new_environ = malloc(sizeof(char *) * (i + 1));
 	if (!new_environ)
 		return (0);

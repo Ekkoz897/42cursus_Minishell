@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/25 14:03:52 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/03 12:05:40 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_echo(char **commands)
 	}
 	if (!n_flag)
 		ft_printf("\n");
+	exit(0);
 }
 
 void	ft_pwd(void)
@@ -71,6 +72,7 @@ void	ft_pwd(void)
 	}
 	else
 		perror("pwd");
+	exit(0);
 }
 
 void	change_directory(char *path, t_vars *vars)
@@ -116,4 +118,5 @@ void	ft_cd(char **commands, t_vars *vars)
 	}
 	else
 		change_directory(commands[1], vars);
+	exit(0);
 }

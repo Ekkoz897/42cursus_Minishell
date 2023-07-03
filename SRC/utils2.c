@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/25 13:56:31 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:04:18 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	int		token_length;
 	int		i;
 
+	if (str == NULL)
+		return (NULL);
 	num_words = count_words_no_redirection(str, delimiters);
 	tokens = malloc((num_words + 1) * sizeof(char *));
 	if (!tokens)

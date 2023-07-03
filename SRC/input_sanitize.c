@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/03 14:38:55 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:57:33 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ char	*check_valid_cmd(char *command, char **envp)
 
 	cmd = find_path(envp);
 	split_paths = ft_split(cmd, ':');
+	if (ft_strcmp(command, "echo") == 0)
+		return (command);
+	else if (ft_strcmp(command, "cd") == 0)
+		return (command);
+	else if (ft_strcmp(command, "pwd") == 0)
+		return (command);
+	else if (ft_strcmp(command, "export") == 0)
+		return (command);
+	else if (ft_strcmp(command, "unset") == 0)
+		return (command);
+	else if (ft_strcmp(command, "env") == 0)
+		return (command);
+	else if (ft_strcmp(command, "exit") == 0)
+		return (command);
 	if (ft_strchr(command, '/'))
 		return (check_executable(command, split_paths));
 	else

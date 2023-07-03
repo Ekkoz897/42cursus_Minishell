@@ -25,13 +25,13 @@ $(NAME): $(addprefix SRC/,$(OBJ))  $(addprefix GNL/,$(OBJ_GNL)) $(addprefix GNL/
 	@make -s -C ft_printf
 	@make -s -C libft
 	@$(CC) $(addprefix SRC/,$(OBJ)) $(addprefix GNL/,$(OBJ_GNL)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
-	@$(CC) $(addprefix SRC/,$(OBJ)) $(addprefix GNL/,$(OBJ_GNL)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
+#@$(CC) $(addprefix SRC/,$(OBJ)) $(addprefix GNL/,$(OBJ_GNL)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
 
 run: $(NAME)
 	@./minishell
 
 valgrind: $(NAME)
-	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./minishell
+	@make re && valgrind --leak-check=full --show-leak-kinds=definite ./minishell
 
 git: fclean
 	@git add .

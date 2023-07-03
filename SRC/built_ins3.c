@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/05/25 13:53:19 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/03 12:05:53 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_exit(char **split_cmds)
 		ft_printf("minishell: exit: too many arguments\n");
 		exit(EXIT_FAILURE);
 	}
+	exit(0);
 }
 
 void	ft_env(t_vars *vars)
@@ -50,6 +51,7 @@ void	ft_env(t_vars *vars)
 		ft_printf("%s\n", vars->my_environ[i]);
 		i++;
 	}
+	exit(0);
 }
 
 
@@ -115,4 +117,5 @@ void	ft_export(t_vars *vars, char **split_cmds)
 	}
 	else
 		ft_env(vars);
+	exit(0);
 }

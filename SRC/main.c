@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/06/09 17:04:26 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/03 11:43:53 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	here_doc(t_vars *vars, char **commands)
 			j++;
 		i++;
 	}
-	ft_printf("%i\n", j);
 	vars->here_doc_fd = malloc(sizeof(char) * j + 1);
 	vars->here_doc_fd[j] = '\0';
 	i = 0;
@@ -111,8 +110,6 @@ void	minishell(char *input, char **env, t_vars *vars)
 
 	j = 0;
 	commands = ft_split_commands(input, "|");
-	if (check_if_builtin(commands, vars))
-		return ;
 	here_doc(vars, commands);
 	i = 0;
 	vars->p0 = 0;
@@ -145,15 +142,11 @@ void	ft_vars_init(t_vars *vars)
 
 void	ft_free_vars(t_vars *vars)
 {
-	int	i;
-
-	i = 0;
-	while(vars->cmd_flags[i])
-	{
-		free(vars->cmd_flags[i]);
-		i++;
+	if (vars->cmd_flags)
+	{	
+		ft_free(vars->cmd_flags);
 	}
-	free(vars->cmd_flags);
+	// ft_free(vars->my_environ);
 	free(vars->here_doc_fd);
 }
 
@@ -179,7 +172,6 @@ int	main(int ac, char **av, char **env)
 		if (!ft_exit_ctrl_d(input))
 		{
 			ft_free_vars(&vars);
-			ft_free(vars.my_environ);
 			return (0);
 		}
 		if (ft_strlen(input) != 0)
