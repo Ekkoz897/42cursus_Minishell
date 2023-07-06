@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 12:05:40 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/06 12:06:19 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	ft_echo(char **commands)
 	while (commands[i])
 	{
 		ft_printf("%s", commands[i]);
+		if (ft_strcmp(commands[i + 1], ">>") == 0 || ft_strcmp(commands[i + 1], ">") == 0 || ft_strcmp(commands[i + 1], "<<") == 0 || ft_strcmp(commands[i + 1], "<") == 0)
+			break ;
 		if (commands[i + 1])
 			ft_printf(" ");
 		i++;
