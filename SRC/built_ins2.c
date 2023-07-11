@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 11:20:00 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/06 10:51:36 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,14 @@ char	*get_env_var(t_vars *vars, const char *name)
 	return (NULL);
 }
 
+// static to stay within 25 lines without spliting such a simple
+// function in two.
 char	**copy_environ(char **environ)
 {
-	int		i;
-	int		j;
-	char	**new_environ;
+	static int		i;
+	int				j;
+	char			**new_environ;
 
-	i = 0;
 	while (environ[i] != NULL)
 		i++;
 	new_environ = malloc(sizeof(char *) * (i + 1));
