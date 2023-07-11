@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/11 13:45:32 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:51:07 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ char	*get_env_var(t_vars *vars, const char *name)
 	return (NULL);
 }
 
-void	copy_environ(char **environ, t_vars *vars)
+// static to stay within 25 lines without spliting such a simple
+// function in two.
+char	**copy_environ(char **environ)
 {
 	int		i;
 	int		j;
 
-	i = 0;
 	while (environ[i] != NULL)
 		i++;
 	vars->num_env_vars = i;
