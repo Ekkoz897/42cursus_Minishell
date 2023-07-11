@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 11:20:00 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:45:32 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,32 +92,31 @@ char	*get_env_var(t_vars *vars, const char *name)
 	return (NULL);
 }
 
-char	**copy_environ(char **environ)
+void	copy_environ(char **environ, t_vars *vars)
 {
 	int		i;
 	int		j;
-	char	**new_environ;
 
 	i = 0;
 	while (environ[i] != NULL)
 		i++;
-	new_environ = malloc(sizeof(char *) * (i + 1));
-	if (!new_environ)
-		return (0);
+	vars->num_env_vars = i;
+	vars->my_environ = malloc(sizeof(char *) * (i + 1));
+	if (!vars->my_environ)
+		return ;
 	i = 0;
 	while (environ[i] != NULL)
 	{
-		new_environ[i] = ft_strdup(environ[i]);
-		if (new_environ[i] == NULL)
+		vars->my_environ[i] = ft_strdup(environ[i]);
+		if (vars->my_environ[i] == NULL)
 		{
 			j = 0;
 			while (j < i)
-				free(new_environ[j++]);
-			free(new_environ);
-			return (NULL);
+				free(vars->my_environ[j++]);
+			free(vars->my_environ);
+			return ;
 		}
 		i++;
 	}
-	new_environ[i] = NULL;
-	return (new_environ);
+	vars->my_environ[i] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/06/05 13:01:47 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:36:51 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_vars
 	int		num_env_vars;
 }t_vars;
 
-void	ft_free_vars(t_vars *vars);
+void		ft_free_vars(t_vars *vars);
 
 // Input Sanitize.c
 char		*check_executable(char *command, char **split_paths);
@@ -97,7 +97,7 @@ void		add_env_var(t_vars *vars, const char *name, const char *value);
 void		modify_env_var(t_vars *vars, const char *name,
 				const char *new_value);
 char		*get_env_var(t_vars *vars, const char *name);
-char		**copy_environ(char **environ);
+void		copy_environ(char **environ, t_vars *vars);
 
 // Built_ins3.c
 void		ft_exit(char **split_cmds);
@@ -108,4 +108,5 @@ void		ft_export(t_vars *vars, char **split_cmds);
 
 // Built_ins4.c
 void		ft_unset(t_vars *vars, char **commands);
+int			check_cd_ex_uns(char **commands, t_vars *vars);
 #endif

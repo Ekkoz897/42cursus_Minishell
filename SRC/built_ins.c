@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/11 12:36:06 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:26:25 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ int	check_if_builtin(char **commands, t_vars *vars)
 		ft_cd(split_cmds, vars);
 	else if (ft_strcmp(split_cmds[0], "pwd") == 0)
 		ft_pwd();
-	else if (ft_strcmp(split_cmds[0], "export") == 0)
+	else if (ft_strcmp(split_cmds[0], "export") == 0 && !split_cmds[1])
 		ft_export(vars, split_cmds);
-	else if (ft_strcmp(split_cmds[0], "unset") == 0)
-		ft_unset(vars, split_cmds);
 	else if (ft_strcmp(split_cmds[0], "env") == 0)
 		ft_env(vars);
 	else if (ft_strcmp(split_cmds[0], "exit") == 0)
@@ -120,5 +118,4 @@ void	ft_cd(char **commands, t_vars *vars)
 	}
 	else
 		change_directory(commands[1], vars);
-	exit(0);
 }

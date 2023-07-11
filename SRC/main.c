@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 12:31:18 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:37:19 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,12 @@ void	minishell(char *input, char **env, t_vars *vars)
 
 	j = 0;
 	commands = ft_split_commands(input, "|");
+	if (check_cd_ex_uns(commands, vars))
+	{
+		ft_free_vars(vars);
+		ft_free(commands);
+		return ;
+	}
 	here_doc(vars, commands);
 	i = 0;
 	vars->p0 = 0;
@@ -131,6 +137,7 @@ void	minishell(char *input, char **env, t_vars *vars)
 
 void	ft_vars_init(t_vars *vars)
 {
+	vars->num_env_vars = 0;
 	vars->here_doc_fd = NULL;
 	vars->my_environ = NULL;
 	vars->cmd2_flags = NULL;
@@ -147,11 +154,11 @@ void	ft_free_vars(t_vars *vars)
 		ft_free(vars->cmd_flags);
 		vars->cmd_flags = NULL;
 	}
-	if (vars->my_environ)
-	{	
-		ft_free(vars->my_environ);
-		vars->my_environ = NULL;
-	}
+	// if (vars->my_environ)
+	// {	
+	// 	ft_free(vars->my_environ);
+	// 	vars->my_environ = NULL;
+	// }
 	if (vars->here_doc_fd)
 	{
 		free(vars->here_doc_fd);
@@ -172,7 +179,7 @@ int	main(int ac, char **av, char **env)
 	rl_catch_signals = 0;
 	rl_set_signals();
 	ft_vars_init(&vars);
-	vars.my_environ = copy_environ(env);
+	copy_environ(env, &vars);
 	while (1)
 	{
 		signal(SIGQUIT, signal_handler);
