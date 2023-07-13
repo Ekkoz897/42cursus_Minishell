@@ -6,35 +6,69 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/11 13:26:14 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:55:19 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-// Clears value form env variables, otherwise does nothing
-void	ft_unset(t_vars *vars, char **commands)
+int	env_num(t_vars *vars, char **commands)
 {
 	int	i;
 	int	j;
+	int	x;
 
-	i = 1;
-	while (commands[i])
+	i = 0;
+	j = 0;
+	while (vars->my_environ[i] != NULL)
 	{
-		j = 0;
-		while (vars->my_environ[j])
+		x = 1;
+		while (commands[x])
 		{
-			if (ft_strncmp(commands[i], vars->my_environ[j],
-					ft_strlen(commands[i])) == 0)
-			{
-				free(vars->my_environ[j]);
-				vars->my_environ[j] = NULL;
-			}
-			j++;
+			if (ft_strncmp(commands[x], vars->my_environ[i], ft_strlen(commands[x])) == 0)
+				j++;
+			x++;
 		}
 		i++;
 	}
+	return (j);
+}
+
+// Clears value form env variables, otherwise does nothing
+void	ft_unset(t_vars *vars, char **commands)
+{
+	int		i;
+	int		j;
+	int		x;
+	int		flag;
+	char	**new_environ;
+
+	i = 0;
+	j = 0;
+	flag = 1;
+	vars->num_env_vars = vars->num_env_vars - env_num(vars, commands);
+	new_environ = malloc(sizeof(char *) * (vars->num_env_vars + 1));
+	while (vars->my_environ[i] != NULL)
+	{
+		x = 1;
+		while (commands[x])
+		{
+			if (ft_strncmp(commands[x], vars->my_environ[i], ft_strlen(commands[x])) == 0)
+				flag = 0;
+			x++;
+		}
+		if (flag == 1)
+		{
+			new_environ[j] = ft_strdup(vars->my_environ[i]);
+			j++;
+		}
+		flag = 1;
+		i++;
+	}
+	new_environ[j] = NULL;
+	ft_free(vars->my_environ);
+	vars->my_environ = new_environ;
 }
 
 int	check_cd_ex_uns(char **commands, t_vars *vars)
