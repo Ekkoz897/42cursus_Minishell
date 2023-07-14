@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/11 13:37:19 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/14 00:36:51 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,15 +150,10 @@ void	ft_vars_init(t_vars *vars)
 void	ft_free_vars(t_vars *vars)
 {
 	if (vars->cmd_flags)
-	{	
+	{
 		ft_free(vars->cmd_flags);
 		vars->cmd_flags = NULL;
 	}
-	// if (vars->my_environ)
-	// {	
-	// 	ft_free(vars->my_environ);
-	// 	vars->my_environ = NULL;
-	// }
 	if (vars->here_doc_fd)
 	{
 		free(vars->here_doc_fd);
