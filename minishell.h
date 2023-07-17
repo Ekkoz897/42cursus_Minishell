@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 11:39:39 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:57:11 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ void		open_doc_file(t_vars *vars, char *doc_file, int *j);
 void		open_doc(t_vars *vars, char *commands, int *j);
 void		handle_heredoc(t_vars *vars, char *tmp, int *j);
 void		here_doc(t_vars *vars, char **commands);
+
 #endif
