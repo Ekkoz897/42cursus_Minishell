@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 09:54:54 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:26:09 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char		**ft_split_commands_no_redirection(char *str,
 // utils3.c
 void		ft_free(char **matrix);
 void		signal_handler(int sig);
+void		ft_free_vars(t_vars *vars);
+void		ft_vars_init(t_vars *vars);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
