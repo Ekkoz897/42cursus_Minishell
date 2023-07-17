@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/14 00:36:51 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:27:56 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+
+//Creates a temporary fd to 
 void	open_doc(t_vars *vars, char *commands, int *j)
 {
 	char	*doc_file;
@@ -57,6 +59,8 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	vars->here_doc_fd[*j] = open(vars->temp, O_RDONLY, 0000644);
 }
 
+//Searches the commands matrix for '<<'
+//and calls open_doc
 void	here_doc(t_vars *vars, char **commands)
 {
 	char	*tmp;
