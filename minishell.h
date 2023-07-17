@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/11 13:36:51 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:54:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		ft_free_vars(t_vars *vars);
 // Input Sanitize.c
 char		*check_executable(char *command, char **split_paths);
 char		*check_command(char *command, char **split_paths);
+char		*check_valid_cmd_builtin(char *command, char **split_paths);
 char		*check_valid_cmd(char *argv, char **envp);
 
 // split_cmds.c

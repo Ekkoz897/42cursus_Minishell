@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/13 12:55:19 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:41:25 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	env_num(t_vars *vars, char **commands)
 		x = 1;
 		while (commands[x])
 		{
-			if (ft_strncmp(commands[x], vars->my_environ[i], ft_strlen(commands[x])) == 0)
+			if (ft_strncmp(commands[x], vars->my_environ[i], \
+				ft_strlen(commands[x])) == 0)
 				j++;
 			x++;
 		}
@@ -54,7 +55,8 @@ void	ft_unset(t_vars *vars, char **commands)
 		x = 1;
 		while (commands[x])
 		{
-			if (ft_strncmp(commands[x], vars->my_environ[i], ft_strlen(commands[x])) == 0)
+			if (ft_strncmp(commands[x], vars->my_environ[i], \
+				ft_strlen(commands[x])) == 0)
 				flag = 0;
 			x++;
 		}
