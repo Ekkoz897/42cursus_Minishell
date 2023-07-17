@@ -6,57 +6,68 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 10:38:35 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:43:05 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-//Creates a temporary fd to 
-void	open_doc(t_vars *vars, char *commands, int *j)
+//Creates a temporary fd to take the input to be executed with the command
+void	process_heredoc(t_vars *vars, char *doc_file, int fd)
 {
-	char	*doc_file;
 	char	*str;
-	int		i;
-	int		id;
 
-	i = 0;
+	write(1, "> ", 2);
+	str = get_next_line(0);
+	while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
+	{
+		write(fd, str, ft_strlen(str));
+		free(str);
+		write(1, "> ", 2);
+	str = get_next_line(0);
+	}
+	free(str);
 	str = NULL;
-	commands = ft_strchr(commands, '<');
-	commands += 2;
-	while (*commands == ' ' || *commands == '	')
-		commands++;
-	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' && commands[i] != '	' && commands[i])
-		i++;
-	doc_file = ft_strndup(commands, i);
-	vars->temp = doc_file;
-	doc_file = ft_strjoin(doc_file, "\n");
-	vars->here_doc_fd[*j] = open(vars->temp, O_CREAT | O_TRUNC | O_RDWR, 0000644);
+	get_next_line(-1);
+	free(doc_file);
+	ft_free_vars(vars);
+	exit(0);
+}
+
+void	open_doc_file(t_vars *vars, char *doc_file, int *j)
+{
+	int	id;
+
+	vars->here_doc_fd[*j] = open(vars->temp, O_CREAT | O_TRUNC \
+	| O_RDWR, 0000644);
 	if (vars->here_doc_fd[*j] == -1)
 		perror(vars->temp);
 	id = fork();
 	if (id == 0)
-	{
-		write(1, "> ", 2);
-		str = get_next_line(0);
-		while (ft_strncmp(str, doc_file, ft_strlen(str)) != 0)
-		{
-			write(vars->here_doc_fd[*j], str, ft_strlen(str));
-			free(str);
-			write(1, "> ", 2);
-			str = get_next_line(0);
-		}
-		free(str);
-		str = NULL;
-		get_next_line(-1);
-		free(doc_file);
-		ft_free_vars(vars);
-		exit(0);
-	}
+		process_heredoc(vars, doc_file, vars->here_doc_fd[*j]);
 	wait(NULL);
 	free(doc_file);
 	vars->here_doc_fd[*j] = open(vars->temp, O_RDONLY, 0000644);
+}
+
+void	open_doc(t_vars *vars, char *commands, int *j)
+{
+	char	*doc_file;
+	int		i;
+
+	i = 0;
+	commands = ft_strchr(commands, '<');
+	commands += 2;
+	while (*commands == ' ' || *commands == '	')
+		commands++;
+	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
+	&& commands[i] != '	' && commands[i])
+		i++;
+	doc_file = ft_strndup(commands, i);
+	vars->temp = doc_file;
+	doc_file = ft_strjoin(doc_file, "\n");
+	open_doc_file(vars, doc_file, j);
 }
 
 //Searches the commands matrix for '<<'
