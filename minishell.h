@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 11:26:09 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:39:39 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,11 @@ void		ft_export(t_vars *vars, char **split_cmds);
 // Built_ins4.c
 void		ft_unset(t_vars *vars, char **commands);
 int			check_cd_ex_uns(char **commands, t_vars *vars);
+
+// here_doc.c
+void		process_heredoc(t_vars *vars, char *doc_file, int fd);
+void		open_doc_file(t_vars *vars, char *doc_file, int *j);
+void		open_doc(t_vars *vars, char *commands, int *j);
+void		handle_heredoc(t_vars *vars, char *tmp, int *j);
+void		here_doc(t_vars *vars, char **commands);
 #endif
