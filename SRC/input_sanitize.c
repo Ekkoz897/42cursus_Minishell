@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 10:16:27 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:32:22 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*check_valid_cmd_builtin(char *command, char **split_paths)
 	builtins[4] = "unset";
 	builtins[5] = "env";
 	builtins[6] = "exit";
-	builtins[7] = "NULL";
+	builtins[7] = NULL;
 	i = 0;
 	while (builtins[i])
 	{
