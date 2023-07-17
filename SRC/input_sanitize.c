@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 09:55:44 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:16:27 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*check_valid_cmd(char *command, char **envp)
 
 	cmd = find_path(envp);
 	split_paths = ft_split(cmd, ':');
-	valid_cmd = check_valid_cmd_builtinbuiltin(command, split_paths);
+	valid_cmd = check_valid_cmd_builtin(command, split_paths);
 	if (valid_cmd)
 		return (valid_cmd);
 	if (ft_strchr(command, '/'))
