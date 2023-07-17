@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:52:08 by apereira          #+#    #+#             */
-/*   Updated: 2023/06/09 17:06:34 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:25:58 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,30 @@ void	signal_handler(int sig)
 	}
 	else if (sig == SIGQUIT)
 		SIG_IGN ;
+}
+
+void	ft_free_vars(t_vars *vars)
+{
+	if (vars->cmd_flags)
+	{
+		ft_free(vars->cmd_flags);
+		vars->cmd_flags = NULL;
+	}
+	if (vars->here_doc_fd)
+	{
+		free(vars->here_doc_fd);
+		vars->here_doc_fd = NULL;
+	}
+}
+
+void	ft_vars_init(t_vars *vars)
+{
+	vars->num_env_vars = 0;
+	vars->here_doc_fd = NULL;
+	vars->my_environ = NULL;
+	vars->cmd2_flags = NULL;
+	vars->cmd2_path = NULL;
+	vars->cmd_flags = NULL;
+	vars->cmd1_path = NULL;
+	vars->temp = NULL;
 }

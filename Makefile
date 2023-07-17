@@ -7,7 +7,7 @@ RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 
 SRC = main.c input_sanitize.c processes.c split_cmds.c utils.c utils2.c built_ins.c built_ins2.c \
-		built_ins3.c built_ins4.c utils3.c
+		built_ins3.c built_ins4.c utils3.c here_doc.c
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 09:54:54 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:39:39 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char		**ft_split_commands_no_redirection(char *str,
 // utils3.c
 void		ft_free(char **matrix);
 void		signal_handler(int sig);
+void		ft_free_vars(t_vars *vars);
+void		ft_vars_init(t_vars *vars);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
@@ -110,4 +112,11 @@ void		ft_export(t_vars *vars, char **split_cmds);
 // Built_ins4.c
 void		ft_unset(t_vars *vars, char **commands);
 int			check_cd_ex_uns(char **commands, t_vars *vars);
+
+// here_doc.c
+void		process_heredoc(t_vars *vars, char *doc_file, int fd);
+void		open_doc_file(t_vars *vars, char *doc_file, int *j);
+void		open_doc(t_vars *vars, char *commands, int *j);
+void		handle_heredoc(t_vars *vars, char *tmp, int *j);
+void		here_doc(t_vars *vars, char **commands);
 #endif
