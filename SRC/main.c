@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+
+//Creates a temporary fd to 
 void	process_heredoc(t_vars *vars, char *doc_file, int fd)
 {
 	char	*str;
@@ -83,6 +85,42 @@ void	handle_heredoc(t_vars *vars, char *tmp, int *j)
 	}
 }
 
+void	open_doc(t_vars *vars, char *commands, int *j)
+	{
+	char	*doc_file;
+	int		i;
+
+	i = 0;
+	commands = ft_strchr(commands, '<');
+	commands += 2;
+	while (*commands == ' ' || *commands == '	')
+		commands++;
+	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
+		&& commands[i] != '	' && commands[i])
+		i++;
+	doc_file = ft_strndup(commands, i);
+	vars->temp = doc_file;
+	doc_file = ft_strjoin(doc_file, "\n");
+	open_doc_file(vars, doc_file, j);
+}
+
+void	handle_heredoc(t_vars *vars, char *tmp, int *j)
+{
+	while (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
+	{
+		open_doc(vars, tmp, j);
+		tmp = ft_strchr(tmp, '<') + 2;
+		if (ft_strchr(tmp, '<') && *(ft_strchr(tmp, '<') + 1) == '<')
+		{
+			close(vars->here_doc_fd[*j]);
+			unlink(vars->temp);
+			free(vars->temp);
+		}
+	}
+}
+
+//Searches the commands matrix for '<<'
+//and calls open_doc
 void	here_doc(t_vars *vars, char **commands)
 {
 	char	*tmp;
