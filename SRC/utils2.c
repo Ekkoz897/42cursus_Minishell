@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 11:04:18 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:59:07 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_token_length_no_redirection(char *str, char *delimiters)
 	length = 0;
 	while (str[length] && !ft_strchr(delimiters, str[length]))
 	{
-	length++;
+		length++;
 	}
 	return (length);
 }
@@ -55,23 +55,12 @@ int	count_words_no_redirection(char *str, char *delimiters)
 	token_start = get_next_token_no_redirection(str, delimiters);
 	while (token_start)
 	{
-	count++;
-	token_length = get_token_length_no_redirection(token_start, delimiters);
-	token_start = get_next_token_no_redirection(token_start + token_length,
+		count++;
+		token_length = get_token_length_no_redirection(token_start, delimiters);
+		token_start = get_next_token_no_redirection(token_start + token_length,
 				delimiters);
 	}
 	return (count);
-}
-
-int	is_delimiter(char c, char *delimiters)
-{
-	while (*delimiters)
-	{
-		if (c == *delimiters)
-			return (1);
-	delimiters++;
-	}
-	return (0);
 }
 
 // Para printar os tokens individuais:
@@ -81,15 +70,29 @@ int	is_delimiter(char c, char *delimiters)
 // 		ft_printf("token [%i] = %s\n", i, tokens[i]);
 // 		i++;
 // 	}
+void	process_token(char **tokens, char **token_start, 
+		char *delimiters, int *i)
+{
+	int	token_length;
+
+	*token_start = get_next_token_no_redirection(*token_start, delimiters);
+	if (*token_start && **token_start != '>' && **token_start != '<')
+	{
+		token_length = get_token_length(*token_start, delimiters);
+		tokens[*i] = ft_strndup(*token_start, token_length);
+		*token_start += token_length;
+		(*i)++;
+	}
+}
+
 char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 {
 	char	**tokens;
 	int		num_words;
 	char	*token_start;
-	int		token_length;
 	int		i;
 
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	num_words = count_words_no_redirection(str, delimiters);
 	tokens = malloc((num_words + 1) * sizeof(char *));
@@ -98,15 +101,8 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	token_start = (char *)str;
 	i = 0;
 	while (token_start)
-	{
-		token_start = get_next_token_no_redirection(token_start, delimiters);
-		if (token_start && *token_start != '>' && *token_start != '<')
-		{
-			token_length = get_token_length(token_start, delimiters);
-			tokens[i++] = ft_strndup(token_start, token_length);
-			token_start += token_length;
-		}
-	}
+		process_token(tokens, &token_start, delimiters, &i);
 	tokens[i] = NULL;
 	return (tokens);
 }
+

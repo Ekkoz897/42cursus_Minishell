@@ -3,31 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/03 11:32:04 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:55:13 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	setup_input_redirection(char **commands, t_vars *vars, int *j)
+void	handle_file_opening(t_vars *vars, char *infile, int *j)
 {
-	char		*infile;
-	char		*temp;
-	int			i;
-
-	i = 0;
-	temp = ft_strrchr(commands[0], '<');
-	temp++;
-	while (*temp == ' ' || *temp == '	')
-		temp++;
-	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
-		i++;
-	infile = ft_strndup(temp, i);
-	i = 0;
-	if (*(ft_strrchr(commands[0], '<') - 1) == '<')
+	if (*(ft_strrchr(infile, '<') - 1) == '<')
 	{
 		vars->fd0 = vars->here_doc_fd[*j];
 		(*j)++;
@@ -37,9 +24,27 @@ int	setup_input_redirection(char **commands, t_vars *vars, int *j)
 	if (vars->fd0 < 0)
 	{
 		perror(infile);
-		return (0);
+		free(infile);
+		exit(0);
 	}
 	free(infile);
+}
+
+int	setup_input_redirection(char **commands, t_vars *vars, int *j)
+{
+	char	*infile;
+	char	*temp;
+	int		i;
+
+	temp = ft_strrchr(commands[0], '<');
+	temp++;
+	while (*temp == ' ' || *temp == '	')
+		temp++;
+	i = 0;
+	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
+		i++;
+	infile = ft_strndup(temp, i);
+	handle_file_opening(vars, infile, j);
 	return (1);
 }
 
@@ -64,16 +69,6 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 	if (vars->fd1 < 0)
 	{
 		perror(outfile);
-		return (0);
-	}
-	return (1);
-}
-
-int	setup_pipe(int	*pipe_fd)
-{
-	if (pipe(pipe_fd) < 0)
-	{
-		perror("Pipe");
 		return (0);
 	}
 	return (1);

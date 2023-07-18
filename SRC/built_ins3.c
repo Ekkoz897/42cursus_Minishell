@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/11 13:17:10 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:55:39 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ft_env(t_vars *vars)
 	exit(0);
 }
 
-
 char	*get_var_name(char *str)
 {
 	int		i;
@@ -90,7 +89,6 @@ char	*get_value(char *str)
 	ft_strlcpy(value, str + i, j - i + 1);
 	return (value);
 }
-
 
 void	ft_export(t_vars *vars, char **split_cmds)
 {

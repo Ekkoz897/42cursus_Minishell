@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:52:08 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 12:25:58 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:55:32 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ void	ft_vars_init(t_vars *vars)
 	vars->cmd_flags = NULL;
 	vars->cmd1_path = NULL;
 	vars->temp = NULL;
+}
+
+int	setup_pipe(int	*pipe_fd)
+{
+	if (pipe(pipe_fd) < 0)
+	{
+		perror("Pipe");
+		return (0);
+	}
+	return (1);
 }

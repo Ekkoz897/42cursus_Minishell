@@ -6,26 +6,11 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/14 00:36:12 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:50:16 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// static char	**free_arr(char **arr, char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (arr[i])
-// 	{
-// 		free(arr[i]);
-// 		i++;
-// 	}
-// 	free(arr);
-// 	free(s);
-// 	return (NULL);
-// }
 
 int	get_token_length(const char *str, const char *delimiters)
 {

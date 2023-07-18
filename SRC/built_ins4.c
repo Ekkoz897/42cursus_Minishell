@@ -6,12 +6,11 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 09:41:25 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:55:50 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 int	env_num(t_vars *vars, char **commands)
 {
@@ -36,36 +35,40 @@ int	env_num(t_vars *vars, char **commands)
 	return (j);
 }
 
-// Clears value form env variables, otherwise does nothing
+// Clears value from env variables, otherwise does nothing
+int	is_command_in_env(char *env_var, char **commands)
+{
+	int	x;
+	int	flag;
+
+	x = 1;
+	flag = 1;
+	while (commands[x])
+	{
+		if (ft_strncmp(commands[x], env_var, ft_strlen(commands[x])) == 0)
+			flag = 0;
+		x++;
+	}
+	return (flag);
+}
+
 void	ft_unset(t_vars *vars, char **commands)
 {
 	int		i;
 	int		j;
-	int		x;
-	int		flag;
 	char	**new_environ;
 
 	i = 0;
 	j = 0;
-	flag = 1;
 	vars->num_env_vars = vars->num_env_vars - env_num(vars, commands);
 	new_environ = malloc(sizeof(char *) * (vars->num_env_vars + 1));
 	while (vars->my_environ[i] != NULL)
 	{
-		x = 1;
-		while (commands[x])
-		{
-			if (ft_strncmp(commands[x], vars->my_environ[i], \
-				ft_strlen(commands[x])) == 0)
-				flag = 0;
-			x++;
-		}
-		if (flag == 1)
+		if (is_command_in_env(vars->my_environ[i], commands))
 		{
 			new_environ[j] = ft_strdup(vars->my_environ[i]);
 			j++;
 		}
-		flag = 1;
 		i++;
 	}
 	new_environ[j] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 11:57:11 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:54:52 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int			get_token_length_no_redirection(char *str,
 char		*get_next_token_no_redirection(char *str,
 				char *delimiters);
 int			count_words_no_redirection(char *str, char *delimiters);
-int			is_delimiter(char c, char *delimiters);
+char		**add_token(char *token_start, char **tokens, char *delimiters,
+				int *i);
 char		**ft_split_commands_no_redirection(char *str,
 				char *delimiters);
 
@@ -87,6 +88,10 @@ void		ft_free(char **matrix);
 void		signal_handler(int sig);
 void		ft_free_vars(t_vars *vars);
 void		ft_vars_init(t_vars *vars);
+int			setup_pipe(int	*pipe_fd);
+
+// utils4.c
+int			is_delimiter(char c, char *delimiters);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
