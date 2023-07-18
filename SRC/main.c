@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/18 13:09:59 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:16:47 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	minishell(char *input, char **env, t_vars *vars)
 	ft_free_vars(vars);
 	input = NULL;
 }
-
 
 // rl_catch_signals = 0; // Disables the default behavior of SIGINT and SIGQUIT
 // rl_set_signals(); // Tells readline to ignore the default behaviour of those

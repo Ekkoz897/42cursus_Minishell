@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/18 12:59:07 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:16:27 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	count_words_no_redirection(char *str, char *delimiters)
 // 		ft_printf("token [%i] = %s\n", i, tokens[i]);
 // 		i++;
 // 	}
-void	process_token(char **tokens, char **token_start, 
+void	process_token(char **tokens, char **token_start,
 		char *delimiters, int *i)
 {
 	int	token_length;
@@ -105,4 +105,3 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	tokens[i] = NULL;
 	return (tokens);
 }
-
