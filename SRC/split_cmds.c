@@ -3,35 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/18 12:50:16 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:36:45 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	get_token_length(const char *str, const char *delimiters)
-{
-	int	length;
-
-	length = 0;
-	while (str[length] && !ft_strchr(delimiters, str[length]))
-		length++;
-	return (length);
-}
-
 const char	*get_next_token(const char *str, const char *delimiters)
 {
-	if (!str)
-		return (NULL);
-	while (*str && ft_strchr(delimiters, *str))
+	int			in_quotes;
+	char		current_quote;
+
+	in_quotes = -1;
+	current_quote = '\0';
+	while (*str)
+	{
+		if (in_quotes == -1 && !ft_strchr(delimiters, *str))
+			break ;
+		if ((*str == '\'' || *str == '\"') && (in_quotes == -1 || current_quote == *str))
+		{
+			in_quotes *= -1;
+			if (in_quotes == 1)
+				current_quote = *str;
+			else
+				current_quote = '\0';
+		}
 		str++;
+	}
 	if (*str)
 		return (str);
 	else
 		return (NULL);
+}
+
+int	get_token_length(const char *token_start, const char *delimiters)
+{
+	int		length = 0;
+	int		in_quotes;
+	char	current_quote = '\0';
+
+	in_quotes = -1;
+	while (*token_start)
+	{
+		if (in_quotes == -1 && ft_strchr(delimiters, *token_start))
+			break ;
+		if ((*token_start == '\'' || *token_start == '\"') && (in_quotes == -1 || current_quote == *token_start))
+		{
+			in_quotes *= -1;
+			if (in_quotes == 1)
+				current_quote = *token_start;
+			else
+				current_quote = '\0';
+		}
+		token_start++;
+		length++;
+	}
+	return (length);
 }
 
 char	**ft_split_commands(const char *str, const char *delimiters)
