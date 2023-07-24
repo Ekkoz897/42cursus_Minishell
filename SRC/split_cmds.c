@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/19 13:36:45 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:32:12 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ const char	*get_next_token(const char *str, const char *delimiters)
 	{
 		if (in_quotes == -1 && !ft_strchr(delimiters, *str))
 			break ;
-		if ((*str == '\'' || *str == '\"') && (in_quotes == -1 || current_quote == *str))
+		if ((*str == '\'' || *str == '\"')
+			&& (in_quotes == -1 || current_quote == *str))
 		{
 			in_quotes *= -1;
 			if (in_quotes == 1)
@@ -41,16 +42,19 @@ const char	*get_next_token(const char *str, const char *delimiters)
 
 int	get_token_length(const char *token_start, const char *delimiters)
 {
-	int		length = 0;
+	int		length;
 	int		in_quotes;
-	char	current_quote = '\0';
+	char	current_quote;
 
+	length = 0;
 	in_quotes = -1;
+	current_quote = '\0';
 	while (*token_start)
 	{
 		if (in_quotes == -1 && ft_strchr(delimiters, *token_start))
 			break ;
-		if ((*token_start == '\'' || *token_start == '\"') && (in_quotes == -1 || current_quote == *token_start))
+		if ((*token_start == '\'' || *token_start == '\"')
+			&& (in_quotes == -1 || current_quote == *token_start))
 		{
 			in_quotes *= -1;
 			if (in_quotes == 1)
