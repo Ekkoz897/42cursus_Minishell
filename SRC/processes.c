@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/31 13:25:01 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:51:03 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,52 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 	return (1);
 }
 
+char	*remove_quotes_from_string(const char *str)
+{
+	char	*new_str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_str = (char *)malloc((strlen(str) + 1) * sizeof(char));
+	while (str[i])
+	{
+		if (str[i] != '"' && str[i] != '\'')
+			new_str[j++] = str[i];
+		i++;
+	}
+	new_str[j] = '\0';
+	return (new_str);
+}
+
+
+void	remove_quotes_from_array(char **arr)
+{
+	int		i;
+	char	*new_str;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		new_str = remove_quotes_from_string(arr[i]);
+		free(arr[i]);
+		arr[i] = new_str;
+		i++;
+	}
+}
+
+
 // signals para evitar o double prompt "minishell>minishell>"
 void	execute_command(t_vars *vars, char **commands, char **envp)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
+	// tirar as aspas do cmd_flags
+	remove_quotes_from_array(vars->cmd_flags);
+	ft_printf("cmd_flags[1]: %s\n", vars->cmd_flags[1]);
 	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
 	if (vars->cmd1_path == NULL)
 		exit(1);

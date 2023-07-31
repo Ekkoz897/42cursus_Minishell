@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/28 13:28:05 by apereira         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:45:14 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,5 @@ int	check_cd_ex_uns(char **commands, t_vars *vars)
 	ft_free(split_cmds);
 	return (1);
 }
+
+
