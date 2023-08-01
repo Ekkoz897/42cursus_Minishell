@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 13:41:54 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:06:43 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	handle_file_opening(t_vars *vars, char *infile, int *j)
+void	handle_file_opening(char *str, t_vars *vars, char *infile, int *j)
 {
-	if (*(ft_strrchr(infile, '<') - 1) == '<')
+	if (*(ft_strrchr(str, '<') - 1) == '<')
 	{
 		vars->fd0 = vars->here_doc_fd[*j];
 		(*j)++;
@@ -44,7 +44,7 @@ int	setup_input_redirection(char **commands, t_vars *vars, int *j)
 	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
 		i++;
 	infile = ft_strndup(temp, i);
-	handle_file_opening(vars, infile, j);
+	handle_file_opening(commands[0], vars, infile, j);
 	return (1);
 }
 

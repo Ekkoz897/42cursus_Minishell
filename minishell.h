@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 13:51:06 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:05:00 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			get_token_length(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
-void		handle_file_opening(t_vars *vars, char *infile, int *j);
+void	handle_file_opening(char *str, t_vars *vars, char *infile, int *j);
 int			setup_input_redirection(char **commands, t_vars *vars, int *j);
 int			setup_output_redirection(char **commands, t_vars *vars);
 void		execute_command(t_vars *vars, char **commands, char **envp);
