@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/31 13:51:03 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:32:01 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,11 @@ void	remove_quotes_from_array(char **arr)
 	}
 }
 
-
 // signals para evitar o double prompt "minishell>minishell>"
 void	execute_command(t_vars *vars, char **commands, char **envp)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
-	// tirar as aspas do cmd_flags
 	remove_quotes_from_array(vars->cmd_flags);
 	ft_printf("cmd_flags[1]: %s\n", vars->cmd_flags[1]);
 	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/28 13:18:04 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:36:35 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	check_if_builtin(char **commands, t_vars *vars)
 
 void	ft_echo(char **commands)
 {
-	int	i;
-	int	n_flag;
+	int		i;
+	int		n_flag;
+	char	*temp;
 
 	i = 1;
 	n_flag = 0;
@@ -48,7 +49,9 @@ void	ft_echo(char **commands)
 	}
 	while (commands[i])
 	{
-		ft_printf("%s", commands[i]);
+		temp = remove_quotes_from_string(commands[i]);
+		ft_printf("%s", temp);
+		free(temp);
 		if (commands[i + 1] && (ft_strcmp(commands[i + 1], ">>") == 0 || \
 			ft_strcmp(commands[i + 1], ">") == 0 || \
 				ft_strcmp(commands[i + 1], "<<") == 0 || \

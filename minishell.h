@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/28 13:28:08 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:36:58 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_vars
 }t_vars;
 
 void		ft_free_vars(t_vars *vars);
+char		*remove_quotes_from_string(const char *str);
 
 // Input Sanitize.c
 char		*check_executable(char *command, char **split_paths);
