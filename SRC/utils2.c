@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/31 13:03:32 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:43:20 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	get_token_length_no_redirection(char *token_start, char *delimiters)
 	{
 		if (in_quotes == 0 && ft_strchr(delimiters, *token_start))
 			break ;
-
 		if (*token_start == '\'' || *token_start == '\"')
 		{
 			if (in_quotes == 0 || current_quote == *token_start)
@@ -43,7 +42,6 @@ int	get_token_length_no_redirection(char *token_start, char *delimiters)
 	return (length);
 }
 
-
 char	*get_next_token_no_redirection(char *str, char *delimiters)
 {
 	int		in_quotes;
@@ -57,7 +55,6 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 			str++;
 		else
 			break ;
-
 		if (*str == '\'' || *str == '\"')
 		{
 			if (in_quotes == 0 || current_quote == *str)
@@ -70,13 +67,11 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 			}
 		}
 	}
-
 	if (*str != '\0')
 		return (str);
 	else
 		return (NULL);
 }
-
 
 int	count_words_no_redirection(char *str, char *delimiters)
 {

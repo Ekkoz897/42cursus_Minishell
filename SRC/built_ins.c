@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 13:36:35 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:40:45 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,10 @@ int	check_if_builtin(char **commands, t_vars *vars)
 	return (1);
 }
 
-void	ft_echo(char **commands)
+void	ft_echo2(char **commands, int i)
 {
-	int		i;
-	int		n_flag;
 	char	*temp;
 
-	i = 1;
-	n_flag = 0;
-	if (commands[1] && ft_strcmp(commands[1], "-n") == 0)
-	{
-		n_flag = 1;
-		i++;
-	}
 	while (commands[i])
 	{
 		temp = remove_quotes_from_string(commands[i]);
@@ -61,23 +52,23 @@ void	ft_echo(char **commands)
 			ft_printf(" ");
 		i++;
 	}
-	if (!n_flag)
-		ft_printf("\n");
-	exit(0);
 }
 
-void	ft_pwd(void)
+void	ft_echo(char **commands)
 {
-	char	*pwd;
+	int		i;
+	int		n_flag;
 
-	pwd = getcwd(NULL, 0);
-	if (pwd)
+	i = 1;
+	n_flag = 0;
+	if (commands[1] && ft_strcmp(commands[1], "-n") == 0)
 	{
-		ft_printf("%s\n", pwd);
-		free(pwd);
+		n_flag = 1;
+		i++;
 	}
-	else
-		perror("pwd");
+	ft_echo2(commands, i);
+	if (!n_flag)
+		ft_printf("\n");
 	exit(0);
 }
 

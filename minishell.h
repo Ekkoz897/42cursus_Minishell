@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 13:36:58 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:51:06 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "GNL/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
-// Same struct used in Pipex
 typedef struct s_vars
 {
 	int		fd[2];
@@ -44,9 +43,6 @@ typedef struct s_vars
 	int		num_env_vars;
 }t_vars;
 
-void		ft_free_vars(t_vars *vars);
-char		*remove_quotes_from_string(const char *str);
-
 // Input Sanitize.c
 char		*check_executable(char *command, char **split_paths);
 char		*check_command(char *command, char **split_paths);
@@ -54,17 +50,16 @@ char		*check_valid_cmd_builtin(char *command, char **split_paths);
 char		*check_valid_cmd(char *argv, char **envp);
 
 // split_cmds.c
-int			get_token_length(const char *str, const char *delimiters);
 const char	*get_next_token(const char *str, const char *delimiters);
+int			get_token_length(const char *str, const char *delimiters);
 char		**ft_split_commands(const char *str, const char *delimiters);
 
 // Processes.c
+void		handle_file_opening(t_vars *vars, char *infile, int *j);
 int			setup_input_redirection(char **commands, t_vars *vars, int *j);
 int			setup_output_redirection(char **commands, t_vars *vars);
-int			setup_pipe(int	*pipe_fd);
 void		execute_command(t_vars *vars, char **commands, char **envp);
 void		first_process(t_vars *vars, char **envp, char **commands, int *j);
-// void		second_process(t_vars *vars, char **envp, int *pipe_fd);
 
 // utils.c
 char		*find_path(char **envp);
@@ -79,8 +74,8 @@ int			get_token_length_no_redirection(char *str,
 char		*get_next_token_no_redirection(char *str,
 				char *delimiters);
 int			count_words_no_redirection(char *str, char *delimiters);
-char		**add_token(char *token_start, char **tokens, char *delimiters,
-				int *i);
+void		process_token(char **tokens, char **token_start,
+				char *delimiters, int *i);
 char		**ft_split_commands_no_redirection(char *str,
 				char *delimiters);
 
@@ -93,11 +88,14 @@ int			setup_pipe(int	*pipe_fd);
 
 // utils4.c
 int			is_delimiter(char c, char *delimiters);
+char		*remove_quotes_from_string(const char *str);
+void		remove_quotes_from_array(char **arr);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
+void		ft_echo2(char **commands, int i);
 void		ft_echo(char **commands);
-void		ft_pwd(void);
+void		change_directory(char *path, t_vars *vars);
 void		ft_cd(char **commands, t_vars *vars);
 
 // Built_ins2.c
@@ -116,14 +114,16 @@ char		*get_value(char *str);
 void		ft_export(t_vars *vars, char **split_cmds);
 
 // Built_ins4.c
+void		ft_pwd(void);
+int			env_num(t_vars *vars, char **commands);
+int			is_command_in_env(char *env_var, char **commands);
 void		ft_unset(t_vars *vars, char **commands);
 int			check_cd_ex_uns(char **commands, t_vars *vars);
 
 // here_doc.c
-void		process_heredoc(t_vars *vars, char *doc_file, int fd);
-void		open_doc_file(t_vars *vars, char *doc_file, int *j);
 void		open_doc(t_vars *vars, char *commands, int *j);
-void		handle_heredoc(t_vars *vars, char *tmp, int *j);
+void		open_doc_file(t_vars *vars, char *doc_file, int *j);
+void		process_heredoc(t_vars *vars, char *doc_file, int fd);
 void		here_doc(t_vars *vars, char **commands);
-
+void		handle_heredoc(t_vars *vars, char *tmp, int *j);
 #endif

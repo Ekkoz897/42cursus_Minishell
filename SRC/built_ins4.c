@@ -6,11 +6,26 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/31 13:45:14 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:43:37 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_pwd(void)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	if (pwd)
+	{
+		ft_printf("%s\n", pwd);
+		free(pwd);
+	}
+	else
+		perror("pwd");
+	exit(0);
+}
 
 int	env_num(t_vars *vars, char **commands)
 {
@@ -97,5 +112,3 @@ int	check_cd_ex_uns(char **commands, t_vars *vars)
 	ft_free(split_cmds);
 	return (1);
 }
-
-
