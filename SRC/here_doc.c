@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:38:06 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 12:21:27 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:31:13 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,40 @@
 //opens a file to write the output of the terminal
 //saves the fd in vars->here_doc_fd
 void	open_doc(t_vars *vars, char *commands, int *j)
-	{
+{
 	char	*doc_file;
+	char	current_quote;
+	int		in_quotes;
 	int		i;
 
 	i = 0;
+	in_quotes = -1;
+	current_quote = '\0';
 	commands = ft_strchr(commands, '<');
 	commands += 2;
 	while (*commands == ' ' || *commands == '	')
 		commands++;
-	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
-		&& commands[i] != '	' && commands[i])
+
+	/*while (commands[i])
+	{
+		if (in_quotes == -1 && commands[i] == ' ')
+			break ;
+		if ((commands[i] == '\'' || commands[i] == '\"')
+			&& (in_quotes == -1 || current_quote == commands[i]))
+		{
+			in_quotes *= -1;
+			if (in_quotes == 1)
+				current_quote = commands[i];
+			else
+				current_quote = '\0';
+		}
 		i++;
+	}*/
+
+	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
+	&& commands[i] != '	' && commands[i])
+	i++;
+
 	doc_file = ft_strndup(commands, i);
 	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
@@ -35,7 +57,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 }
 
 void	open_doc_file(t_vars *vars, char *doc_file, int *j)
-	{
+{
 	int	id;
 
 	vars->here_doc_fd[*j] = open(vars->temp, O_CREAT | O_TRUNC \
