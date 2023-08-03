@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:38:06 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/03 13:27:42 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:29:30 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*ft_strndup_aspas(char *commands, int len)
 
 	i = 0;
 	j = 0;
-	in_quotes = -1;
 	current_quote = '\0';
 	new_str = (char *)malloc(len + 1);
 	if (!new_str && !commands)
@@ -34,12 +33,12 @@ char	*ft_strndup_aspas(char *commands, int len)
 			new_str[i] = commands[j];
 			i++;
 		}
-		if ((commands[i] == '\'' || commands[i] == '\"')
-			&& (in_quotes == -1 || current_quote == commands[i]))
+		if ((commands[j] == '\'' || commands[j] == '\"')
+			&& (in_quotes == -1 || current_quote == commands[j]))
 		{
 			in_quotes *= -1;
 			if (in_quotes == 1)
-				current_quote = commands[i];
+				current_quote = commands[j];
 			else
 				current_quote = '\0';
 		}
