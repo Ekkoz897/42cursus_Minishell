@@ -6,11 +6,48 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:38:06 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/02 16:31:13 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/03 13:27:42 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*ft_strndup_aspas(char *commands, int len)
+{
+	int		i;
+	int		j;
+	int		in_quotes;
+	char	*new_str;
+	char	current_quote;
+
+	i = 0;
+	j = 0;
+	in_quotes = -1;
+	current_quote = '\0';
+	new_str = (char *)malloc(len + 1);
+	if (!new_str && !commands)
+		return (NULL);
+	while (j < len)
+	{
+		if (in_quotes == 1 || (commands[j] != '\'' && commands[j] != '\"'))
+		{
+			new_str[i] = commands[j];
+			i++;
+		}
+		if ((commands[i] == '\'' || commands[i] == '\"')
+			&& (in_quotes == -1 || current_quote == commands[i]))
+		{
+			in_quotes *= -1;
+			if (in_quotes == 1)
+				current_quote = commands[i];
+			else
+				current_quote = '\0';
+		}
+		j++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
+}
 
 //searches the '<<' and writes the name inside vars->temp
 //opens a file to write the output of the terminal
@@ -30,7 +67,7 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	while (*commands == ' ' || *commands == '	')
 		commands++;
 
-	/*while (commands[i])
+	while (commands[i])
 	{
 		if (in_quotes == -1 && commands[i] == ' ')
 			break ;
@@ -44,13 +81,13 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 				current_quote = '\0';
 		}
 		i++;
-	}*/
+	}
 
-	while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
+	/*while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
 	&& commands[i] != '	' && commands[i])
-	i++;
+	i++;*/
 
-	doc_file = ft_strndup(commands, i);
+	doc_file = ft_strndup_aspas(commands, i);
 	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
 	open_doc_file(vars, doc_file, j);
