@@ -31,7 +31,7 @@ run: $(NAME)
 	@./minishell
 
 valgrind: $(NAME)
-	@make re && valgrind --leak-check=full --show-leak-kinds=definite ./minishell
+	@make re && valgrind --leak-check=full --show-leak-kinds=all ./minishell
 
 git: fclean
 	@git add .

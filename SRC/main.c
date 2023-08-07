@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/07 11:01:55 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:25:50 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	minishell(char *input, char **env, t_vars *vars)
 	if (input)
 		free(input);
 	ft_free_vars(vars);
+	ft_free(vars->my_environ);
 	input = NULL;
 }
 

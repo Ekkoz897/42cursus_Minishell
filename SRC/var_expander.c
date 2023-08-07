@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:02:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/07 13:07:13 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:21:24 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 		tmp2 = tmp;
 		tmp = ft_strjoin_char(tmp, commands[j + i]);
 		i++;
+		free (tmp2);
 	}
 	ft_printf("tmp = %s\n", tmp);
 	k = 0;
@@ -52,11 +53,10 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 		k++;
 	}
 	tmp3 = ft_strjoin_three(tmp, tmp2, &commands[i + j]);
-	ft_printf("tmp3 = %s\n", tmp3);
+	ft_printf("tmp2 = %s\n", tmp2);
 	if (tmp)
 		free(tmp);
-	if (tmp2)
-		free(tmp2);
+	// free(tmp2);
 	free(commands);
 	return (tmp3);
 }
