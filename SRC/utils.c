@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/19 13:21:19 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:12:46 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
-int	count_words(const char *str, const char *delimiters)
+int	count_words(char *str, char *delimiters)
 {
 	int			count;
 	int			token_length;
-	const char	*token_start;
+	char	*token_start;
 
 	count = 0;
 	if (!str)
@@ -47,7 +47,7 @@ void	custom_handle_signal(int sign)
 	write(1, "\n", 1);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 

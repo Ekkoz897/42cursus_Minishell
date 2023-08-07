@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 16:05:00 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:14:39 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ char		*check_valid_cmd_builtin(char *command, char **split_paths);
 char		*check_valid_cmd(char *argv, char **envp);
 
 // split_cmds.c
-const char	*get_next_token(const char *str, const char *delimiters);
-int			get_token_length(const char *str, const char *delimiters);
-char		**ft_split_commands(const char *str, const char *delimiters);
+char		*get_next_token(char *str, char *delimiters);
+int			get_token_length(char *str, char *delimiters);
+char		**ft_split_commands(char *str, char *delimiters);
 
 // Processes.c
-void	handle_file_opening(char *str, t_vars *vars, char *infile, int *j);
+void		handle_file_opening(char *str, t_vars *vars, char *infile, int *j);
 int			setup_input_redirection(char **commands, t_vars *vars, int *j);
 int			setup_output_redirection(char **commands, t_vars *vars);
 void		execute_command(t_vars *vars, char **commands, char **envp);
@@ -63,9 +63,9 @@ void		first_process(t_vars *vars, char **envp, char **commands, int *j);
 
 // utils.c
 char		*find_path(char **envp);
-int			count_words(const char *str, const char *delimiters);
+int			count_words(char *str, char *delimiters);
 void		custom_handle_signal(int sign);
-int			ft_strcmp(const char *s1, const char *s2);
+int			ft_strcmp(char *s1, char *s2);
 int			ft_exit_ctrl_d(char *input);
 
 // util2.c
@@ -88,8 +88,10 @@ int			setup_pipe(int	*pipe_fd);
 
 // utils4.c
 int			is_delimiter(char c, char *delimiters);
-char		*remove_quotes_from_string(const char *str);
+char		*remove_quotes_from_string(char *str);
 void		remove_quotes_from_array(char **arr);
+char		*ft_strjoin_char(char *str1, char c);
+char		*get_value_for_expand(char *str);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
@@ -99,11 +101,11 @@ void		change_directory(char *path, t_vars *vars);
 void		ft_cd(char **commands, t_vars *vars);
 
 // Built_ins2.c
-char		*ft_strjoin_three(char const *s1, char const *s2, char const *s3);
-void		add_env_var(t_vars *vars, const char *name, const char *value);
-void		modify_env_var(t_vars *vars, const char *name,
-				const char *new_value);
-char		*get_env_var(t_vars *vars, const char *name);
+char		*ft_strjoin_three(char *s1, char *s2, char *s3);
+void		add_env_var(t_vars *vars, char *name, char *value);
+void		modify_env_var(t_vars *vars, char *name,
+				char *new_value);
+char		*get_env_var(t_vars *vars, char *name);
 void		copy_environ(char **environ, t_vars *vars);
 
 // Built_ins3.c
@@ -126,4 +128,8 @@ void		open_doc_file(t_vars *vars, char *doc_file, int *j);
 void		process_heredoc(t_vars *vars, char *doc_file, int fd);
 void		here_doc(t_vars *vars, char **commands);
 void		handle_heredoc(t_vars *vars, char *tmp, int *j);
+
+// var_expander.c
+char		*replace_var(t_vars *vars, char *commands, int j);
+void		var_expander(t_vars *vars, char **commands);
 #endif

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/28 12:55:38 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:01:55 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	minishell_helper(char *input, char **env, t_vars *vars,
 		ft_free(commands);
 		return (0);
 	}
+	if (ft_strchr(input, '$'))
+		var_expander(vars, commands);
 	here_doc(vars, commands);
 	i = 0;
 	vars->p0 = 0;

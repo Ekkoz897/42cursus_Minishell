@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/13 11:27:17 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:12:06 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
+char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 {
 	char	*str;
 	size_t	len;
@@ -29,7 +29,7 @@ char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
 	return (str);
 }
 
-void	add_env_var(t_vars *vars, const char *name, const char *value)
+void	add_env_var(t_vars *vars, char *name, char *value)
 {
 	int		i;
 	char	**new_environ;
@@ -52,7 +52,7 @@ void	add_env_var(t_vars *vars, const char *name, const char *value)
 	vars->num_env_vars++;
 }
 
-void	modify_env_var(t_vars *vars, const char *name, const char *new_value)
+void	modify_env_var(t_vars *vars, char *name, char *new_value)
 {
 	int		i;
 	int		name_len;
@@ -75,7 +75,7 @@ void	modify_env_var(t_vars *vars, const char *name, const char *new_value)
 	add_env_var(vars, name, new_value);
 }
 
-char	*get_env_var(t_vars *vars, const char *name)
+char	*get_env_var(t_vars *vars, char *name)
 {
 	int		i;
 	int		name_len;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/24 09:32:12 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:14:49 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-const char	*get_next_token(const char *str, const char *delimiters)
+char	*get_next_token(char *str, char *delimiters)
 {
 	int			in_quotes;
 	char		current_quote;
@@ -40,7 +40,7 @@ const char	*get_next_token(const char *str, const char *delimiters)
 		return (NULL);
 }
 
-int	get_token_length(const char *token_start, const char *delimiters)
+int	get_token_length(char *token_start, char *delimiters)
 {
 	int		length;
 	int		in_quotes;
@@ -68,11 +68,11 @@ int	get_token_length(const char *token_start, const char *delimiters)
 	return (length);
 }
 
-char	**ft_split_commands(const char *str, const char *delimiters)
+char	**ft_split_commands(char *str, char *delimiters)
 {
 	int			num_words;
 	char		**words;
-	const char	*token_start;
+	char		*token_start;
 	int			token_length;
 	int			i;
 
