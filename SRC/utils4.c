@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:53:05 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/07 13:12:50 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/08 07:41:20 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,31 @@ char	*remove_quotes_from_string(char *str)
 	char	*new_str;
 	int		i;
 	int		j;
+	int		in_quotes;
+	char	current_quote;
 
 	i = 0;
 	j = 0;
+	in_quotes = -1;
+	current_quote = '\0';
 	new_str = (char *)malloc((strlen(str) + 1) * sizeof(char));
-	while (str[i])
+	while (str[j])
 	{
-		if (str[i] != '"' && str[i] != '\'')
-			new_str[j++] = str[i];
-		i++;
+		if ((in_quotes == 1 && current_quote != str[j])
+			|| (str[j] != '\"' && str[j] != '\''))
+			new_str[i++] = str[j];
+		if ((str[j] == '\'' || str[j] == '\"')
+			&& (in_quotes == -1 || current_quote == str[j]))
+		{
+			in_quotes *= -1;
+			if (in_quotes == 1)
+				current_quote = str[j];
+			else
+				current_quote = '\0';
+		}
+		j++;
 	}
-	new_str[j] = '\0';
+	new_str[i] = '\0';
 	return (new_str);
 }
 
