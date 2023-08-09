@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:38:06 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/09 10:28:33 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:05:01 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	*ft_strndup_aspas(char *commands, int len)
 		return (NULL);
 	while (j < len)
 	{
-		if ((in_quotes == 1 && current_quote != commands[j]) || (commands[j] != '\'' && commands[j] != '\"'))
+		if ((in_quotes == 1 && current_quote != commands[j])
+			|| (commands[j] != '\'' && commands[j] != '\"'))
 		{
 			new_str[i] = commands[j];
 			i++;
@@ -66,7 +67,6 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 	commands += 2;
 	while (*commands == ' ' || *commands == '	')
 		commands++;
-
 	while (commands[i])
 	{
 		if (in_quotes == -1 && commands[i] == ' ')
@@ -82,11 +82,6 @@ void	open_doc(t_vars *vars, char *commands, int *j)
 		}
 		i++;
 	}
-
-	/*while (commands[i] != '<' && commands[i] != '>' && commands[i] != ' ' \
-	&& commands[i] != '	' && commands[i])
-	i++;*/
-
 	doc_file = ft_strndup_aspas(commands, i);
 	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
