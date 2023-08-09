@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/07 13:14:39 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:15:15 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ void		remove_quotes_from_array(char **arr);
 char		*ft_strjoin_char(char *str1, char c);
 char		*get_value_for_expand(char *str);
 
+// utils5.c
+void		ft_gntnr_helper(char chr, int *in_quotes, char *current_quote);
+void		ft_gtlnr_helper(int *len, char *ts, char *delimiters, char cq);
+void		ft_rq_helper(char *str, char *new_str, int *i);
+
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);
 void		ft_echo2(char **commands, int i);
@@ -129,7 +134,13 @@ void		process_heredoc(t_vars *vars, char *doc_file, int fd);
 void		here_doc(t_vars *vars, char **commands);
 void		handle_heredoc(t_vars *vars, char *tmp, int *j);
 
+// here_doc2.c
+void		ft_open_helper(int *i, char *commands);
+void		ft_aspas_helper( int len, int *i, char *new_str, char *commands);
+char		*ft_strndup_aspas(char *commands, int len);
+
 // var_expander.c
 char		*replace_var(t_vars *vars, char *commands, int j);
 void		var_expander(t_vars *vars, char **commands);
+
 #endif

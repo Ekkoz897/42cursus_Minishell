@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 13:43:20 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:16:21 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,11 @@
 int	get_token_length_no_redirection(char *token_start, char *delimiters)
 {
 	int		length;
-	int		in_quotes;
 	char	current_quote;
 
 	length = 0;
-	in_quotes = 0;
 	current_quote = '\0';
-	while (*token_start)
-	{
-		if (in_quotes == 0 && ft_strchr(delimiters, *token_start))
-			break ;
-		if (*token_start == '\'' || *token_start == '\"')
-		{
-			if (in_quotes == 0 || current_quote == *token_start)
-			{
-				in_quotes = !in_quotes;
-				if (in_quotes)
-					current_quote = *token_start;
-				else
-					current_quote = '\0';
-			}
-		}
-		token_start++;
-		length++;
-	}
+	ft_gtlnr_helper(&length, token_start, delimiters, current_quote);
 	return (length);
 }
 
@@ -55,17 +36,7 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 			str++;
 		else
 			break ;
-		if (*str == '\'' || *str == '\"')
-		{
-			if (in_quotes == 0 || current_quote == *str)
-			{
-				in_quotes = !in_quotes;
-				if (in_quotes)
-					current_quote = *str;
-				else
-					current_quote = '\0';
-			}
-		}
+		ft_gntnr_helper(*str, &in_quotes, &current_quote);
 	}
 	if (*str != '\0')
 		return (str);

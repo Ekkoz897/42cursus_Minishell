@@ -6,49 +6,11 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:38:06 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/09 12:05:01 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:21:04 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*ft_strndup_aspas(char *commands, int len)
-{
-	int		i;
-	int		j;
-	int		in_quotes;
-	char	current_quote;
-	char	*new_str;
-
-	i = 0;
-	j = 0;
-	in_quotes = -1;
-	current_quote = '\0';
-	new_str = (char *)malloc(len + 1);
-	if (!new_str && !commands)
-		return (NULL);
-	while (j < len)
-	{
-		if ((in_quotes == 1 && current_quote != commands[j])
-			|| (commands[j] != '\'' && commands[j] != '\"'))
-		{
-			new_str[i] = commands[j];
-			i++;
-		}
-		if ((commands[j] == '\'' || commands[j] == '\"')
-			&& (in_quotes == -1 || current_quote == commands[j]))
-		{
-			in_quotes *= -1;
-			if (in_quotes == 1)
-				current_quote = commands[j];
-			else
-				current_quote = '\0';
-		}
-		j++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
-}
 
 //searches the '<<' and writes the name inside vars->temp
 //opens a file to write the output of the terminal
@@ -56,32 +18,14 @@ char	*ft_strndup_aspas(char *commands, int len)
 void	open_doc(t_vars *vars, char *commands, int *j)
 {
 	char	*doc_file;
-	char	current_quote;
-	int		in_quotes;
 	int		i;
 
 	i = 0;
-	in_quotes = -1;
-	current_quote = '\0';
 	commands = ft_strchr(commands, '<');
 	commands += 2;
 	while (*commands == ' ' || *commands == '	')
 		commands++;
-	while (commands[i])
-	{
-		if (in_quotes == -1 && commands[i] == ' ')
-			break ;
-		if ((commands[i] == '\'' || commands[i] == '\"')
-			&& (in_quotes == -1 || current_quote == commands[i]))
-		{
-			in_quotes *= -1;
-			if (in_quotes == 1)
-				current_quote = commands[i];
-			else
-				current_quote = '\0';
-		}
-		i++;
-	}
+	ft_open_helper(&i, commands);
 	doc_file = ft_strndup_aspas(commands, i);
 	vars->temp = doc_file;
 	doc_file = ft_strjoin(doc_file, "\n");
