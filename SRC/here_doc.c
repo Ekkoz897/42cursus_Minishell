@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:38:06 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/08 07:08:26 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/09 10:28:33 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*ft_strndup_aspas(char *commands, int len)
 	int		i;
 	int		j;
 	int		in_quotes;
-	char	*new_str;
 	char	current_quote;
+	char	*new_str;
 
 	i = 0;
 	j = 0;

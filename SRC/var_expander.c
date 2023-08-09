@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:02:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/07 13:21:24 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:41:08 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 		i++;
 		free (tmp2);
 	}
-	ft_printf("tmp = %s\n", tmp);
 	k = 0;
 	while (vars->my_environ[k] && !ft_strnstr(vars->my_environ[k], tmp, \
 			ft_strlen(tmp)))
@@ -41,7 +40,7 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 	k = 0;
 	free (tmp);
 	tmp = NULL;
-	while (commands[k] != '$' && commands[k])
+	while (k < j - 1 && commands[k])
 	{
 		if (tmp)
 		{
@@ -53,20 +52,24 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 		k++;
 	}
 	tmp3 = ft_strjoin_three(tmp, tmp2, &commands[i + j]);
-	ft_printf("tmp2 = %s\n", tmp2);
 	if (tmp)
 		free(tmp);
-	// free(tmp2);
 	free(commands);
 	return (tmp3);
 }
 
 void	var_expander(t_vars *vars, char **commands)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		in_quotes;
+	int		in_squotes;
+	char	current_quote;
 
 	i = 0;
+	in_quotes = -1;
+	in_squotes = -1;
+	current_quote = '\0';
 	while (commands[i])
 	{
 		if (strchr(commands[i], '$'))
@@ -74,11 +77,28 @@ void	var_expander(t_vars *vars, char **commands)
 			j = 0;
 			while (commands[i][j])
 			{
-				if (commands[i][j] == '$')
+				if (in_squotes == -1 && commands[i][j] == '$')
 				{
 					commands[i] = replace_var(vars, commands[i], j + 1);
-					ft_printf("ok\n");
 					j = 0;
+				}
+				if (commands[i][j] == '\"' && in_squotes == -1
+					&& (in_quotes == -1 || current_quote == '\"'))
+				{
+					in_quotes *= -1;
+					if (in_quotes == 1)
+						current_quote = '\"';
+					else
+						current_quote = '\0';
+				}
+				if (commands[i][j] == '\'' && in_quotes == -1
+					&& (in_squotes == -1 || current_quote == '\''))
+				{
+					in_squotes *= -1;
+					if (in_squotes == 1)
+						current_quote = '\'';
+					else
+						current_quote = '\0';
 				}
 				j++;
 			}
