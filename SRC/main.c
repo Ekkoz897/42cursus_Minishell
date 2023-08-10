@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/08 11:14:54 by apereira         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:26:17 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	run_shell(t_vars *vars, char **env)
 		input = readline("myshell> ");
 		if (!ft_exit_ctrl_d(input))
 		{
+			ft_free(vars->my_environ);
 			ft_free_vars(vars);
 			break ;
 		}
