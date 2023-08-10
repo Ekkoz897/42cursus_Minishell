@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/09 17:15:15 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:00:39 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,14 @@ void		ft_aspas_helper( int len, int *i, char *new_str, char *commands);
 char		*ft_strndup_aspas(char *commands, int len);
 
 // var_expander.c
+void		ft_expander_helper(char commands, int *qte, int *sqte,
+				char *curr_qte);
+void		ft_replace_helper2(char *commands, int j, char *tmp, char **fre);
+int			ft_replace_helper(char *commands, int j, char **tmp);
 char		*replace_var(t_vars *vars, char *commands, int j);
 void		var_expander(t_vars *vars, char **commands);
+
+// var_expander.c
+void		ft_expander_helper2(char **commands, t_vars *vars, int i);
 
 #endif
