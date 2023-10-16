@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 13:43:37 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:36:36 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	check_cd_ex_uns(char **commands, t_vars *vars)
 {
 	char	**split_cmds;
 
+	printf("\n\nok\n\n\n");
 	split_cmds = ft_split(commands[0], ' ');
 	if (ft_strcmp(split_cmds[0], "cd") == 0)
 		ft_cd(split_cmds, vars);

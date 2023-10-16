@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/10 10:00:39 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:42:04 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char		*get_value_for_expand(char *str);
 void		ft_gntnr_helper(char chr, int *in_quotes, char *current_quote);
 void		ft_gtlnr_helper(int *len, char *ts, char *delimiters, char cq);
 void		ft_rq_helper(char *str, char *new_str, int *i);
+int			str_is_spaces_only(char *input);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);

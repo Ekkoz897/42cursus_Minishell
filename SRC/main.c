@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/10 10:26:17 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:42:20 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	minishell_helper(char *input, char **env, t_vars *vars,
 
 	i = 0;
 	j = 0;
+	if (str_is_spaces_only(input))
+		return (0);
 	commands = ft_split_commands(input, "|");
 	if (check_cd_ex_uns(commands, vars))
 	{
