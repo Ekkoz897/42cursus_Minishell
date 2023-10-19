@@ -28,8 +28,9 @@ $(NAME): $(addprefix SRC/,$(OBJ))  $(addprefix GNL/,$(OBJ_GNL)) $(addprefix GNL/
 	@$(CC) $(addprefix SRC/,$(OBJ)) $(addprefix GNL/,$(OBJ_GNL)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
 #@$(CC) $(addprefix SRC/,$(OBJ)) $(addprefix GNL/,$(OBJ_GNL)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
 
-run: $(NAME)
-	@./minishell
+# comment porque da erro com exit + args, mas ./minishell n da erro
+# run: $(NAME)
+# 	@./minishell
 
 valgrind: $(NAME)
 	@make re && valgrind --leak-check=full --show-leak-kinds=all ./minishell
