@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/16 11:42:04 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/24 07:41:29 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_vars
 	char	**cmd2_flags;
 	char	*here_doc_fd;
 	char	**my_environ;
+	int		exit_stat;
 	int		num_env_vars;
 }t_vars;
 

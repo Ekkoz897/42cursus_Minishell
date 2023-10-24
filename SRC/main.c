@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/16 11:42:20 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/24 08:02:18 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,21 @@ void	minishell(char *input, char **env, t_vars *vars)
 {
 	char	**commands;
 	int		i;
+	int		status;
 
 	i = 0;
+	vars->exit_stat = 0;
 	commands = NULL;
 	i = minishell_helper(input, env, vars, commands);
 	if (i == 0)
 		return ;
 	close(vars->pipe_fd[0]);
 	while (i-- > 0)
-		wait(NULL);
+	{
+		wait(&status);
+		if (WIFEXITED(status))
+			vars->exit_stat = WEXITSTATUS(status);
+	}
 	if (commands)
 		ft_free(commands);
 	if (input)
