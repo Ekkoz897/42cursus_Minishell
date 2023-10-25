@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:02:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/24 07:20:52 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/25 08:46:04 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 	int		k;
 
 	tmp = NULL;
-	tmp2 = NULL;
 	tmp3 = NULL;
 	i = ft_replace_helper(commands, j, &tmp);
 	k = 0;
+	if (!tmp)
+		return (commands);
 	while (vars->my_environ[k] && !ft_strnstr(vars->my_environ[k], tmp, \
 			ft_strlen(tmp)))
 		k++;
