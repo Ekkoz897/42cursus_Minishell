@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:52:08 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/24 08:01:11 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/26 10:15:26 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	signal_handler(int sig)
 		rl_redisplay();
 	}
 	else if (sig == SIGQUIT)
+	{
 		SIG_IGN ;
+		ft_printf("\n");
+	}
 }
 
 void	ft_free_vars(t_vars *vars)
