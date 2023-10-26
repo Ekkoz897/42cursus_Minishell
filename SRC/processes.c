@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/01 16:06:43 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:01:06 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,11 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " |<>");
-	if (ft_strrchr(commands[0], '<'))
+	if (ft_strrchr(commands[0], '<')
+		&& !ft_strnstr(vars->cmd_flags[0], "echo", 4))
 		setup_input_redirection(commands, vars, j);
-	if (ft_strrchr(commands[0], '>'))
+	if (ft_strrchr(commands[0], '>')
+		&& !ft_strnstr(vars->cmd_flags[0], "echo", 4))
 		setup_output_redirection(commands, vars);
 	if (!setup_pipe(vars->pipe_fd))
 		exit(1);

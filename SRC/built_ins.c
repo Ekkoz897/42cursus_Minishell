@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/24 07:41:46 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/26 10:53:36 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	ft_echo2(char **commands, int i)
 		temp = remove_quotes_from_string(commands[i]);
 		ft_printf("%s", temp);
 		free(temp);
-		if (commands[i + 1] && (ft_strcmp(commands[i + 1], ">>") == 0 || \
-			ft_strcmp(commands[i + 1], ">") == 0 || \
-				ft_strcmp(commands[i + 1], "<<") == 0 || \
-					ft_strcmp(commands[i + 1], "<") == 0))
-			break ;
 		if (commands[i + 1])
 			ft_printf(" ");
 		i++;
