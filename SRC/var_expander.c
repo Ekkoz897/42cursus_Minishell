@@ -6,25 +6,11 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:02:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/27 14:20:13 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:46:13 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	ft_expander_helper(char commands, int *in_quote, int *in_squotes,
-	char *current_quote)
-{
-	if (commands == '"' && *in_squotes == -1
-		&& (*in_quote == -1 || *current_quote == '"'))
-	{
-		*in_quote *= -1;
-		if (*in_quote == 1)
-			*current_quote = '"';
-		else
-			*current_quote = '\0';
-	}
-}
 
 void	ft_replace_helper2(char *commands, int j, char *tmp, char **fre)
 {
