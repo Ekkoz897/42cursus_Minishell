@@ -80,7 +80,7 @@ void	execute_command(t_vars *vars, char **commands, char **envp)
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	remove_quotes_from_array(vars->cmd_flags);
-	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], envp);
+	vars->cmd1_path = check_valid_cmd(vars->cmd_flags[0], vars->my_environ);
 	if (vars->cmd1_path == NULL)
 		exit(1);
 	if (vars->fd1 != 1)
