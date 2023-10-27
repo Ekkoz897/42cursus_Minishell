@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/09 17:16:21 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:59:48 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	get_token_length_no_redirection(char *token_start, char *delimiters)
 
 	length = 0;
 	current_quote = '\0';
-	ft_gtlnr_helper(&length, token_start, delimiters, current_quote);
+	ft_get_token_l_noredirection_helper(&length, token_start, delimiters, \
+		current_quote);
 	return (length);
 }
 
@@ -36,7 +37,8 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 			str++;
 		else
 			break ;
-		ft_gntnr_helper(*str, &in_quotes, &current_quote);
+		ft_get_next_token_noredirection_helper(*str, &in_quotes, \
+			&current_quote);
 	}
 	if (*str != '\0')
 		return (str);

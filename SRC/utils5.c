@@ -6,13 +6,14 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:22:41 by miandrad          #+#    #+#             */
-/*   Updated: 2023/10/16 11:42:44 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:02:33 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_gntnr_helper(char chr, int *in_quotes, char *current_quote)
+void	ft_get_next_token_noredirection_helper(char chr,
+	int *in_quotes, char *current_quote)
 {
 	if (chr == '\'' || chr == '\"')
 	{
@@ -27,32 +28,33 @@ void	ft_gntnr_helper(char chr, int *in_quotes, char *current_quote)
 	}
 }
 
-void	ft_gtlnr_helper(int *len, char *ts, char *delimiters, char cq)
+void	ft_get_token_l_noredirection_helper(int *len, char *token_start, \
+	char *delimiters, char current_quote)
 {
 	int	in_quotes;
 
 	in_quotes = 0;
-	while (*ts)
+	while (*token_start)
 	{
-		if (in_quotes == 0 && ft_strchr(delimiters, *ts))
+		if (in_quotes == 0 && ft_strchr(delimiters, *token_start))
 			break ;
-		if (*ts == '\'' || *ts == '\"')
+		if (*token_start == '\'' || *token_start == '\"')
 		{
-			if (in_quotes == 0 || cq == *ts)
+			if (in_quotes == 0 || current_quote == *token_start)
 			{
 				in_quotes = !in_quotes;
 				if (in_quotes)
-					cq = *ts;
+					current_quote = *token_start;
 				else
-					cq = '\0';
+					current_quote = '\0';
 			}
 		}
-		ts++;
+		token_start++;
 		(*len)++;
 	}
 }
 
-void	ft_rq_helper(char *str, char *new_str, int *i)
+void	ft_remove_quotes_helper(char *str, char *new_str, int *i)
 {
 	int		j;
 	int		in_quotes;

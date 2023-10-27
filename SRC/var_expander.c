@@ -6,25 +6,25 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:02:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/27 14:46:13 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:06:32 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_replace_helper2(char *commands, int j, char *tmp, char **fre)
+void	ft_replace_helper2(char *commands, int j, char *tmp, char **freee)
 {
 	int	k;
 
 	k = 0;
 	while (k < j - 1 && commands[k])
 	{
-		if (*fre)
+		if (*freee)
 		{
-			tmp = ft_strdup(*fre);
-			free (*fre);
+			tmp = ft_strdup(*freee);
+			free (*freee);
 		}
-		*fre = ft_strjoin_char(tmp, commands[k]);
+		*freee = ft_strjoin_char(tmp, commands[k]);
 		free(tmp);
 		k++;
 	}

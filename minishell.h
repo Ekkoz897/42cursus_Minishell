@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/24 07:41:29 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:10:07 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_exit_ctrl_d(char *input);
 
 // util2.c
-int			get_token_length_no_redirection(char *str,
+int			get_token_length_no_redirection(char *str, \
 				char *delimiters);
-char		*get_next_token_no_redirection(char *str,
+char		*get_next_token_no_redirection(char *str, \
 				char *delimiters);
 int			count_words_no_redirection(char *str, char *delimiters);
-void		process_token(char **tokens, char **token_start,
+void		process_token(char **tokens, char **token_start, \
 				char *delimiters, int *i);
-char		**ft_split_commands_no_redirection(char *str,
+char		**ft_split_commands_no_redirection(char *str, \
 				char *delimiters);
 
 // utils3.c
@@ -95,9 +95,11 @@ char		*ft_strjoin_char(char *str1, char c);
 char		*get_value_for_expand(char *str);
 
 // utils5.c
-void		ft_gntnr_helper(char chr, int *in_quotes, char *current_quote);
-void		ft_gtlnr_helper(int *len, char *ts, char *delimiters, char cq);
-void		ft_rq_helper(char *str, char *new_str, int *i);
+void		ft_get_next_token_noredirection_helper(char chr, \
+				int *in_quotes, char *current_quote);
+void		ft_get_token_l_noredirection_helper(int *len, char *ts, \
+				char *delimiters, char cq);
+void		ft_remove_quotes_helper(char *str, char *new_str, int *i);
 int			str_is_spaces_only(char *input);
 
 // Built_ins.c
@@ -142,14 +144,14 @@ void		ft_aspas_helper( int len, int *i, char *new_str, char *commands);
 char		*ft_strndup_aspas(char *commands, int len);
 
 // var_expander.c
-void		ft_expander_helper(char commands, int *qte, int *sqte,
-				char *curr_qte);
-void		ft_replace_helper2(char *commands, int j, char *tmp, char **fre);
+void		ft_replace_helper2(char *commands, int j, char *tmp, char **freee);
 int			ft_replace_helper(char *commands, int j, char **tmp);
 char		*replace_var(t_vars *vars, char *commands, int j);
 void		var_expander(t_vars *vars, char **commands);
 
 // var_expander.c
+char		*replace_exit_status(t_vars *vars, char *commands, int j);
+int			check_if_exit_stat(char **commands, int i, t_vars *vars, int j);
 void		ft_expander_helper2(char **commands, t_vars *vars, int i);
 
 #endif

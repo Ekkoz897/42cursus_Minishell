@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:53:05 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/26 10:31:11 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:02:22 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*remove_quotes_from_string(char *str)
 
 	i = 0;
 	new_str = (char *)malloc((strlen(str) + 1) * sizeof(char));
-	ft_rq_helper(str, new_str, &i);
+	ft_remove_quotes_helper(str, new_str, &i);
 	new_str[i] = '\0';
 	return (new_str);
 }

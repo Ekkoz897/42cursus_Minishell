@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/19 13:31:13 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:19:46 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	ft_pwd(void)
 	exit(0);
 }
 
+// Helps determine the number of env variables that need to be unset.
+// Used to adjust the size of the new environment variable array
+// after unsetting the variables.
 int	env_num(t_vars *vars, char **commands)
 {
 	int	i;
