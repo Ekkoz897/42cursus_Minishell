@@ -6,22 +6,23 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:45:21 by miandrad          #+#    #+#             */
-/*   Updated: 2023/10/25 08:36:38 by apereira         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:20:19 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_expander_helper3(char commands, int *qte, int *sqte, char *curr_qte)
+void	ft_expander_helper3(char commands, int *in_quotes, int *in_squotes,
+	char *current_quote)
 {
-	if (commands == '\"' && *qte == -1
-		&& (*sqte == -1 || *curr_qte == '\"'))
+	if (commands == 39 && *in_quotes == -1
+		&& (*in_squotes == -1 || *current_quote == '"'))
 	{
-		*sqte *= -1;
-		if (*sqte == 1)
-			*curr_qte = '\"';
+		*in_squotes *= -1;
+		if (*in_squotes == 1)
+			*current_quote = '"';
 		else
-			*curr_qte = '\0';
+			*current_quote = '\0';
 	}
 }
 
