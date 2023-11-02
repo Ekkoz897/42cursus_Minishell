@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/02 14:09:23 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:39:30 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		first_process(t_vars *vars, char **envp, char **commands, int *j);
 // utils.c
 char		*find_path(char **envp);
 int			count_words(char *str, char *delimiters);
-void		custom_handle_signal(int sign);
+void		handler_quit(int signal);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_exit_ctrl_d(char *input);
 

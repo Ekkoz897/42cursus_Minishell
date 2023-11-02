@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/26 11:01:06 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:49:41 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
+	signal(SIGQUIT, handler_quit);
 	if (vars->pid1 == 0)
 		execute_command(vars, commands, envp);
 	if (vars->fd1 != 1)

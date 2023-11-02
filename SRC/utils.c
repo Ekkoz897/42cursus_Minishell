@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/09 12:18:33 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:39:15 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	count_words(char *str, char *delimiters)
 	return (count);
 }
 
-// This functions helps preventing a double print
-// when using commands that wait for input like "cat"
-void	custom_handle_signal(int sign)
+
+void	handler_quit(int signal)
 {
-	(void)sign;
-	write(1, "\n", 1);
+	if (signal == SIGQUIT)
+		write(2, "Quit (core dumped)\n", 20);
 }
+
 
 int	ft_strcmp(char *s1, char *s2)
 {
