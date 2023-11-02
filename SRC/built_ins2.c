@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/08/07 13:12:06 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:17:04 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,30 @@ char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 	char	*str;
 	size_t	len;
 
-	if (!s1 || !s2 || !s3)
+	if (!s1 && !s2 && !s3)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
-	str = malloc(sizeof(char) * len);
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, s1, len);
-	ft_strlcat(str, s2, len);
-	ft_strlcat(str, s3, len);
+	else if (!s1 && (s2 && s3))
+		str = ft_strjoin(s2, s3);
+	else if (!s2 && (s1 && s3))
+		str = ft_strjoin(s1, s3);
+	else if (!s3 && (s1 && s2))
+		str = ft_strjoin(s1, s2);
+	else if (s1 && !s2 && !s3)
+		str = ft_strdup(s1);
+	else if (s2 && !s1 && !s3)
+		str = ft_strdup(s2);
+	else if (s3 && !s1 && !s2)
+		str = ft_strdup(s3);
+	else
+	{
+		len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
+		str = malloc(sizeof(char) * len);
+		if (!str)
+			return (NULL);
+		ft_strlcpy(str, s1, len);
+		ft_strlcat(str, s2, len);
+		ft_strlcat(str, s3, len);
+	}
 	return (str);
 }
 

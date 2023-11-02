@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/27 15:10:07 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:09:23 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		ft_get_token_l_noredirection_helper(int *len, char *ts, \
 				char *delimiters, char cq);
 void		ft_remove_quotes_helper(char *str, char *new_str, int *i);
 int			str_is_spaces_only(char *input);
+int			find_env_line_nbr(t_vars *vars, char *name);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);

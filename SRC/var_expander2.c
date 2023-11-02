@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:45:21 by miandrad          #+#    #+#             */
-/*   Updated: 2023/10/27 14:46:25 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:45:36 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void	ft_expander_helper2(char **commands, t_vars *vars, int i)
 	while (commands[i][j])
 	{
 		if (in_squotes == -1 && check_if_exit_stat(commands, i, vars, j))
-			return ;
+			continue ;
 		else if (in_squotes == -1 && commands[i][j] == '$')
 		{
 			commands[i] = replace_var(vars, commands[i], j + 1);
+			if (!commands[i])
+				return ;
 			j = 0;
 		}
 		if (commands[i][j] == '"' && in_squotes == -1 && in_quotes == -1)

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:22:41 by miandrad          #+#    #+#             */
-/*   Updated: 2023/10/27 15:02:33 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:06:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,21 @@ int	str_is_spaces_only(char *input)
 		i++;
 	}
 	return (1);
+}
+
+int	find_env_line_nbr(t_vars *vars, char *name)
+{
+	int		i;
+	int		name_len;
+
+	name_len = ft_strlen(name);
+	i = 0;
+	while (vars->my_environ[i])
+	{
+		if (ft_strncmp(vars->my_environ[i], name, name_len) == 0
+			&& vars->my_environ[i][name_len] == '=')
+			return (i);
+		i++;
+	}
+	return (-1);
 }

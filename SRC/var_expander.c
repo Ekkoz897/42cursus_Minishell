@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:02:13 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/27 15:06:32 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:17:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_replace_helper2(char *commands, int j, char *tmp, char **freee)
 {
 	int	k;
 
+	free (*freee);
+	*freee = NULL;
 	k = 0;
 	while (k < j - 1 && commands[k])
 	{
@@ -54,25 +56,22 @@ char	*replace_var(t_vars *vars, char *commands, int j)
 	char	*tmp;
 	char	*tmp2;
 	char	*tmp3;
-	int		k;
 
 	tmp = NULL;
+	tmp2 = NULL;
 	tmp3 = NULL;
 	i = ft_replace_helper(commands, j, &tmp);
-	k = 0;
 	if (!tmp)
 		return (commands);
-	while (vars->my_environ[k] && !ft_strnstr(vars->my_environ[k], tmp, \
-			ft_strlen(tmp)))
-		k++;
-	tmp2 = get_value_for_expand(vars->my_environ[k]);
-	k = 0;
-	free (tmp);
-	tmp = NULL;
+	if (find_env_line_nbr(vars, tmp) != -1)
+		tmp2 = get_value_for_expand(vars->my_environ[find_env_line_nbr(vars,
+					tmp)]);
 	ft_replace_helper2(commands, j, tmp3, &tmp);
 	tmp3 = ft_strjoin_three(tmp, tmp2, &commands[i + j]);
 	if (tmp)
 		free(tmp);
+	if (tmp2)
+		free(tmp2);
 	free(commands);
 	return (tmp3);
 }
