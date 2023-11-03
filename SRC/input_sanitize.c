@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/17 10:32:22 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:41:56 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,27 @@ char	*check_valid_cmd(char *command, char **envp)
 		return (check_executable(command, split_paths));
 	else
 		return (check_command(command, split_paths));
+}
+
+int	check_flag_n(char *str)
+{
+	int	f;
+	int	flag;
+
+	f = 2;
+	flag = 1;
+	if (ft_strcmp(str, "-n") == 0)
+		return (1);
+	else if (ft_strlen(str) > 2 && ft_strncmp(str, "-n", 2) == 0)
+	{
+		while (str[f])
+		{
+			if (str[f] != 'n')
+				flag = 0;
+			f++;
+		}
+		if (flag == 1)
+			return (1);
+	}
+	return (0);
 }
