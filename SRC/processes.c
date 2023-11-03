@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/03 12:34:36 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:49:15 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,6 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " |<>");
-	printf("cmd_flags[0] = %s\n", vars->cmd_flags[0]);
-	printf("cmd_flags[1] = %s\n", vars->cmd_flags[1]);
-	printf("cmd_flags[2] = %s\n", vars->cmd_flags[2]);
-	// 	printf("cmd_flags[3] = %s\n", vars->cmd_flags[3]);
 	if (ft_strrchr(commands[0], '<'))
 		setup_input_redirection(commands, vars, j);
 	if (ft_strrchr(commands[0], '>'))
