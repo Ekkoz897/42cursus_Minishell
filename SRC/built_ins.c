@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/26 10:53:36 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:49:03 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_echo(char **commands)
 
 	i = 1;
 	n_flag = 0;
-	if (commands[1] && ft_strcmp(commands[1], "-n") == 0)
+	if (commands[1] && check_flag_n(commands[1]) == 1)
 	{
 		n_flag = 1;
 		i++;
@@ -64,7 +64,7 @@ void	ft_echo(char **commands)
 	ft_echo2(commands, i);
 	if (!n_flag)
 		ft_printf("\n");
-	exit(0);
+	exit (0);
 }
 
 void	change_directory(char *path, t_vars *vars)

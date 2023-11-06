@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/02 14:39:30 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:42:08 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char		*check_executable(char *command, char **split_paths);
 char		*check_command(char *command, char **split_paths);
 char		*check_valid_cmd_builtin(char *command, char **split_paths);
 char		*check_valid_cmd(char *argv, char **envp);
+int			check_flag_n(char *str);
 
 // split_cmds.c
 char		*get_next_token(char *str, char *delimiters);

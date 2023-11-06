@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/03 15:08:44 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:18:50 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,18 @@ int	setup_input_redirection(char **commands, t_vars *vars, int *j)
 	char	*infile;
 	char	*temp;
 	int		i;
+	int		in_quotes;
 
+	temp = commands[0];
+	in_quotes = -1;
+	while (temp && *temp != '>')
+	{
+		if (*temp == '"' || *temp == 39)
+			in_quotes *= -1;
+		temp++;
+	}
+	if (in_quotes == 1)
+		return (0);
 	temp = ft_strrchr(commands[0], '<');
 	temp++;
 	while (*temp == ' ' || *temp == '	')
@@ -53,7 +64,18 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 	char		*outfile;
 	char		*temp;
 	int			i;
+	int			in_quotes;
 
+	temp = (commands[0]);
+	in_quotes = -1;
+	while (temp && *temp != '>')
+	{
+		if (*temp == '"' || *temp == 39)
+			in_quotes *= -1;
+		temp++;
+	}
+	if (in_quotes == 1)
+		return (0);
 	i = 0;
 	temp = ft_strrchr(commands[0], '>');
 	temp++;
@@ -107,11 +129,9 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " |<>");
-	if (ft_strrchr(commands[0], '<')
-		&& !ft_strnstr(vars->cmd_flags[0], "echo", 4))
+	if (ft_strrchr(commands[0], '<'))
 		setup_input_redirection(commands, vars, j);
-	if (ft_strrchr(commands[0], '>')
-		&& !ft_strnstr(vars->cmd_flags[0], "echo", 4))
+	if (ft_strrchr(commands[0], '>'))
 		setup_output_redirection(commands, vars);
 	if (!setup_pipe(vars->pipe_fd))
 		exit(1);
