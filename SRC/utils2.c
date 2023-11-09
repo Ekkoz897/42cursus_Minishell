@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/10/27 14:59:48 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:14:15 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 	while (*str)
 	{
 		if (in_quotes == 0 && ft_strchr(delimiters, *str))
+		{
+			if (*str == > || *str == <)
+			{
+				funcao_nova();
+			}
 			str++;
+		}
 		else
 			break ;
 		ft_get_next_token_noredirection_helper(*str, &in_quotes, \
@@ -115,11 +121,18 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	i = 0;
 	while (token_start)
 	{
+		ft_printf("%s\n", token_start);
 		token_length = get_token_length_no_redirection(token_start, delimiters);
 		tokens[i++] = ft_strndup(token_start, token_length);
 		token_start += token_length;
 		token_start = get_next_token_no_redirection(token_start, delimiters);
 	}
 	tokens[i] = NULL;
+	i = 0;
+	while (tokens[i])
+	{
+		ft_printf("tokens : %s\n", tokens[i]);
+		i++;
+	}
 	return (tokens);
 }

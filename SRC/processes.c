@@ -121,7 +121,10 @@ void	execute_command(t_vars *vars, char **commands, char **envp)
 	else if (vars->p0 != 0)
 		dup2(vars->p0, STDIN_FILENO);
 	if (!check_if_builtin(commands, vars))
+	{
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
+		ft_printf("ok\n");
+	}
 }
 
 void	first_process(t_vars *vars, char **envp, char **commands, int *j)
