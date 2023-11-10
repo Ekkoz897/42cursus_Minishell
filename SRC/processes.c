@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/06 11:18:50 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:14:18 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	execute_command(t_vars *vars, char **commands, char **envp)
 	if (!check_if_builtin(commands, vars))
 	{
 		execve(vars->cmd1_path, vars->cmd_flags, envp);
-		ft_printf("ok\n");
 	}
 }
 
@@ -142,6 +141,7 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	if (vars->pid1 < 0)
 		return ;
 	signal(SIGQUIT, handler_quit);
+	signal(SIGINT, handler_quit_ctrlc);
 	if (vars->pid1 == 0)
 		execute_command(vars, commands, envp);
 	if (vars->fd1 != 1)

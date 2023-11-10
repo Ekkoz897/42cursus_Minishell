@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:04:22 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/10 13:04:33 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:16:34 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,12 @@ char	*funcao_nova(char *str, char *delimiters)
 		str++;
 	str--;
 	return (str);
+}
+
+void	handler_quit_ctrlc(int sig)
+{
+	if (sig == SIGINT || sig == SIGQUIT)
+	{
+		printf("\n");
+	}
 }
