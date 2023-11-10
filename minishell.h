@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/03 12:42:08 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:06:41 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ void		ft_get_token_l_noredirection_helper(int *len, char *ts, \
 void		ft_remove_quotes_helper(char *str, char *new_str, int *i);
 int			str_is_spaces_only(char *input);
 int			find_env_line_nbr(t_vars *vars, char *name);
+
+// utils6.c
+char		*funcao_nova(char *str, char *delimiters);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);

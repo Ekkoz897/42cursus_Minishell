@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/10 12:14:13 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:04:12 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,6 @@ int	get_token_length_no_redirection(char *token_start, char *delimiters)
 		current_quote);
 	return (length);
 }
-
-char	*funcao_nova(char *str, char *delimiters)
-{
-	while (*str && ft_strchr(delimiters, *str))
-		str++;
-	while (*str && !ft_strchr(delimiters, *str))
-		str++;
-	while (*str && ft_strchr(delimiters, *str))
-		str++;
-	str--;
-	return (str);
-}
-
 
 char	*get_next_token_no_redirection(char *str, char *delimiters)
 {
