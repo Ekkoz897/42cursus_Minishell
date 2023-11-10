@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/09 16:14:15 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:14:13 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ int	get_token_length_no_redirection(char *token_start, char *delimiters)
 	return (length);
 }
 
+char	*funcao_nova(char *str, char *delimiters)
+{
+	while (*str && ft_strchr(delimiters, *str))
+		str++;
+	while (*str && !ft_strchr(delimiters, *str))
+		str++;
+	while (*str && ft_strchr(delimiters, *str))
+		str++;
+	str--;
+	return (str);
+}
+
+
 char	*get_next_token_no_redirection(char *str, char *delimiters)
 {
 	int		in_quotes;
@@ -35,10 +48,8 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 	{
 		if (in_quotes == 0 && ft_strchr(delimiters, *str))
 		{
-			if (*str == > || *str == <)
-			{
-				funcao_nova();
-			}
+			if (*str == '>' || *str == '<')
+				str = funcao_nova(str, delimiters);
 			str++;
 		}
 		else
@@ -121,7 +132,6 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	i = 0;
 	while (token_start)
 	{
-		ft_printf("%s\n", token_start);
 		token_length = get_token_length_no_redirection(token_start, delimiters);
 		tokens[i++] = ft_strndup(token_start, token_length);
 		token_start += token_length;
@@ -129,10 +139,5 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 	}
 	tokens[i] = NULL;
 	i = 0;
-	while (tokens[i])
-	{
-		ft_printf("tokens : %s\n", tokens[i]);
-		i++;
-	}
 	return (tokens);
 }
