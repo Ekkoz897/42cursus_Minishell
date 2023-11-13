@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:04:22 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/13 12:53:20 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:00:09 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ char	*setup_output_redirection_help(char **commands, t_vars *vars, \
 	return (outfile);
 }
 
-char	*ft_strjoin_three_help(char *s1, char *s2, char *s3, char *str)
+void	ft_strjoin_three_help(char *s1, char *s2, char *s3, char *str)
 {
 	size_t	len;
 
 	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
 	str = malloc(sizeof(char) * len);
 	if (!str)
-		return (NULL);
+		return ;
 	ft_strlcpy(str, s1, len);
 	ft_strlcat(str, s2, len);
 	ft_strlcat(str, s3, len);
