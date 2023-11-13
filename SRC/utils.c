@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 08:04:34 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/02 14:39:15 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:44:41 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ int	count_words(char *str, char *delimiters)
 	return (count);
 }
 
-
 void	handler_quit(int signal)
 {
 	if (signal == SIGQUIT)
 		write(2, "Quit (core dumped)\n", 20);
 }
-
 
 int	ft_strcmp(char *s1, char *s2)
 {

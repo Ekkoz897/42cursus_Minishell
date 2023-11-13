@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/10 15:30:57 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:36:10 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	if (vars->pid1 < 0)
 		return ;
 	signal(SIGQUIT, handler_quit);
+	signal(SIGINT, handler_quit_ctrlc);
 	if (vars->pid1 == 0)
 		execute_command(vars, commands, envp);
 	if (vars->fd1 != 1)
