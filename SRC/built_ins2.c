@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/02 14:17:04 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:54:27 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 {
 	char	*str;
-	size_t	len;
 
 	if (!s1 && !s2 && !s3)
 		return (NULL);
@@ -33,13 +32,8 @@ char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 		str = ft_strdup(s3);
 	else
 	{
-		len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
-		str = malloc(sizeof(char) * len);
-		if (!str)
-			return (NULL);
-		ft_strlcpy(str, s1, len);
-		ft_strlcat(str, s2, len);
-		ft_strlcat(str, s3, len);
+		str = NULL;
+		ft_strjoin_three_help(s1, s2, s3, str);
 	}
 	return (str);
 }

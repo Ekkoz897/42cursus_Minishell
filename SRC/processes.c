@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/13 11:36:10 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:11:55 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 {
 	char		*outfile;
 	char		*temp;
-	int			i;
 	int			in_quotes;
 
+	outfile = NULL;
 	temp = (commands[0]);
 	in_quotes = -1;
 	while (temp && *temp != '>')
@@ -76,18 +76,7 @@ int	setup_output_redirection(char **commands, t_vars *vars)
 	}
 	if (in_quotes == 1)
 		return (0);
-	i = 0;
-	temp = ft_strrchr(commands[0], '>');
-	temp++;
-	while (*temp == ' ' || *temp == '	')
-		temp++;
-	while (temp[i] != ' ' && temp[i] != '	' && temp[i])
-		i++;
-	outfile = ft_strndup(temp, i);
-	if (*(ft_strrchr(commands[0], '>') - 1) == '>')
-		vars->fd1 = open(outfile, O_CREAT | O_RDWR | O_APPEND, 0000644);
-	else
-		vars->fd1 = open(outfile, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+	outfile = setup_output_redirection_help(commands, vars, temp, outfile);
 	if (vars->fd1 < 0)
 	{
 		perror(outfile);

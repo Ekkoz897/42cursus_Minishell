@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_sanitize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:34:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/03 12:41:56 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:50:19 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
