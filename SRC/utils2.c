@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/10 13:04:12 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:55:53 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_next_token_no_redirection(char *str, char *delimiters)
 	{
 		if (in_quotes == 0 && ft_strchr(delimiters, *str))
 		{
-			if (*str == '>' || *str == '<')
+			if (*str == '>')
 				str = funcao_nova(str, delimiters);
 			str++;
 		}
@@ -125,6 +125,5 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 		token_start = get_next_token_no_redirection(token_start, delimiters);
 	}
 	tokens[i] = NULL;
-	i = 0;
 	return (tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:04:22 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/13 14:00:09 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:55:04 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*funcao_nova(char *str, char *delimiters)
 	while (*str && ft_strchr(delimiters, *str))
 		str++;
 	while (*str && !ft_strchr(delimiters, *str))
-		str++;
-	while (*str && ft_strchr(delimiters, *str))
 		str++;
 	str--;
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/13 12:11:55 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:51:05 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	handle_file_opening(char *str, t_vars *vars, char *infile, int *j)
 	}
 	else
 		vars->fd0 = open(infile, O_RDONLY);
-	if (vars->fd0 < 0)
-	{
-		perror(infile);
-		free(infile);
-		exit(0);
-	}
+	// if (vars->fd0 < 0)
+	// {
+	// 	perror(infile);
+	// 	free(infile);
+	// 	exit(0);
+	// }
 	free(infile);
 }
 
@@ -39,7 +39,7 @@ int	setup_input_redirection(char **commands, t_vars *vars, int *j)
 
 	temp = commands[0];
 	in_quotes = -1;
-	while (temp && *temp != '>')
+	while (temp && *temp && *temp != '>')
 	{
 		if (*temp == '"' || *temp == 39)
 			in_quotes *= -1;
