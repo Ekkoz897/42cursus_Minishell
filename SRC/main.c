@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/10 13:12:18 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:08:30 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	run_shell(t_vars *vars, char **env)
 		input = readline("myshell> ");
 		if (!ft_exit_ctrl_d(input))
 		{
+			vars->exit_stat = 1;
 			ft_free(vars->my_environ);
 			ft_free_vars(vars);
 			break ;
