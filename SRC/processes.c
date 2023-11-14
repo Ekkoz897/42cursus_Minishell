@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: miandrad <miandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/13 17:51:05 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/14 01:14:09 by miandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,11 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	if (vars->p0 != 0)
 		close(vars->p0);
 	vars->p0 = vars->pipe_fd[0];
+	wait(&vars->pid1);
+	if (vars->temp != NULL)
+	{
+		unlink(vars->temp);
+		free(vars->temp);	
+		vars->temp = NULL;
+	}
 }
