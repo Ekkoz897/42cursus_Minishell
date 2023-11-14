@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:38:12 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/14 01:03:13 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:20:03 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_open_helper(int *i, char *commands)
 	current_quote = '\0';
 	while (commands[*i])
 	{
-		if (in_quotes == -1 && (commands[*i] == ' ' || commands[*i] == '<' || commands[*i] == '>'))
+		if (in_quotes == -1 && (commands[*i] == ' ' || commands[*i] == '<' || \
+			commands[*i] == '>'))
 			break ;
 		if ((commands[*i] == '\'' || commands[*i] == '\"')
 			&& (in_quotes == -1 || current_quote == commands[*i]))

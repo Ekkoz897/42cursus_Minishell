@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/03 12:49:03 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:38:03 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	check_if_builtin(char **commands, t_vars *vars)
 {
 	char	**split_cmds;
-
+	
 	split_cmds = ft_split(commands[0], ' ');
-	if (ft_strcmp(split_cmds[0], "echo") == 0)
-		ft_echo(split_cmds);
-	else if (ft_strcmp(split_cmds[0], "cd") == 0)
-		ft_cd(split_cmds, vars);
+	if (ft_strcmp(vars->cmd_flags[0], "echo") == 0)
+		ft_echo(vars->cmd_flags);
+	else if (ft_strcmp(vars->cmd_flags[0], "cd") == 0)
+		ft_cd(vars->cmd_flags, vars);
 	else if (ft_strcmp(split_cmds[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(split_cmds[0], "export") == 0 && !split_cmds[1])
@@ -36,13 +36,9 @@ int	check_if_builtin(char **commands, t_vars *vars)
 
 void	ft_echo2(char **commands, int i)
 {
-	char	*temp;
-
 	while (commands[i])
 	{
-		temp = remove_quotes_from_string(commands[i]);
-		ft_printf("%s", temp);
-		free(temp);
+		ft_printf("%s", commands[i]);
 		if (commands[i + 1])
 			ft_printf(" ");
 		i++;

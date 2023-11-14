@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:45:21 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/02 13:45:36 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:19:37 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 char	*replace_exit_status(t_vars *vars, char *commands, int j)
 {
 	char	*temp;
+	char	*temp2;
 
-	temp = ft_substr(commands, j, ft_strlen(commands) - j);
+	temp = ft_substr(commands, 0, j - 2);
+	temp2 = ft_substr(commands, j, ft_strlen(commands) - j);
 	free (commands);
-	commands = ft_strjoin_three("echo ", ft_itoa(vars->exit_stat), temp);
+	commands = ft_strjoin_three(temp, ft_itoa(vars->exit_stat), temp2);
 	free (temp);
 	return (commands);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/13 14:00:59 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:28:58 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,10 @@ int			find_env_line_nbr(t_vars *vars, char *name);
 // utils6.c
 char		*funcao_nova(char *str, char *delimiters);
 void		handler_quit_ctrlc(int sig);
-void		ft_strjoin_three_help(char *s1, char *s2, char *s3, char *str);
+char		*ft_strjoin_three_help(char *s1, char *s2, char *s3, char *str);
 char		*setup_output_redirection_help(char **commands, t_vars *vars, \
 	char *temp, char *outfile);
+void		first_process_helper(t_vars *vars);
 
 // Built_ins.c
 int			check_if_builtin(char **commands, t_vars *vars);

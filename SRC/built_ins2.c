@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/13 12:54:27 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:28:05 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 
 	if (!s1 && !s2 && !s3)
 		return (NULL);
-	else if (!s1 && (s2 && s3))
+	else if ((!s1 || !*s1) && (s2 && s3))
 		str = ft_strjoin(s2, s3);
-	else if (!s2 && (s1 && s3))
+	else if ((!s2 || !*s2) && (s1 && s3))
 		str = ft_strjoin(s1, s3);
-	else if (!s3 && (s1 && s2))
+	else if (((!s3 || !*s3) && (s1 && s2)))
 		str = ft_strjoin(s1, s2);
-	else if (s1 && !s2 && !s3)
+	else if (s1 && (!s2 || !*s2) && (!s3 || !*s3))
 		str = ft_strdup(s1);
-	else if (s2 && !s1 && !s3)
+	else if (s2 && (!s1 || !*s1) && (!s3 || !*s3))
 		str = ft_strdup(s2);
-	else if (s3 && !s1 && !s2)
+	else if (s3 && (!s1 || !*s1) && (!s2 || !*s2))
 		str = ft_strdup(s3);
 	else
 	{
 		str = NULL;
-		ft_strjoin_three_help(s1, s2, s3, str);
+		str = ft_strjoin_three_help(s1, s2, s3, str);
 	}
 	return (str);
 }

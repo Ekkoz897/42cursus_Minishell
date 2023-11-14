@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:58:20 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/14 16:12:53 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:04:30 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_cd_ex_uns(char **commands, t_vars *vars)
 	{
 		ft_putendl_fd("exit: too many arguments\n", 2);
 		vars->exit_stat = 1;
-	}	
+	}
 	else if (ft_strcmp(split_cmds[0], "exit") == 0)
 		ft_exit(split_cmds);
 	else if (ft_strcmp(split_cmds[0], "unset") == 0)

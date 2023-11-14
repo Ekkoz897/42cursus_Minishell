@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:05:24 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/13 17:55:53 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:39:21 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ char	**ft_split_commands_no_redirection(char *str, char *delimiters)
 		token_start = get_next_token_no_redirection(token_start, delimiters);
 	}
 	tokens[i] = NULL;
+	i = 0;
 	return (tokens);
 }

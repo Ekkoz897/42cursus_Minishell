@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miandrad <miandrad@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:04:22 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/13 17:55:04 by miandrad         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:29:15 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,27 @@ char	*setup_output_redirection_help(char **commands, t_vars *vars, \
 	return (outfile);
 }
 
-void	ft_strjoin_three_help(char *s1, char *s2, char *s3, char *str)
+char	*ft_strjoin_three_help(char *s1, char *s2, char *s3, char *str)
 {
 	size_t	len;
 
 	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1;
 	str = malloc(sizeof(char) * len);
 	if (!str)
-		return ;
+		return (NULL);
 	ft_strlcpy(str, s1, len);
 	ft_strlcat(str, s2, len);
 	ft_strlcat(str, s3, len);
+	return (str);
+}
+
+void	first_process_helper(t_vars *vars)
+{
+	if (vars->fd1 != 1)
+		close(vars->fd1);
+	if (vars->fd0 != 0)
+		close(vars->fd0);
+	close(vars->pipe_fd[1]);
+	if (vars->p0 != 0)
+		close(vars->p0);
 }

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/14 16:08:30 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:05:04 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	minishell_helper(char *input, char **env, t_vars *vars,
 	if (str_is_spaces_only(input))
 		return (0);
 	commands = ft_split_commands(input, "|");
+	if (ft_strchr(input, '$'))
+		var_expander(vars, commands);
 	if (check_cd_ex_uns(commands, vars))
 	{
 		ft_free_vars(vars);
 		ft_free(commands);
 		return (0);
 	}
-	if (ft_strchr(input, '$'))
-		var_expander(vars, commands);
 	here_doc(vars, commands);
 	i = 0;
 	vars->p0 = 0;
