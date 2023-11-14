@@ -40,9 +40,9 @@ git: fclean
 	@git commit
 	@git push
 	@clear
-	@echo "|         a                                        |"
 	@echo "|                                                 |"
-	@echo "|        -------Commited and Pushed-------        |"
+	@echo "|                                                 |"
+	@echo "|      -------{ Commited and Pushed }-------      |"
 	@echo "|                                                 |"
 	@echo "|                                                 |"
 
