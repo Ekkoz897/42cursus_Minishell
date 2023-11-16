@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/14 18:38:03 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/16 07:32:34 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_if_builtin(char **commands, t_vars *vars)
 {
 	char	**split_cmds;
-	
+
 	split_cmds = ft_split(commands[0], ' ');
 	if (ft_strcmp(vars->cmd_flags[0], "echo") == 0)
 		ft_echo(vars->cmd_flags);
