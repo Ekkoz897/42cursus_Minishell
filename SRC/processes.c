@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/14 17:48:42 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:54:40 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,13 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 		free(vars->temp);
 		vars->temp = NULL;
 	}
+	// int i = 0;
+	// while (vars->cmd_flags[i])
+	// {
+	// 	printf("%i -> %s\n", i, vars->cmd_flags[i]);
+	// 	i++;
+	// }
+	if (vars->cmd_flags)
+		ft_free(vars->cmd_flags);
+	vars->cmd_flags = NULL;
 }
