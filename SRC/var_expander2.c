@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:45:21 by miandrad          #+#    #+#             */
-/*   Updated: 2023/11/16 07:52:01 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/16 08:01:49 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	ft_expander_helper2(char **commands, t_vars *vars, int i)
 			commands[i] = replace_var(vars, commands[i], j + 1);
 			if (!commands[i])
 				return ;
-			if (commands[i][j + 1])
-				j = 0;
 		}
 		if (commands[i][j] == '"' && in_squotes == -1 && in_quotes == -1)
 			in_quotes *= -1;

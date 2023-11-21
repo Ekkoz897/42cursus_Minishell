@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/16 07:36:19 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/21 07:23:09 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int	minishell_helper(char *input, char **env, t_vars *vars,
 	return (i);
 }
 
-void	minishell(char *input, char **env, t_vars *vars)
+void	minishell(char *input, char **env, t_vars *vars, char **commands)
 {
-	char	**commands;
 	int		i;
 	int		status;
 
 	i = 0;
 	vars->exit_stat = 0;
 	commands = NULL;
+	status = 0;
 	i = minishell_helper(input, env, vars, commands);
 	if (i == 0)
 		return ;
@@ -84,7 +84,9 @@ void	setup_shell(t_vars *vars, char **env)
 void	run_shell(t_vars *vars, char **env)
 {
 	char	*input;
+	char	**commands;
 
+	commands = NULL;
 	while (1)
 	{
 		signal(SIGQUIT, signal_handler);
@@ -93,6 +95,8 @@ void	run_shell(t_vars *vars, char **env)
 		if (!ft_exit_ctrl_d(input))
 		{
 			vars->exit_stat = 1;
+			if (commands)
+				ft_free (commands);
 			ft_free(vars->my_environ);
 			ft_free_vars(vars);
 			break ;
@@ -100,7 +104,7 @@ void	run_shell(t_vars *vars, char **env)
 		if (ft_strlen(input) != 0)
 			add_history(input);
 		if (ft_strlen(input) != 0)
-			minishell(input, env, vars);
+			minishell(input, env, vars, commands);
 		signal(SIGQUIT, signal_handler);
 		signal(SIGINT, signal_handler);
 	}

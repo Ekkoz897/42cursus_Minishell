@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:27:54 by apereira          #+#    #+#             */
-/*   Updated: 2023/07/18 12:55:39 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/16 08:08:31 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_exit(char **split_cmds)
 		{
 			ft_printf("minishell: exit: %s: numeric argument required\n",
 				split_cmds[1]);
-			exit(EXIT_FAILURE);
+			exit(2);
 		}
 	}
 	else
@@ -63,7 +63,7 @@ char	*get_var_name(char *str)
 		i++;
 	name = malloc(sizeof(char) * (i + 1));
 	if (!name)
-		exit(EXIT_FAILURE);
+		exit(1);
 	ft_strlcpy(name, str, i + 1);
 	return (name);
 }
@@ -85,7 +85,7 @@ char	*get_value(char *str)
 		j++;
 	value = malloc(sizeof(char) * (j - i + 1));
 	if (!value)
-		exit(EXIT_FAILURE);
+		exit(1);
 	ft_strlcpy(value, str + i, j - i + 1);
 	return (value);
 }
@@ -115,6 +115,6 @@ void	ft_export(t_vars *vars, char **split_cmds)
 	else
 	{
 		ft_env(vars);
-		exit(0);
+		exit(1);
 	}
 }
