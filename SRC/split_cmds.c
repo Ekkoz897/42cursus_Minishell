@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:45:56 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/21 14:14:19 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/22 07:26:39 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,17 @@ char	**ft_split_commands(char *str, char *delimiters)
 	}
 	words[num_words] = NULL;
 	return (words);
+}
+
+void	setup_redirections(char **commands, t_vars *vars, int *j)
+{
+	if (ft_strrchr(commands[0], '<'))
+		setup_input_redirection(commands, vars, j);
+	if (ft_strrchr(commands[0], '>'))
+		setup_output_redirection(commands, vars);
+	if (!setup_pipe(vars->pipe_fd))
+	{
+		vars->exit_stat = 1;
+		exit(1);
+	}
 }

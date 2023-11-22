@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:00:07 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/21 14:54:40 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/22 07:24:37 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,7 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 	vars->fd0 = 0;
 	vars->fd1 = 1;
 	vars->cmd_flags = ft_split_commands_no_redirection(commands[0], " |<>");
-	if (ft_strrchr(commands[0], '<'))
-		setup_input_redirection(commands, vars, j);
-	if (ft_strrchr(commands[0], '>'))
-		setup_output_redirection(commands, vars);
-	if (!setup_pipe(vars->pipe_fd))
-		exit(1);
+	setup_redirections(commands, vars, j);
 	vars->pid1 = fork();
 	if (vars->pid1 < 0)
 		return ;
@@ -134,12 +129,6 @@ void	first_process(t_vars *vars, char **envp, char **commands, int *j)
 		free(vars->temp);
 		vars->temp = NULL;
 	}
-	// int i = 0;
-	// while (vars->cmd_flags[i])
-	// {
-	// 	printf("%i -> %s\n", i, vars->cmd_flags[i]);
-	// 	i++;
-	// }
 	if (vars->cmd_flags)
 		ft_free(vars->cmd_flags);
 	vars->cmd_flags = NULL;

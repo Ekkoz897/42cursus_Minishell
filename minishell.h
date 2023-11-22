@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:40:10 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/14 17:28:58 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/22 07:26:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 typedef struct s_vars
 {
+	int		i;
+	int		j;
 	int		fd[2];
 	int		pipe_fd[2];
 	int		pid1;
@@ -55,6 +57,7 @@ int			check_flag_n(char *str);
 char		*get_next_token(char *str, char *delimiters);
 int			get_token_length(char *str, char *delimiters);
 char		**ft_split_commands(char *str, char *delimiters);
+void		setup_redirections(char **commands, t_vars *vars, int *j);
 
 // Processes.c
 void		handle_file_opening(char *str, t_vars *vars, char *infile, int *j);

@@ -6,7 +6,7 @@
 /*   By: apereira <apereira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:42:14 by apereira          #+#    #+#             */
-/*   Updated: 2023/11/21 14:53:25 by apereira         ###   ########.fr       */
+/*   Updated: 2023/11/22 07:20:54 by apereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 int	minishell_helper(char *input, char **env, t_vars *vars,
 		char **commands)
 {
-	int	j;
-	int	i;
-
-	i = 0;
-	j = 0;
 	if (str_is_spaces_only(input))
 		return (0);
 	commands = ft_split_commands(input, "|");
@@ -33,17 +28,18 @@ int	minishell_helper(char *input, char **env, t_vars *vars,
 		return (0);
 	}
 	here_doc(vars, commands);
-	i = 0;
+	vars->i = 0;
 	vars->p0 = 0;
-	while (commands[i])
+	vars->j = 0;
+	while (commands[vars->i])
 	{
-		first_process(vars, env, &commands[i], &j);
-		free(commands[i]);
-		(i)++;
+		first_process(vars, env, &commands[vars->i], &vars->j);
+		free(commands[vars->i]);
+		(vars->i)++;
 	}
 	free(commands);
 	commands = NULL;
-	return (i);
+	return (vars->i);
 }
 
 void	minishell(char *input, char **env, t_vars *vars, char **commands)
