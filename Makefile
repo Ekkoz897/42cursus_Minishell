@@ -4,7 +4,7 @@ CC = cc
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = main.c input_sanitize.c processes.c split_cmds.c utils.c utils2.c built_ins.c built_ins2.c \
 		built_ins3.c built_ins4.c utils3.c utils4.c utils5.c here_doc.c here_doc2.c var_expander.c \
@@ -26,13 +26,6 @@ $(NAME): $(addprefix SRC/,$(OBJ))  $(addprefix GNL/,$(OBJ_GNL)) $(addprefix GNL/
 	@make -s -C ft_printf
 	@make -s -C libft
 	@$(CC) $(addprefix SRC/,$(OBJ)) $(addprefix GNL/,$(OBJ_GNL)) ft_printf/libftprintf.a libft/libft.a -o $(NAME) -lreadline
-
-# comment porque da erro com exit + args, mas ./minishell n da erro
-# run: $(NAME)
-# 	@./minishell
-
-valgrind: $(NAME)
-	@make re && valgrind --leak-check=full --show-leak-kinds=all --suppressions=".minishell.sup" ./minishell
 
 git: fclean
 	@git add .
